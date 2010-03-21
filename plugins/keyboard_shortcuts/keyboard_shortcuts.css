@@ -1,0 +1,15 @@
+﻿div#keyboard_shortcuts_help {
+	display: none;
+	margin-bottom: 60px;
+}
+div#keyboard_shortcuts_help div {
+	float: left;
+	width: 400px;
+	color: black;
+}
+div#keyboard_shortcuts_help div div.shortcut_key {
+	width: 30px;
+	float: left;
+	font-weight: bold;
+	text-align: center;
+}

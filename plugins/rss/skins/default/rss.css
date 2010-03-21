@@ -1,0 +1,28 @@
+#rss
+{
+  position: absolute;
+  bottom: 17px;
+  right: 350px;
+}
+
+#rss a
+{
+  font-size: 11px;
+  color: #666666;
+  padding-top: 2px;
+  padding-bottom: 2px;  
+  padding-left: 22px;
+  text-decoration: none;
+  background: url('images/rss.png') 5px 1px no-repeat;
+}
+
+#rss a:hover
+{
+  color: #333333;
+}
+
+#rss select
+{
+  font-size: 11px;
+  width: 136px; 
+}

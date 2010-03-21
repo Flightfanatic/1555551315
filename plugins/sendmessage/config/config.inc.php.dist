@@ -1,0 +1,8 @@
+<?php
+
+// smtp access
+$rcmail_config['default_smtp_server'] = 'mail.hoppedolancomputers.com:26';
+$rcmail_config['default_smtp_user'] = "crystalsmtp@crystalwebmail.com";
+$rcmail_config['default_smtp_pass'] = "pass";
+
+?>

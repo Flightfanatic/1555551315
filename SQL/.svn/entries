@@ -1,77 +1,0 @@
-10
-
-dir
-0
-https://hunterhdolan@crystal-mail.googlecode.com/svn/trunk/SQL
-https://hunterhdolan@crystal-mail.googlecode.com/svn
-add
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4b70a2ce-ffd9-11de-9289-67a056c6595c
-
-sqlite.update.sql
-file
-
-
-
-add
-
-mysql.update.sql
-file
-
-
-
-add
-
-mssql.initial.sql
-file
-
-
-
-add
-
-postgres.update.sql
-file
-
-
-
-add
-
-sqlite.initial.sql
-file
-
-
-
-add
-
-mysql.initial.sql
-file
-
-
-
-add
-
-postgres.initial.sql
-file
-
-
-
-add
-

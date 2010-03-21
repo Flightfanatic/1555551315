@@ -1,0 +1,11 @@
+Function: plays a sound notification when new email arrives
+
+Required Plugins: none
+
+Instructions:
+
+1- Register plugin ("./config/main.inc.php ::: $cmail_config['plugins']").
+
+* Additional sounds can be placed in <installdir>\plugins\sound_notifier\sounds
+* Once configured, you can find the sound options under Settings - Mailbox View
+

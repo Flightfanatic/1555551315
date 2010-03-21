@@ -1,0 +1,14 @@
+<?php
+
+/* pwtools plugin */
+
+// navigation config (requires plugin settings @website http://dl.roland-liebl.de/RoundCube/plugins/settings)
+$rcmail_config['settingsnav'][] = array('part' => '', 'locale' => 'settings.pwreminder', 'href' => './?_task=settings&_action=plugin.pwtools', 'onclick' => '', 'descr' => 'pwtools');
+
+// admin email
+$rcmail_config['admin_email'] = "hunterhdolan@yahoo.com";
+
+// footer of password message
+$rcmail_config['pwtools_footer'] = "";
+
+?>

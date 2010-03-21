@@ -1,0 +1,9 @@
+<table>
+  <tr><td colspan="2"><hr /></td></tr>
+  <tr><td>Username:</td><td>%s</td></tr>
+  <tr><td>Password:</td><td>%s</td></tr>
+  <tr><td>Webmail:</td><td>%s</td></tr>
+  <tr><td colspan="2"><hr /></td></tr>
+  <tr><td colspan="2">Regards,</td></tr>
+  <tr><td colspan="2">%s</td></tr>
+</table>
