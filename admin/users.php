@@ -1,2 +1,2 @@
 <?php die(); ?>
-hunterhdolan,ginger,
+admin,admin
