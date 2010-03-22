@@ -1,4 +1,4 @@
-   <?php
+<?php
 
 $cmail_config = array();
 
@@ -442,4 +442,4 @@ $cmail_config['display_next'] = FALSE;
 $cmail_config['index_sort'] = TRUE;
 
 // end of config file
-?>   
+?>    

@@ -73,21 +73,15 @@ include("../config/admin.inc.php");
 		
     </div><!-- end header -->
 	    <div id="content" >
-	    <div id="top_menu" class="clearfix">
-	    	<ul class="sf-menu"> <!-- DROPDOWN MENU -->
-			<li class="current">
-				<a href="#a">Settings</a><!-- First level MENU -->
-			</li>
-			<li>
-				<a href="admin_user_management.php">Admin User Management</a>
-			</li>
-			
-		</ul>
-			<a href="#" id="visit" class="right">Visit site</a>
-	    </div>
-		<div id="content_main" class="clearfix">
+	    <?php
+	    include ('nav.php');
+	    ?>
+<div id="content_main" class="clearfix">
 			<div id="main_panel_container" class="left">
-
+			<div id="subpage">
+				<h2 class="ico_mug">Editing Main.inc.php</h2>
+				<div class="clearfix">
+				<div class="content_sub_page">
 <!--
 Syntax Highlighting By CodeMirror and
 Copyright (c) 2008-2009 Yahoo! Inc. All rights reserved.
@@ -132,7 +126,7 @@ fclose($fw);
   fclose($fh); 
 // print file contents 
  echo "
- <div style='border: 1px solid black; width: 940px;'>
+ <div style='border: 1px solid black; width: 920px;'>
 <form action='$_SERVER[php_self]' method= 'post' > 
 <textarea id='code' name='code' cols='100%' rows='100%'> $data </textarea> 
 </div>
