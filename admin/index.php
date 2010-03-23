@@ -14,28 +14,6 @@ $delimiter = ',';
 $skip_lines = 1;
 
 include("../config/admin.inc.php");
-
-
-/* 
-
-  Datebase connection code goes here. 
-  If you don't know how to do it, see: 
-  http://www.totallyphp.co.uk/code/connect_to_a_mysql_database.htm 
-
-  Change tablename to match the name of your own table 
-
-*/ 
-
-// Connect to the database 
-db_connect(); 
-
-// Query the database and get the count 
-$result = mysql_query("SELECT * FROM tablename"); 
-$num_rows = mysql_num_rows($result); 
-
-// Display the results 
-echo $num_rows; 
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
