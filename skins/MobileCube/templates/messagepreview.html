@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	
 	<head>
-		<title><roundcube:object name="pagetitle" /></title>
+		<title><crystal:object name="pagetitle" /></title>
 		<link rel="stylesheet" type="text/css" href="/common.css" />
 		<link rel="stylesheet" type="text/css" href="/mail.css" />
 		<style type="text/css">
@@ -13,14 +13,14 @@
 	</head>
 	<body class="iframe">
 		<div class="messageheaderbox">
-			<roundcube:object name="messageHeaders" class="headers-table" cellspacing="0" cellpadding="1" addicon="/images/icons/plus.gif" summary="Message headers" />
-			<roundcube:object name="messageAttachments" id="attachment-list" />
+			<crystal:object name="messageHeaders" class="headers-table" cellspacing="0" cellpadding="1" addicon="/images/icons/plus.gif" summary="Message headers" />
+			<crystal:object name="messageAttachments" id="attachment-list" />
 		</div>
 
-		<roundcube:object name="blockedObjects" id="remote-objects-message" />
+		<crystal:object name="blockedObjects" id="remote-objects-message" />
 
 		<div class="borderline"></div>
 
-		<roundcube:object name="messageBody" id="messagebody" />
+		<crystal:object name="messageBody" id="messagebody" />
 	</body>
 </html>

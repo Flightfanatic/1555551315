@@ -2,10 +2,10 @@
 
 /*
  +-----------------------------------------------------------------------+
- | rcube_install.php                                                     |
+ | cmail_install.php                                                     |
  |                                                                       |
  | This file is part of the Crystal Webmail package                    |
- | Copyright (C) 2008-2009, Crystal Dev. - Switzerland                 |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU Public License                                 |
  +-----------------------------------------------------------------------+
 
@@ -21,7 +21,7 @@
  * @package  Crystal
  * @author Thomas Bruederli
  */
-class rcube_install
+class cmail_install
 {
   var $step;
   var $is_post = false;
@@ -53,7 +53,7 @@ class rcube_install
   /**
    * Constructor
    */
-  function rcube_install()
+  function cmail_install()
   {
     $this->step = intval($_REQUEST['_step']);
     $this->is_post = $_SERVER['REQUEST_METHOD'] == 'POST';
@@ -67,7 +67,7 @@ class rcube_install
     static $inst;
     
     if (!$inst)
-      $inst = new rcube_install();
+      $inst = new cmail_install();
     
     return $inst;
   }
@@ -121,7 +121,7 @@ class rcube_install
     $value = $this->config[$name];
     
     if ($name == 'des_key' && !$this->configured && !isset($_REQUEST["_$name"]))
-      $value = rcube_install::random_key(24);
+      $value = cmail_install::random_key(24);
     
     return $value !== null && $value !== '' ? $value : $default;
   }
@@ -163,7 +163,7 @@ class rcube_install
         $value = '';
       }
       else if ($prop == 'default_host' && is_array($value)) {
-        $value = rcube_install::_clean_array($value);
+        $value = cmail_install::_clean_array($value);
         if (count($value) <= 1)
           $value = $value[0];
       }
@@ -205,7 +205,7 @@ class rcube_install
       // replace the matching line in config file
       $out = preg_replace(
         '/(\$cmail_config\[\''.preg_quote($prop).'\'\])\s+=\s+(.+);/Uie',
-        "'\\1 = ' . rcube_install::_dump_var(\$value) . ';'",
+        "'\\1 = ' . cmail_install::_dump_var(\$value) . ';'",
         $out);
     }
 
@@ -541,7 +541,7 @@ class rcube_install
         }
         
         if ($isnum)
-          return 'array(' . join(', ', array_map(array('rcube_install', '_dump_var'), $var)) . ')';
+          return 'array(' . join(', ', array_map(array('cmail_install', '_dump_var'), $var)) . ')';
       }
     }
     
@@ -552,7 +552,7 @@ class rcube_install
   /**
    * Initialize the database with the according schema
    *
-   * @param object rcube_db Database connection
+   * @param object cmail_db Database connection
    * @return boolen True on success, False on error
    */
   function init_db($DB)

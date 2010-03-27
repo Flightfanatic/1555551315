@@ -1,7 +1,7 @@
 /**
- * RoundCube Calendar
+ * Crystal Calendar
  *
- * Plugin to add a calendar to RoundCube.
+ * Plugin to add a calendar to Crystal.
  *
  * @version 0.2 BETA 2
  * @author Lazlo Westerhof
@@ -161,11 +161,11 @@ $(document).ready(function() {
       if(event.end == null) {
         event.end = event.start;
       }
-      // send request to RoundCube
+      // send request to Crystal
       cmail.http_post('plugin.moveEvent', '_event_id='+event.id+'&_start='+event.start.getTime()/1000+'&_end='+event.end.getTime()/1000+'&_allDay='+allDay);
     },
     eventResize : function(event, delta) {
-      // send request to RoundCube
+      // send request to Crystal
       cmail.http_post('plugin.resizeEvent', '_event_id='+event.id+'&_start='+event.start.getTime()/1000+'&_end='+event.end.getTime()/1000);
     },
     dayClick: function(date, allDay, jsEvent, view) {
@@ -180,7 +180,7 @@ $(document).ready(function() {
          var cancel = cmail.gettext('cancel', 'calendar');
          var buttons = {};
          buttons[save] = function() {
-           // send request to RoundCube
+           // send request to Crystal
            cmail.http_post('plugin.newEvent', '_start='+date.getTime()/1000+'&_summary='+summary.val()+'&_description='+description.val()+'&_location='+location.val()+'&_categories='+categories.val()+'&_allDay='+allDay);
 
            $dialogContent.dialog("close");
@@ -217,14 +217,14 @@ $(document).ready(function() {
           event.location = location.val();
           event.className = categories.val();
 
-          // send request to RoundCube
+          // send request to Crystal
           cmail.http_post('plugin.editEvent', '_event_id='+event.id+'&_summary='+event.title+'&_description='+description.val()+'&_location='+location.val()+'&_categories='+categories.val());
 
           $('#calendar').fullCalendar('updateEvent', event);
           $dialogContent.dialog("close");
          };
          buttons[remove] = function() {
-          // send request to RoundCube
+          // send request to Crystal
           cmail.http_post('plugin.removeEvent', '_event_id='+event.id);
 
           $('#calendar').fullCalendar('removeEvents', event.id);

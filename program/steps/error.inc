@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/error.inc                                               |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Display error message page                                          |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: error.inc 2547 2009-05-26 16:54:55Z alec $
+ $Id: error.inc 2547 2010-05-26 16:54:55Z alec $
 
 */
 
@@ -86,7 +86,7 @@ else {
 
 
 // Ajax request
-if ($OUTPUT && ($OUTPUT instanceof rcube_json_output)) {
+if ($OUTPUT && ($OUTPUT instanceof cmail_json_output)) {
   header("HTTP/1.0 $ERROR_CODE $__error_title");
   die;
 }
@@ -110,7 +110,7 @@ $__skin = $CONFIG->skin ? $CONFIG->skin : 'default';
 print <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
-<title>RoundCube|Mail : ERROR $ERROR_CODE</title>
+<title>Crystal|Mail : ERROR $ERROR_CODE</title>
 <link rel="stylesheet" type="text/css" href="skins/$__skin/common.css" />
 </head>
 <body>

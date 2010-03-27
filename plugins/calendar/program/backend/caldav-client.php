@@ -4,7 +4,7 @@
 *
 * @package   awl
 * removed curl - now using fsockopen
-* changed 2009 by Andres Obrero - Switzerland andres@obrero.ch
+* changed 2010 by Andres Obrero - United States andres@obrero.ch
 *
 * @subpackage   caldav
 * @author Andrew McMillan <debian@mcmillan.net.nz>
@@ -538,7 +538,7 @@ EOFILTER;
 * //}
 *
 * // Fetch all events for February
-* $events = $cal->GetEvents("20090201T000000Z","20090301T000000Z");
+* $events = $cal->GetEvents("20100201T000000Z","20100301T000000Z");
 * foreach ( $events as $k => $event ) {
 *     print_r($event['data']);
 *     print "\n---------------------------------------------\n";

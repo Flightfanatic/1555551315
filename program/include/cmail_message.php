@@ -2,20 +2,20 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_message.php                                     |
+ | program/include/cmail_message.php                                     |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Logical representation of a mail message with all its data          |
  |   and related functions                                               |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_imap.php 1344 2008-04-30 08:21:42Z thomasb $
+ $Id: cmail_imap.php 1344 2008-04-30 08:21:42Z thomasb $
 
 */
 
@@ -25,9 +25,9 @@
  * and related functions
  *
  * @package    Mail
- * @author     Thomas Bruederli <roundcube@gmail.com>
+ * @author     Thomas Bruederli <Crystal@gmail.com>
  */
-class rcube_message
+class cmail_message
 {
   private $app;
   private $imap;
@@ -54,7 +54,7 @@ class rcube_message
    * @param string $uid The message UID.
    *
    * @uses cmail::get_instance()
-   * @uses rcube_imap::decode_mime_string()
+   * @uses cmail_imap::decode_mime_string()
    * @uses self::set_safe()
    *
    * @see self::$app, self::$imap, self::$opt, self::$structure
@@ -67,7 +67,7 @@ class rcube_message
     $this->uid = $uid;
     $this->headers = $this->imap->get_headers($uid, NULL, true, true);
 
-    $this->subject = rcube_imap::decode_mime_string($this->headers->subject, $this->headers->charset);
+    $this->subject = cmail_imap::decode_mime_string($this->headers->subject, $this->headers->charset);
     list(, $this->sender) = each($this->imap->decode_address_list($this->headers->from));
     
     $this->set_safe((intval($_GET['_safe']) || $_SESSION['safe_messages'][$uid]));
@@ -222,7 +222,7 @@ class rcube_message
    * Raad the message structure returend by the IMAP server
    * and build flat lists of content parts and attachments
    *
-   * @param object rcube_message_part Message structure node
+   * @param object cmail_message_part Message structure node
    * @param bool  True when called recursively
    */
   private function parse_structure($structure, $recursive = false)
@@ -300,7 +300,7 @@ class rcube_message
       else if ($html_part !== null && empty($this->parts)) {
         $c = new stdClass;
         $c->type = 'content';
-        $c->body = rcube_label('htmlmessage');
+        $c->body = cmail_label('htmlmessage');
         $c->ctype_primary = 'text';
         $c->ctype_secondary = 'plain';
 
@@ -310,7 +310,7 @@ class rcube_message
       // add html part as attachment
       if ($html_part !== null && $structure->parts[$html_part] !== $print_part) {
         $html_part = &$structure->parts[$html_part];
-        $html_part->filename = rcube_label('htmlmessage');
+        $html_part->filename = cmail_label('htmlmessage');
         $html_part->mimetype = 'text/html';
 
         $this->attachments[] = $html_part;
@@ -322,7 +322,7 @@ class rcube_message
       $p->type = 'content';
       $p->ctype_primary = 'text';
       $p->ctype_secondary = 'plain';
-      $p->body = rcube_label('encryptedmessage');
+      $p->body = cmail_label('encryptedmessage');
       $p->size = strlen($p->body);
       
       // maybe some plugins are able to decode this encrypted message part
@@ -441,7 +441,7 @@ class rcube_message
   /**
    * Fill aflat array with references to all parts, indexed by part numbers
    *
-   * @param object rcube_message_part Message body structure
+   * @param object cmail_message_part Message body structure
    */
   private function get_mime_numbers(&$part)
   {

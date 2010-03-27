@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/copy.inc                                    |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2007, RoundCube Dev. - Switzerland                      |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2007, Crystal Dev. - United States                      |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Copy a contact record from one direcotry to another                 |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: copy.inc 471 2007-02-09 21:25:50Z thomasb $
@@ -23,8 +23,8 @@
 if (!$OUTPUT->ajax_call)
   return;
 
-$cid = get_input_value('_cid', RCUBE_INPUT_POST);
-$target = get_input_value('_to', RCUBE_INPUT_POST);
+$cid = get_input_value('_cid', cmail_INPUT_POST);
+$target = get_input_value('_to', cmail_INPUT_POST);
 
 if ($cid && preg_match('/^[a-z0-9\-_=]+(,[a-z0-9\-_=]+)*$/i', $cid) && strlen($target) && $target !== $source)
 {

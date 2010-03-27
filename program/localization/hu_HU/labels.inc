@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/hu_HU/labels.inc                                             |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -15,7 +15,7 @@
 |         Ervin Hegedűs <airween@damson.hu>                             |
 +-----------------------------------------------------------------------+
 
-@version $Id: labels.inc 2850 2009-08-07 21:17:12Z yllar $
+@version $Id: labels.inc 2850 2010-08-07 21:17:12Z yllar $
 
 */
 

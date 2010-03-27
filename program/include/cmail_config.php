@@ -2,17 +2,17 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_config.php                                      |
+ | program/include/cmail_config.php                                      |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Class to read configuration settings                                |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: $
@@ -20,11 +20,11 @@
 */
 
 /**
- * Configuration class for RoundCube
+ * Configuration class for Crystal
  *
  * @package Core
  */
-class rcube_config
+class cmail_config
 {
   private $prop = array();
   private $errors = array();
@@ -73,11 +73,11 @@ class rcube_config
 
     // fix default imap folders encoding
     foreach (array('drafts_mbox', 'junk_mbox', 'sent_mbox', 'trash_mbox') as $folder)
-      $this->prop[$folder] = rcube_charset_convert($this->prop[$folder], cmail_CHARSET, 'UTF7-IMAP');
+      $this->prop[$folder] = cmail_charset_convert($this->prop[$folder], cmail_CHARSET, 'UTF7-IMAP');
 
     if (!empty($this->prop['default_imap_folders']))
       foreach ($this->prop['default_imap_folders'] as $n => $folder)
-        $this->prop['default_imap_folders'][$n] = rcube_charset_convert($folder, cmail_CHARSET, 'UTF7-IMAP');
+        $this->prop['default_imap_folders'][$n] = cmail_charset_convert($folder, cmail_CHARSET, 'UTF7-IMAP');
 
     // set PHP error logging according to config
     if ($this->prop['debug_level'] & 1) {

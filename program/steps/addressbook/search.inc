@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/search.inc                                  |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Search step for address book contacts                               |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: search.inc 456 2007-01-10 12:34:33Z thomasb $
@@ -22,7 +22,7 @@
 $CONTACTS->set_page(1);
 $_SESSION['page'] = 1;
 
-$search = trim(get_input_value('_q', RCUBE_INPUT_GET));
+$search = trim(get_input_value('_q', cmail_INPUT_GET));
 $search_request = md5('addr'.$search);
 
 // get contacts for this user

@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/pt_PT/labels.inc                                             |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -17,7 +17,7 @@
 |          Teotónio Ricardo <teotonio.ricardo@webtuga.pt>               |
 +-----------------------------------------------------------------------+
 
-@version $Id: labels.inc 3019 2009-10-05 19:10:11Z yllar $
+@version $Id: labels.inc 3019 2010-10-05 19:10:11Z yllar $
 
 */
 

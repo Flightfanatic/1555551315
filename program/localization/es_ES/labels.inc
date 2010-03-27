@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/es_ES/labels.inc                                             |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2008, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2008, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -18,7 +18,7 @@
 |         http://www.mediaiberia.com                                    |
 +-----------------------------------------------------------------------+
 
-@version $Id: labels.inc 2756 2009-07-15 19:31:05Z yllar $
+@version $Id: labels.inc 2756 2010-07-15 19:31:05Z yllar $
 
 */
 

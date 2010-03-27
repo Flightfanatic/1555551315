@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/check_recent.inc                                   |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Check for recent messages, in all mailboxes                         |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: check_recent.inc 233 2006-06-26 17:31:20Z richs $
@@ -26,7 +26,7 @@ foreach ($a_mailboxes as $mbox_name) {
   if ($mbox_name == $IMAP->get_mailbox_name()) {
     if ($recent_count = $IMAP->messagecount(NULL, 'RECENT', TRUE)) {
       // refresh saved search set
-      if (($search_request = get_input_value('_search', RCUBE_INPUT_GPC)) && isset($_SESSION['search'][$search_request])) {
+      if (($search_request = get_input_value('_search', cmail_INPUT_GPC)) && isset($_SESSION['search'][$search_request])) {
         $_SESSION['search'][$search_request] = $IMAP->refresh_search();
         $all_count = $IMAP->messagecount();
       } else {

@@ -5,15 +5,15 @@
  +-----------------------------------------------------------------------+
  | language/nl_BE/messages.inc                                           |
  |                                                                       |
- | Language file of the RoundCube Webmail client                         |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | Language file of the Crystal Webmail client                         |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
  | Author: Dennis Heeren <dennis.heeren@gmail.com>                       |
  +-----------------------------------------------------------------------+
 
- @version $Id: messages.inc 2237 2009-01-17 01:55:39Z till $
+ @version $Id: messages.inc 2237 2010-01-17 01:55:39Z till $
 
 */
 

@@ -5,15 +5,15 @@
  +-----------------------------------------------------------------------+
  | language/en_US/messages.inc                                           |
  |                                                                       |
- | Language file of the RoundCube Webmail client                         |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | Language file of the Crystal Webmail client                         |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- @version $Id: messages.inc 3042 2009-10-14 10:52:27Z alec $
+ @version $Id: messages.inc 3042 2010-10-14 10:52:27Z alec $
 
 */
 

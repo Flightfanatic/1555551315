@@ -9,18 +9,18 @@
  *
  * @version 1.0
  * @author Ziba Scott
- * @website http://roundcube.net
+ * @website http://Crystal.net
  * 
  * Example:
  *
  * $cmail_config['additional_message_headers']['X-Remote-Browser'] = $_SERVER['HTTP_USER_AGENT'];
  * $cmail_config['additional_message_headers']['X-Originating-IP'] = $_SERVER['REMOTE_ADDR'];
- * $cmail_config['additional_message_headers']['X-RoundCube-Server'] = $_SERVER['SERVER_ADDR'];
+ * $cmail_config['additional_message_headers']['X-Crystal-Server'] = $_SERVER['SERVER_ADDR'];
  * if( isset( $_SERVER['MACHINE_NAME'] )) {
- *     $cmail_config['additional_message_headers']['X-RoundCube-Server'] .= ' (' . $_SERVER['MACHINE_NAME'] . ')';
+ *     $cmail_config['additional_message_headers']['X-Crystal-Server'] .= ' (' . $_SERVER['MACHINE_NAME'] . ')';
  * }
  */
-class additional_message_headers extends rcube_plugin
+class additional_message_headers extends cmail_plugin
 {
     public $task = 'mail';
     

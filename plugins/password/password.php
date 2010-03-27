@@ -2,10 +2,10 @@
 
 /*
  +-------------------------------------------------------------------------+
- | Password Plugin for Roundcube                                           |
+ | Password Plugin for Crystal                                           |
  | Version 1.3.1                                                           |
  |                                                                         |
- | Copyright (C) 2009, RoundCube Dev.                                      |
+ | Copyright (C) 2010, Crystal Dev.                                      |
  |                                                                         |
  | This program is free software; you can redistribute it and/or modify    |
  | it under the terms of the GNU General Public License version 2          |
@@ -24,7 +24,7 @@
  | Author: Aleksander Machniak <alec@alec.pl>                              |
  +-------------------------------------------------------------------------+
 
- $Id: index.php 2645 2009-06-15 07:01:36Z alec $
+ $Id: index.php 2645 2010-06-15 07:01:36Z alec $
 
 */
 
@@ -45,7 +45,7 @@ define('PASSWORD_SUCCESS', 0);
  * @version 1.3.1
  * @author Aleksander Machniak
  */
-class password extends rcube_plugin
+class password extends cmail_plugin
 {
   public $task = 'settings';
 
@@ -87,9 +87,9 @@ class password extends rcube_plugin
     }
     else {
 
-      $curpwd = get_input_value('_curpasswd', RCUBE_INPUT_POST);
-      $newpwd = get_input_value('_newpasswd', RCUBE_INPUT_POST);
-      $conpwd = get_input_value('_confpasswd', RCUBE_INPUT_POST);
+      $curpwd = get_input_value('_curpasswd', cmail_INPUT_POST);
+      $newpwd = get_input_value('_newpasswd', cmail_INPUT_POST);
+      $conpwd = get_input_value('_confpasswd', cmail_INPUT_POST);
 
       if ($conpwd != $newpwd) {
         $cmail->output->command('display_message', $this->gettext('passwordinconsistency'), 'error');

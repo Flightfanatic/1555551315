@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/pt_BR/messages.inc                                           |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -17,7 +17,7 @@
 |         Victor Benincasa <vbenincasa@gmail.com>                       |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 3061 2009-10-26 21:42:58Z yllar $
+@version $Id: messages.inc 3061 2010-10-26 21:42:58Z yllar $
 
 */
 

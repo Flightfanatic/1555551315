@@ -2,17 +2,17 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_plugin_api.php                                  |
+ | program/include/cmail_plugin_api.php                                  |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Plugins repository                                                  |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: $
@@ -24,7 +24,7 @@
  *
  * @package Core
  */
-class rcube_plugin_api
+class cmail_plugin_api
 {
   static private $instance;
   
@@ -45,12 +45,12 @@ class rcube_plugin_api
   /**
    * This implements the 'singleton' design pattern
    *
-   * @return object rcube_plugin_api The one and only instance if this class
+   * @return object cmail_plugin_api The one and only instance if this class
    */
   static function get_instance()
   {
     if (!self::$instance) {
-      self::$instance = new rcube_plugin_api();
+      self::$instance = new cmail_plugin_api();
     }
 
     return self::$instance;
@@ -90,7 +90,7 @@ class rcube_plugin_api
         if (class_exists($plugin_name, false)) {
           $plugin = new $plugin_name($this);
           // check inheritance and task specification
-          if (is_subclass_of($plugin, 'rcube_plugin') && (!$plugin->task || preg_match('/('.$plugin->task.')/i', $cmail->task))) {
+          if (is_subclass_of($plugin, 'cmail_plugin') && (!$plugin->task || preg_match('/('.$plugin->task.')/i', $cmail->task))) {
             $plugin->init();
             $this->plugins[] = $plugin;
           }
@@ -123,7 +123,7 @@ class rcube_plugin_api
           if (class_exists($plugin_name, false)) {
             $plugin = new $plugin_name($this);
             // check inheritance
-            if (is_subclass_of($plugin, 'rcube_plugin')) {
+            if (is_subclass_of($plugin, 'cmail_plugin')) {
 	      if (!$plugin->task || preg_match('/('.$plugin->task.')/i', $cmail->task)) {
                 $plugin->init();
                 $this->plugins[] = $plugin;

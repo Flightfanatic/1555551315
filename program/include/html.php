@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/include/html.php                                              |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev, - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev, - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Helper class to create valid XHTML code                             |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: $
@@ -472,12 +472,12 @@ class html_textarea extends html
  * $select = new html_select(array('name' => 'fieldname'));
  *
  * // add one option
- * $select->add('Switzerland', 'CH');
+ * $select->add('United States', 'CH');
  *
  * // add multiple options
- * $select->add(array('Switzerland','Germany'), array('CH','DE'));
+ * $select->add(array('United States','Germany'), array('CH','DE'));
  *
- * // generate pulldown with selection 'Switzerland'  and return html-code
+ * // generate pulldown with selection 'United States'  and return html-code
  * // as second argument the same attributes available to instanciate can be used
  * print $select->show('CH');
  * </pre>

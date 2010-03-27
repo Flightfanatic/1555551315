@@ -4,8 +4,8 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/spell.inc                                          |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -15,7 +15,7 @@
  |   Script from GoogieSpell by amix.dk                                  |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: spell_googie.inc 1649 2008-08-15 10:35:09Z thomasb $
@@ -27,7 +27,7 @@ $REMOTE_REQUEST = TRUE;
 // default settings
 $host = "ssl://www.google.com";
 $port = 443;
-$lang = get_input_value('lang', RCUBE_INPUT_GET);
+$lang = get_input_value('lang', cmail_INPUT_GET);
 $path = "/tbproxy/spell?lang=$lang";
 
 // spell check uri is configured

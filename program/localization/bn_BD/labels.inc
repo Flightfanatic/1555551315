@@ -4,8 +4,8 @@
 +-----------------------------------------------------------------------+
 | language/bn_BD/labels.inc                                             |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2008, RoundQube Dev. - Switzerland                      |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2008, RoundQube Dev. - United States                      |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+

@@ -4,7 +4,7 @@
  * Sample plugin that adds a new tab to the settings section
  * to display some information about the current user
  */
-class userinfo extends rcube_plugin
+class userinfo extends cmail_plugin
 {
   public $task = 'settings';
 

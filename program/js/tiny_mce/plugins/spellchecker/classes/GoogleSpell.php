@@ -55,7 +55,7 @@ class GoogleSpell extends SpellChecker {
 		$path = "/tbproxy/spell?lang=" . $lang . "&hl=en";
 		$ssl = true;
 		
-		// spell check uri is configured (added by RoundCube)
+		// spell check uri is configured (added by Crystal)
 		if (!empty($this->_config['rpc_uri'])) {
 			$a_uri = parse_url($this->_config['rpc_uri']);
 			$ssl = ($a_uri['scheme']=='https' || $a_uri['scheme']=='ssl');

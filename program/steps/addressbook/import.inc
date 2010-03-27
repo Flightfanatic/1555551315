@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/import.inc                                  |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Import contacts from a vCard or CSV file                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: $
@@ -29,16 +29,16 @@ function cmail_import_form($attrib)
   $attrib += array('id' => "rcmImportForm");
   
   $upload = new html_inputfield(array('type' => 'file', 'name' => '_file', 'id' => 'rcmimportfile', 'size' => 40));
-  $form = html::p(null, html::label('rcmimportfile', rcube_label('importfromfile')) . html::br() . $upload->show());
+  $form = html::p(null, html::label('rcmimportfile', cmail_label('importfromfile')) . html::br() . $upload->show());
   
   $check_replace = new html_checkbox(array('name' => '_replace', 'value' => 1, 'id' => 'rcmimportreplace'));
-  $form .= html::p(null, $check_replace->show(get_input_value('_replace', RCUBE_INPUT_GPC)) .
-    html::label('rcmimportreplace', rcube_label('importreplace')));
+  $form .= html::p(null, $check_replace->show(get_input_value('_replace', cmail_INPUT_GPC)) .
+    html::label('rcmimportreplace', cmail_label('importreplace')));
   
   $OUTPUT->add_label('selectimportfile','importwait');
   $OUTPUT->add_gui_object('importform', $attrib['id']);
   
-  $out = html::p(null, Q(rcube_label('importtext'), 'show'));
+  $out = html::p(null, Q(cmail_label('importtext'), 'show'));
   
   $out .= $OUTPUT->form_tag(array(
       'action' => $cmail->url('import'),
@@ -60,7 +60,7 @@ function cmail_import_confirm($attrib)
   $vars = get_object_vars($IMPORT_STATS);
   $vars['names'] = join(', ', array_map('Q', $IMPORT_STATS->names));
   
-  return html::p($attrib, Q(rcube_label(array(
+  return html::p($attrib, Q(cmail_label(array(
     'name' => 'importconfirm',
     'nr' => $IMORT_STATS->inserted,
     'vars' => $vars,
@@ -99,11 +99,11 @@ $importstep = 'cmail_import_form';
 
 if ($_FILES['_file']['tmp_name'] && is_uploaded_file($_FILES['_file']['tmp_name'])) {
 
-  $replace = (bool)get_input_value('_replace', RCUBE_INPUT_GPC);
+  $replace = (bool)get_input_value('_replace', cmail_INPUT_GPC);
   $CONTACTS = $cmail->get_address_book(null, true);
 
-  // let rcube_vcard do the hard work :-)
-  $vcards = rcube_vcard::import(file_get_contents($_FILES['_file']['tmp_name']));
+  // let cmail_vcard do the hard work :-)
+  $vcards = cmail_vcard::import(file_get_contents($_FILES['_file']['tmp_name']));
 
   // no vcards detected
   if (!count($vcards)) {
@@ -174,7 +174,7 @@ else if ($err = $_FILES['_file']['error']) {
 }
 
 
-$OUTPUT->set_pagetitle(rcube_label('importcontacts'));
+$OUTPUT->set_pagetitle(cmail_label('importcontacts'));
 
 $OUTPUT->add_handlers(array(
   'importstep' => $importstep,

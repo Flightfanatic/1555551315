@@ -11,9 +11,9 @@
  *
  * @version 1.0
  * @author Thomas Bruederli
- * @website http://roundcube.net
+ * @website http://Crystal.net
  */
-class show_additional_headers extends rcube_plugin
+class show_additional_headers extends cmail_plugin
 {
   public $task = 'mail';
   

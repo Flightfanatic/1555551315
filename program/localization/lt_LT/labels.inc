@@ -5,15 +5,15 @@
 +-----------------------------------------------------------------------+
 | language/lt_LT/labels.inc                                             |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
 | Author: Martynas Bendorius <martynas@evanet.lt>                       |
 +-----------------------------------------------------------------------+'
 
-@version $Id: labels.inc 2891 2009-08-29 18:56:48Z yllar $
+@version $Id: labels.inc 2891 2010-08-29 18:56:48Z yllar $
 
 */
 

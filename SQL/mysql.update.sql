@@ -1,4 +1,4 @@
--- RoundCube Webmail update script for MySQL databases
+-- Crystal Webmail update script for MySQL databases
 -- Updates from version 0.1-stable to 0.3.1
 
 TRUNCATE TABLE `messages`;

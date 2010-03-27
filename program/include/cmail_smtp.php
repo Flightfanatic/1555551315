@@ -2,17 +2,17 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_smtp.php                                        |
+ | program/include/cmail_smtp.php                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Provide SMTP functionality using socket connections                 |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id$
@@ -22,7 +22,7 @@
 // define headers delimiter
 define('SMTP_MIME_CRLF', "\r\n");
 
-class rcube_smtp {
+class cmail_smtp {
 
   private $conn = null;
   private $response;
@@ -370,7 +370,7 @@ class rcube_smtp {
       $recipients = implode(', ', $recipients);
     
     $addresses = array();
-    $recipients = rcube_explode_quoted_string(',', $recipients);
+    $recipients = cmail_explode_quoted_string(',', $recipients);
   
     reset($recipients);
     while (list($k, $recipient) = each($recipients))

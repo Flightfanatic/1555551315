@@ -47,7 +47,7 @@
  * @author     Sean Coates <sean@php.net>
  * @copyright  2003-2006 PEAR <pear-group@php.net>
  * @license    http://www.opensource.org/licenses/bsd-license.php BSD License
- * @version    CVS: $Id: mimePart.php 2663 2009-06-20 06:55:17Z alec $
+ * @version    CVS: $Id: mimePart.php 2663 2010-06-20 06:55:17Z alec $
  * @link       http://pear.php.net/package/Mail_mime
  */
 

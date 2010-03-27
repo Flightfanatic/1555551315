@@ -4,22 +4,22 @@
  +-----------------------------------------------------------------------+
  | program/steps/settings/save_prefs.inc                                 |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Save user preferences to DB and to the current session              |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: save_prefs.inc 2983 2009-09-23 12:32:09Z alec $
+ $Id: save_prefs.inc 2983 2010-09-23 12:32:09Z alec $
 
 */
 
-$CURR_SECTION = get_input_value('_section', RCUBE_INPUT_POST);
+$CURR_SECTION = get_input_value('_section', cmail_INPUT_POST);
 
 $a_user_prefs = array();
 
@@ -28,13 +28,13 @@ switch ($CURR_SECTION)
 {
   case 'general':
     $a_user_prefs = array(
-      'language'     => isset($_POST['_language']) ? get_input_value('_language', RCUBE_INPUT_POST) : $CONFIG['language'],
-      'timezone'     => isset($_POST['_timezone']) ? (is_numeric($_POST['_timezone']) ? floatval($_POST['_timezone']) : get_input_value('_timezone', RCUBE_INPUT_POST)) : $CONFIG['timezone'],
+      'language'     => isset($_POST['_language']) ? get_input_value('_language', cmail_INPUT_POST) : $CONFIG['language'],
+      'timezone'     => isset($_POST['_timezone']) ? (is_numeric($_POST['_timezone']) ? floatval($_POST['_timezone']) : get_input_value('_timezone', cmail_INPUT_POST)) : $CONFIG['timezone'],
       'dst_active'   => isset($_POST['_dst_active']) ? TRUE : FALSE,
       'pagesize'     => is_numeric($_POST['_pagesize']) ? max(2, intval($_POST['_pagesize'])) : $CONFIG['pagesize'],
       'index_sort'   => isset($_POST['_index_sort']) ? TRUE : FALSE,
       'prettydate'   => isset($_POST['_pretty_date']) ? TRUE : FALSE,
-      'skin' 	     => isset($_POST['_skin']) ? get_input_value('_skin', RCUBE_INPUT_POST) : $CONFIG['skin'],
+      'skin' 	     => isset($_POST['_skin']) ? get_input_value('_skin', cmail_INPUT_POST) : $CONFIG['skin'],
     );
 
   break;
@@ -77,10 +77,10 @@ switch ($CURR_SECTION)
   break;
   case 'folders':
     $a_user_prefs = array(
-      'drafts_mbox' => get_input_value('_drafts_mbox', RCUBE_INPUT_POST),
-      'sent_mbox'   => get_input_value('_sent_mbox', RCUBE_INPUT_POST),
-      'junk_mbox'   => get_input_value('_junk_mbox', RCUBE_INPUT_POST),
-      'trash_mbox'  => get_input_value('_trash_mbox', RCUBE_INPUT_POST),
+      'drafts_mbox' => get_input_value('_drafts_mbox', cmail_INPUT_POST),
+      'sent_mbox'   => get_input_value('_sent_mbox', cmail_INPUT_POST),
+      'junk_mbox'   => get_input_value('_junk_mbox', cmail_INPUT_POST),
+      'trash_mbox'  => get_input_value('_trash_mbox', cmail_INPUT_POST),
     );
 
   break;

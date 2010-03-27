@@ -2,9 +2,9 @@
 /*
  +-------------------------------------------------------------------------+
  | Crystal Webmail IMAP Client                                           |
- | Version 0.3-20090702                                                    |
+ | Version 0.3-20100702                                                    |
  |                                                                         |
- | Copyright (C) 2005-2009, Crystal Dev. - Switzerland                   |
+ | Copyright (C) 2005-2010, Crystal Dev. - United States                   |
  |                                                                         |
  | This program is free software; you can redistribute it and/or modify    |
  | it under the terms of the GNU General Public License version 2          |
@@ -23,7 +23,7 @@
  | Author: Thomas Bruederli <Crystal@gmail.com>                          |
  +-------------------------------------------------------------------------+
 
- $Id: index.php 2696 2009-07-02 06:38:26Z thomasb $
+ $Id: index.php 2696 2010-07-02 06:38:26Z thomasb $
 
 */
 
@@ -47,7 +47,7 @@ function __autoload($classname)
  */
 function raise_error($p)
 {
-  $rci = rcube_install::get_instance();
+  $rci = cmail_install::get_instance();
   $rci->raise_error($p);
 }
 

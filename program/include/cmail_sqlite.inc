@@ -2,10 +2,10 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_sqlite.inc                                      |
+ | program/include/cmail_sqlite.inc                                      |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -13,10 +13,10 @@
  |   sone MySQL functions                                                |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_sqlite.inc 850 2007-10-03 00:13:32Z ihug $
+ $Id: cmail_sqlite.inc 850 2007-10-03 00:13:32Z ihug $
 
 */
 
@@ -27,7 +27,7 @@
  */
 
 
-function rcube_sqlite_from_unixtime($timestamp)
+function cmail_sqlite_from_unixtime($timestamp)
   {
   $timestamp = trim($timestamp);
   if (!preg_match("/^[0-9]+$/is", $timestamp))
@@ -36,12 +36,12 @@ function rcube_sqlite_from_unixtime($timestamp)
     $ret = $timestamp;
     
   $ret = date("Y-m-d H:i:s", $ret);
-  rcube_sqlite_debug("FROM_UNIXTIME ($timestamp) = $ret");
+  cmail_sqlite_debug("FROM_UNIXTIME ($timestamp) = $ret");
   return $ret;
   }
 
 
-function rcube_sqlite_unix_timestamp($timestamp="")
+function cmail_sqlite_unix_timestamp($timestamp="")
   {
   $timestamp = trim($timestamp);
   if (!$timestamp)
@@ -51,25 +51,25 @@ function rcube_sqlite_unix_timestamp($timestamp="")
   else
     $ret = $timestamp;
 
-  rcube_sqlite_debug("UNIX_TIMESTAMP ($timestamp) = $ret");
+  cmail_sqlite_debug("UNIX_TIMESTAMP ($timestamp) = $ret");
   return $ret;
   }
 
 
-function rcube_sqlite_now()
+function cmail_sqlite_now()
   {
-  rcube_sqlite_debug("NOW() = ".date("Y-m-d H:i:s"));
+  cmail_sqlite_debug("NOW() = ".date("Y-m-d H:i:s"));
   return date("Y-m-d H:i:s");
   }
 
 
-function rcube_sqlite_md5($str)
+function cmail_sqlite_md5($str)
   {
   return md5($str);
   }
 
 
-function rcube_sqlite_debug($str)
+function cmail_sqlite_debug($str)
   {
   //console($str);
   }

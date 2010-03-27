@@ -2,26 +2,26 @@
 
 /*
  +-----------------------------------------------------------------------+
- | rcube_shared.inc                                                      |
+ | cmail_shared.inc                                                      |
  |                                                                       |
- | This file is part of the RoundCube PHP suite                          |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal PHP suite                          |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | CONTENTS:                                                             |
  |   Shared functions and classes used in PHP projects                   |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_shared.inc 3063 2009-10-27 09:43:39Z alec $
+ $Id: cmail_shared.inc 3063 2010-10-27 09:43:39Z alec $
 
 */
 
 
 /**
- * RoundCube shared functions
+ * Crystal shared functions
  * 
  * @package Core
  */
@@ -41,7 +41,7 @@ function send_nocacheing_headers()
   header("Pragma: no-cache");
   
   // We need to set the following headers to make downloads work using IE in HTTPS mode.
-  if (rcube_https_check()) {
+  if (cmail_https_check()) {
     header('Pragma: ');
     header('Cache-Control: ');
   }
@@ -275,17 +275,17 @@ function show_bytes($bytes)
   if ($bytes > 1073741824)
   {
     $gb = $bytes/1073741824;
-    $str = sprintf($gb>=10 ? "%d " : "%.1f ", $gb) . rcube_label('GB');
+    $str = sprintf($gb>=10 ? "%d " : "%.1f ", $gb) . cmail_label('GB');
   }
   else if ($bytes > 1048576)
   {
     $mb = $bytes/1048576;
-    $str = sprintf($mb>=10 ? "%d " : "%.1f ", $mb) . rcube_label('MB');
+    $str = sprintf($mb>=10 ? "%d " : "%.1f ", $mb) . cmail_label('MB');
   }
   else if ($bytes > 1024)
-    $str = sprintf("%d ",  round($bytes/1024)) . rcube_label('KB');
+    $str = sprintf("%d ",  round($bytes/1024)) . cmail_label('KB');
   else
-    $str = sprintf('%d ', $bytes) . rcube_label('B');
+    $str = sprintf('%d ', $bytes) . cmail_label('B');
 
   return $str;
 }
@@ -660,7 +660,7 @@ function rc_utf8_clean($input)
  * @param string Delimiter expression string for preg_match()
  * @param string Input string
  */
-function rcube_explode_quoted_string($delimiter, $string)
+function cmail_explode_quoted_string($delimiter, $string)
 {
   $result = array();
   $strlen = strlen($string);

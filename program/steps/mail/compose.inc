@@ -4,26 +4,26 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/compose.inc                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Compose a new mail message with all headers and attachments         |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: compose.inc 3021 2009-10-06 06:55:08Z thomasb $
+ $Id: compose.inc 3021 2010-10-06 06:55:08Z thomasb $
 
 */
 
 // define constants for message compose mode
-define('RCUBE_COMPOSE_REPLY', 0x0106);
-define('RCUBE_COMPOSE_FORWARD', 0x0107);
-define('RCUBE_COMPOSE_DRAFT', 0x0108);
-define('RCUBE_COMPOSE_EDIT', 0x0109);
+define('cmail_COMPOSE_REPLY', 0x0106);
+define('cmail_COMPOSE_FORWARD', 0x0107);
+define('cmail_COMPOSE_DRAFT', 0x0108);
+define('cmail_COMPOSE_EDIT', 0x0109);
 
 $MESSAGE_FORM = NULL;
 $MESSAGE = NULL;
@@ -33,12 +33,12 @@ $MESSAGE = NULL;
 // Since there are many ways to leave the compose page improperly, it seems necessary to clean-up an old
 // compose when a "new/forward/reply/draft" is called - otherwise the old session attachments will appear
 
-if (!is_array($_SESSION['compose']) || $_SESSION['compose']['id'] != get_input_value('_id', RCUBE_INPUT_GET))
+if (!is_array($_SESSION['compose']) || $_SESSION['compose']['id'] != get_input_value('_id', cmail_INPUT_GET))
 {
   cmail_compose_cleanup();
   $_SESSION['compose'] = array(
     'id' => uniqid(mt_rand()),
-    'param' => request2param(RCUBE_INPUT_GET),
+    'param' => request2param(cmail_INPUT_GET),
     'mailbox' => $IMAP->get_mailbox_name(),
   );
   
@@ -106,27 +106,27 @@ $OUTPUT->set_env('mailbox', $IMAP->get_mailbox_name());
 
 // get reference message and set compose mode
 if ($msg_uid = $_SESSION['compose']['param']['reply_uid'])
-  $compose_mode = RCUBE_COMPOSE_REPLY;
+  $compose_mode = cmail_COMPOSE_REPLY;
 else if ($msg_uid = $_SESSION['compose']['param']['forward_uid'])
-  $compose_mode = RCUBE_COMPOSE_FORWARD;
+  $compose_mode = cmail_COMPOSE_FORWARD;
 else if ($msg_uid = $_SESSION['compose']['param']['uid'])
-  $compose_mode = RCUBE_COMPOSE_EDIT;
+  $compose_mode = cmail_COMPOSE_EDIT;
 else if ($msg_uid = $_SESSION['compose']['param']['draft_uid']) {
   $cmail->imap->set_mailbox($CONFIG['drafts_mbox']);
-  $compose_mode = RCUBE_COMPOSE_DRAFT;
+  $compose_mode = cmail_COMPOSE_DRAFT;
 }
 
 if (!empty($msg_uid))
 {
   // similar as in program/steps/mail/show.inc
   // re-set 'prefer_html' to have possibility to use html part for compose
-  $CONFIG['prefer_html'] = $CONFIG['htmleditor'] || $compose_mode == RCUBE_COMPOSE_DRAFT || $compose_mode == RCUBE_COMPOSE_EDIT;
-  $MESSAGE = new rcube_message($msg_uid);
+  $CONFIG['prefer_html'] = $CONFIG['htmleditor'] || $compose_mode == cmail_COMPOSE_DRAFT || $compose_mode == cmail_COMPOSE_EDIT;
+  $MESSAGE = new cmail_message($msg_uid);
   
   if (!empty($MESSAGE->headers->charset))
     $IMAP->set_charset($MESSAGE->headers->charset);
     
-  if ($compose_mode == RCUBE_COMPOSE_REPLY)
+  if ($compose_mode == cmail_COMPOSE_REPLY)
   {
     $_SESSION['compose']['reply_uid'] = $msg_uid;
     $_SESSION['compose']['reply_msgid'] = $MESSAGE->headers->messageID;
@@ -135,7 +135,7 @@ if (!empty($msg_uid))
     if (!empty($_SESSION['compose']['param']['all']))
       $MESSAGE->reply_all = 1;
   }
-  else if ($compose_mode == RCUBE_COMPOSE_DRAFT)
+  else if ($compose_mode == cmail_COMPOSE_DRAFT)
   {
     if($MESSAGE->headers->in_reply_to)
     {
@@ -146,7 +146,7 @@ if (!empty($msg_uid))
     }
     $_SESSION['compose']['references']  = $MESSAGE->headers->references;
   }
-  else if ($compose_mode == RCUBE_COMPOSE_FORWARD)
+  else if ($compose_mode == cmail_COMPOSE_FORWARD)
   {
     $_SESSION['compose']['forward_uid'] = $msg_uid;
   }
@@ -205,12 +205,12 @@ function cmail_compose_headers($attrib)
   }
  
   if ($fname && !empty($_POST[$fname])) {
-    $fvalue = get_input_value($fname, RCUBE_INPUT_POST, TRUE);
+    $fvalue = get_input_value($fname, cmail_INPUT_POST, TRUE);
   }
   else if ($fname && !$fvalue && !empty($_SESSION['compose']['param'][$param])) {
     $fvalue = $_SESSION['compose']['param'][$param];
   }
-  else if ($header && $compose_mode == RCUBE_COMPOSE_REPLY) {
+  else if ($header && $compose_mode == cmail_COMPOSE_REPLY) {
     // get recipent address(es) out of the message headers
     if ($header=='to' && !empty($MESSAGE->headers->replyto))
       $fvalue = $MESSAGE->headers->replyto;
@@ -248,7 +248,7 @@ function cmail_compose_headers($attrib)
       }
     }
   }
-  else if ($header && in_array($compose_mode, array(RCUBE_COMPOSE_DRAFT, RCUBE_COMPOSE_EDIT)))
+  else if ($header && in_array($compose_mode, array(cmail_COMPOSE_DRAFT, cmail_COMPOSE_EDIT)))
   {
     // get drafted headers
     if ($header=='to' && !empty($MESSAGE->headers->to))
@@ -295,7 +295,7 @@ function cmail_compose_header_from($attrib)
 
   // extract all recipients of the reply-message
   $a_recipients = array();
-  if ($compose_mode == RCUBE_COMPOSE_REPLY && is_object($MESSAGE->headers))
+  if ($compose_mode == cmail_COMPOSE_REPLY && is_object($MESSAGE->headers))
   {
     $MESSAGE->compose_from = array();
 
@@ -345,13 +345,13 @@ function cmail_compose_header_from($attrib)
         }
       }
 
-      if ($compose_mode == RCUBE_COMPOSE_REPLY && is_array($MESSAGE->compose_from))
+      if ($compose_mode == cmail_COMPOSE_REPLY && is_array($MESSAGE->compose_from))
         $MESSAGE->compose_from[] = $sql_arr['email'];
 
       if (empty($_POST['_from']))
       {
         // set draft's identity
-        if ($compose_mode == RCUBE_COMPOSE_DRAFT && strstr($MESSAGE->headers->from, $sql_arr['email']))
+        if ($compose_mode == cmail_COMPOSE_DRAFT && strstr($MESSAGE->headers->from, $sql_arr['email']))
           $from_id = $sql_arr['identity_id'];
         // set identity if it's one of the reply-message recipients (with prio for default identity)
         else if (in_array(mb_strtolower($sql_arr['email']), $a_recipients) && (empty($from_id) || $sql_arr['standard']))
@@ -361,7 +361,7 @@ function cmail_compose_header_from($attrib)
 
     // overwrite identity selection with post parameter
     if (!empty($_POST['_from']))
-      $from_id = get_input_value('_from', RCUBE_INPUT_POST);
+      $from_id = get_input_value('_from', cmail_INPUT_POST);
 
     $out = $select_from->show($from_id);
 
@@ -393,7 +393,7 @@ function cmail_compose_body($attrib)
 
   $attrib['name'] = '_message';
 
-  if ($CONFIG['htmleditor'] || (($compose_mode == RCUBE_COMPOSE_DRAFT || $compose_mode == RCUBE_COMPOSE_EDIT) && $MESSAGE->has_html_part()))
+  if ($CONFIG['htmleditor'] || (($compose_mode == cmail_COMPOSE_DRAFT || $compose_mode == cmail_COMPOSE_EDIT) && $MESSAGE->has_html_part()))
     $isHtml = true;
   else
     $isHtml = false;
@@ -403,7 +403,7 @@ function cmail_compose_body($attrib)
   // use posted message body
   if (!empty($_POST['_message']))
   {
-    $body = get_input_value('_message', RCUBE_INPUT_POST, true);
+    $body = get_input_value('_message', cmail_INPUT_POST, true);
   }
   else if ($_SESSION['compose']['param']['body'])
   {
@@ -412,7 +412,7 @@ function cmail_compose_body($attrib)
   }
   else if ($compose_mode)
   {
-    if (($isHtml || $compose_mode == RCUBE_COMPOSE_DRAFT) && $MESSAGE->has_html_part())
+    if (($isHtml || $compose_mode == cmail_COMPOSE_DRAFT) && $MESSAGE->has_html_part())
     {
       $body = $MESSAGE->first_html_part();
       $isHtml = true;
@@ -424,13 +424,13 @@ function cmail_compose_body($attrib)
     }
 
     // compose reply-body
-    if ($compose_mode == RCUBE_COMPOSE_REPLY)
+    if ($compose_mode == cmail_COMPOSE_REPLY)
       $body = cmail_create_reply_body($body, $isHtml);
     // forward message body inline
-    else if ($compose_mode == RCUBE_COMPOSE_FORWARD)
+    else if ($compose_mode == cmail_COMPOSE_FORWARD)
       $body = cmail_create_forward_body($body, $isHtml);
     // load draft message body
-    else if ($compose_mode == RCUBE_COMPOSE_DRAFT || $compose_mode == RCUBE_COMPOSE_EDIT)
+    else if ($compose_mode == cmail_COMPOSE_DRAFT || $compose_mode == cmail_COMPOSE_EDIT)
       $body = cmail_create_draft_body($body, $isHtml);
   }
   else if (!empty($_SESSION['compose']['param']['body']))
@@ -440,7 +440,7 @@ function cmail_compose_body($attrib)
 
   $out = $form_start ? "$form_start\n" : '';
 
-  $saveid = new html_hiddenfield(array('name' => '_draft_saveid', 'value' => $compose_mode==RCUBE_COMPOSE_DRAFT ? str_replace(array('<','>'), "", $MESSAGE->headers->messageID) : ''));
+  $saveid = new html_hiddenfield(array('name' => '_draft_saveid', 'value' => $compose_mode==cmail_COMPOSE_DRAFT ? str_replace(array('<','>'), "", $MESSAGE->headers->messageID) : ''));
   $out .= $saveid->show();
 
   $drafttoggle = new html_hiddenfield(array('name' => '_draft', 'value' => 'yes'));
@@ -458,7 +458,7 @@ function cmail_compose_body($attrib)
   $OUTPUT->set_env('composebody', $attrib['id']);
 
   // include HTML editor
-  rcube_html_editor();
+  cmail_html_editor();
   
   // include GoogieSpell
   if (!empty($CONFIG['enable_spellcheck'])) {
@@ -488,11 +488,11 @@ function cmail_compose_body($attrib)
       "googie.decorateTextarea('%s');\n".
       "%s.set_env('spellcheck', googie);",
       $cmail->comm_path,
-      JQ(Q(rcube_label('checkspelling'))),
-      JQ(Q(rcube_label('resumeediting'))),
-      JQ(Q(rcube_label('close'))),
-      JQ(Q(rcube_label('revertto'))),
-      JQ(Q(rcube_label('nospellerrors'))),
+      JQ(Q(cmail_label('checkspelling'))),
+      JQ(Q(cmail_label('resumeediting'))),
+      JQ(Q(cmail_label('close'))),
+      JQ(Q(cmail_label('revertto'))),
+      JQ(Q(cmail_label('nospellerrors'))),
       json_serialize($spellcheck_langs),
       $lang,
       $attrib['id'],
@@ -740,24 +740,24 @@ function cmail_compose_subject($attrib)
 
   // use subject from post
   if (isset($_POST['_subject'])) {
-    $subject = get_input_value('_subject', RCUBE_INPUT_POST, TRUE);
+    $subject = get_input_value('_subject', cmail_INPUT_POST, TRUE);
   }
   // create a reply-subject
-  else if ($compose_mode == RCUBE_COMPOSE_REPLY) {
+  else if ($compose_mode == cmail_COMPOSE_REPLY) {
     if (preg_match('/^re:/i', $MESSAGE->subject))
       $subject = $MESSAGE->subject;
     else
       $subject = 'Re: '.$MESSAGE->subject;
   }
   // create a forward-subject
-  else if ($compose_mode == RCUBE_COMPOSE_FORWARD) {
+  else if ($compose_mode == cmail_COMPOSE_FORWARD) {
     if (preg_match('/^fwd:/i', $MESSAGE->subject))
       $subject = $MESSAGE->subject;
     else
       $subject = 'Fwd: '.$MESSAGE->subject;
   }
   // creeate a draft-subject
-  else if ($compose_mode == RCUBE_COMPOSE_DRAFT || $compose_mode == RCUBE_COMPOSE_EDIT) {
+  else if ($compose_mode == cmail_COMPOSE_DRAFT || $compose_mode == cmail_COMPOSE_EDIT) {
     $subject = $MESSAGE->subject;
   }
   else if (!empty($_SESSION['compose']['param']['subject'])) {
@@ -788,11 +788,11 @@ function cmail_compose_attachment_list($attrib)
     if ($attrib['deleteicon']) {
       $button = html::img(array(
         'src' => $CONFIG['skin_path'] . $attrib['deleteicon'],
-        'alt' => rcube_label('delete')
+        'alt' => cmail_label('delete')
       ));
     }
     else
-      $button = Q(rcube_label('delete'));
+      $button = Q(cmail_label('delete'));
 
     foreach ($_SESSION['compose']['attachments'] as $id => $a_prop)
     {
@@ -802,7 +802,7 @@ function cmail_compose_attachment_list($attrib)
       $out .= html::tag('li', array('id' => 'rcmfile'.$id),
         html::a(array(
             'href' => "#delete",
-            'title' => rcube_label('delete'),
+            'title' => cmail_label('delete'),
             'onclick' => sprintf("return %s.command('remove-attachment','rcmfile%s', this)", JS_OBJECT_NAME, $id)),
           $button) . Q($a_prop['name']));
         
@@ -844,10 +844,10 @@ function cmail_compose_attachment_form($attrib)
   $out = html::div($attrib,
     $OUTPUT->form_tag(array('name' => 'form', 'method' => 'post', 'enctype' => 'multipart/form-data'),
       html::div(null, cmail_compose_attachment_field(array('size' => $attrib[attachmentfieldsize]))) .
-      html::div('hint', rcube_label(array('name' => 'maxuploadsize', 'vars' => array('size' => $max_filesize)))) .
+      html::div('hint', cmail_label(array('name' => 'maxuploadsize', 'vars' => array('size' => $max_filesize)))) .
       html::div('buttons',
-        $button->show(rcube_label('close'), array('class' => 'button', 'onclick' => "document.getElementById('$attrib[id]').style.visibility='hidden'")) . ' ' .
-        $button->show(rcube_label('upload'), array('class' => 'button mainaction', 'onclick' => JS_OBJECT_NAME . ".command('send-attachment', this.form)"))
+        $button->show(cmail_label('close'), array('class' => 'button', 'onclick' => "document.getElementById('$attrib[id]').style.visibility='hidden'")) . ' ' .
+        $button->show(cmail_label('upload'), array('class' => 'button mainaction', 'onclick' => JS_OBJECT_NAME . ".command('send-attachment', this.form)"))
       )
     )
   );
@@ -876,11 +876,11 @@ function cmail_priority_selector($attrib)
   $attrib['name'] = '_priority';
   $selector = new html_select($attrib);
 
-  $selector->add(array(rcube_label('lowest'),
-                       rcube_label('low'),
-                       rcube_label('normal'),
-                       rcube_label('high'),
-                       rcube_label('highest')),
+  $selector->add(array(cmail_label('lowest'),
+                       cmail_label('low'),
+                       cmail_label('normal'),
+                       cmail_label('high'),
+                       cmail_label('highest')),
                  array(5, 4, 0, 2, 1));
                  
   if (isset($_POST['_priority']))
@@ -913,7 +913,7 @@ function cmail_receipt_checkbox($attrib)
   $checkbox = new html_checkbox($attrib);
 
   $out = $form_start ? "$form_start\n" : '';
-  $out .= $checkbox->show(in_array($compose_mode, array(RCUBE_COMPOSE_DRAFT, RCUBE_COMPOSE_EDIT))
+  $out .= $checkbox->show(in_array($compose_mode, array(cmail_COMPOSE_DRAFT, cmail_COMPOSE_EDIT))
 	&& $MESSAGE->headers->mdn_to ? 1 : 0);
   $out .= $form_end ? "\n$form_end" : '';
 
@@ -927,7 +927,7 @@ function cmail_editor_selector($attrib)
 
   // determine whether HTML or plain text should be checked
   if ($compose_mode)
-    $useHtml = (($CONFIG['htmleditor'] || $compose_mode == RCUBE_COMPOSE_DRAFT || $compose_mode == RCUBE_COMPOSE_EDIT)
+    $useHtml = (($CONFIG['htmleditor'] || $compose_mode == cmail_COMPOSE_DRAFT || $compose_mode == cmail_COMPOSE_EDIT)
 	&& $MESSAGE->has_html_part());
   else
     $useHtml = $CONFIG['htmleditor'] ? true : false;
@@ -942,8 +942,8 @@ function cmail_editor_selector($attrib)
 
   $select = new html_select($attrib);
 
-  $select->add(Q(rcube_label('htmltoggle')), 'html');
-  $select->add(Q(rcube_label('plaintoggle')), 'plain');
+  $select->add(Q(cmail_label('htmltoggle')), 'html');
+  $select->add(Q(cmail_label('plaintoggle')), 'plain');
 
   return $select->show($useHtml ? 'html' : 'plain');
 
@@ -951,7 +951,7 @@ function cmail_editor_selector($attrib)
   {
     $attrib['id'] = '_' . $value;
     $attrib['value'] = $value;
-    $selector .= $radio->show($chosenvalue, $attrib) . html::label($attrib['id'], Q(rcube_label($text)));
+    $selector .= $radio->show($chosenvalue, $attrib) . html::label($attrib['id'], Q(cmail_label($text)));
   }
 
   return $selector;
@@ -961,7 +961,7 @@ function cmail_editor_selector($attrib)
 function cmail_store_target_selection($attrib)
 {
   $attrib['name'] = '_store_target';
-  $select = cmail_mailbox_select(array_merge($attrib, array('noselection' => '- '.rcube_label('dontsave').' -')));
+  $select = cmail_mailbox_select(array_merge($attrib, array('noselection' => '- '.cmail_label('dontsave').' -')));
   return $select->show(cmail::get_instance()->config->get('sent_mbox'), $attrib);
 }
 

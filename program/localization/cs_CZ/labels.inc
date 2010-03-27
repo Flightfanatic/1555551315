@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/cs_CZ/labels.inc                                             |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
 |        Milan Kozak <hodza@hodza.net>					|
 +-----------------------------------------------------------------------+
 
-@version $Id: labels.inc 2994 2009-09-27 14:16:33Z yllar $
+@version $Id: labels.inc 2994 2010-09-27 14:16:33Z yllar $
 
 */
 

@@ -4,8 +4,8 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/rss.inc                                            |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -15,7 +15,7 @@
  | Author: Sjon Hortensius <sjon@hortensius.net>                         |
  +-----------------------------------------------------------------------+
 
- $Id: rss.inc 2927 2009-09-05 12:31:19Z alec $
+ $Id: rss.inc 2927 2010-09-05 12:31:19Z alec $
 
 */
 
@@ -69,14 +69,14 @@ echo '
 		<title>webmail for '.rss_encode($_SESSION['username'].' @ '.$_SESSION['imap_host']).'</title>
 		<generator>'.rss_encode($CONFIG['useragent'], 'xml').' (RSS extension by Sjon Hortensius)</generator>
 		<image>
-			<link>http://www.roundcube.net/</link>
+			<link>http://www.Crystal.net/</link>
 			<title>'.rss_encode($CONFIG['product_name']).' logo</title>
-			<url>'.rss_encode($webmail_url.'skins/default/images/roundcube_logo.png').'</url>
+			<url>'.rss_encode($webmail_url.'skins/default/images/Crystal_logo.png').'</url>
 		</image>';
 
 // Check if the user wants to override the default sortingmethode
 if (isset($_GET['_sort']))
-  list($sort_col, $sort_order) = explode('_', get_input_value('_sort', RCUBE_INPUT_GET));
+  list($sort_col, $sort_order) = explode('_', get_input_value('_sort', cmail_INPUT_GET));
 
 // Add message to output
 if ($messagecount > 0)

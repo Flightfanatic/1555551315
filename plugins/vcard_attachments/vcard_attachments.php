@@ -6,7 +6,7 @@
  * @version 1.0
  * @author Thomas Bruederli
  */
-class vcard_attachments extends rcube_plugin
+class vcard_attachments extends cmail_plugin
 {
   public $task = 'mail';
   
@@ -47,7 +47,7 @@ class vcard_attachments extends rcube_plugin
   function html_output($p)
   {
     if ($this->vcard_part) {
-      $vcard = new rcube_vcard($this->message->get_part_content($this->vcard_part));
+      $vcard = new cmail_vcard($this->message->get_part_content($this->vcard_part));
       
       // successfully parsed vcard
       if ($vcard->displayname) {
@@ -78,16 +78,16 @@ class vcard_attachments extends rcube_plugin
   {
 	  $this->add_texts('localization', true);
 
-    $uid = get_input_value('_uid', RCUBE_INPUT_POST);
-    $mbox = get_input_value('_mbox', RCUBE_INPUT_POST);
-    $mime_id = get_input_value('_part', RCUBE_INPUT_POST);
+    $uid = get_input_value('_uid', cmail_INPUT_POST);
+    $mbox = get_input_value('_mbox', cmail_INPUT_POST);
+    $mime_id = get_input_value('_part', cmail_INPUT_POST);
     
     $cmail = cmail::get_instance();
     $part = $uid && $mime_id ? $cmail->imap->get_message_part($uid, $mime_id) : null;
     
     $error_msg = $this->gettext('vcardsavefailed');
     
-    if ($part && ($vcard = new rcube_vcard($part)) && $vcard->displayname && $vcard->email) {
+    if ($part && ($vcard = new cmail_vcard($part)) && $vcard->displayname && $vcard->email) {
       $contacts = $cmail->get_address_book(null, true);
       
       // check for existing contacts

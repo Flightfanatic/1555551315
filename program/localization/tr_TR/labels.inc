@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/tr/labels.inc                                                |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -14,7 +14,7 @@
 | Author: Gökdeniz Karadağ <gokdenizk@gmail.com>                        |
 +-----------------------------------------------------------------------+
 
-@version $Id: labels.inc 2827 2009-08-02 13:32:47Z yllar $
+@version $Id: labels.inc 2827 2010-08-02 13:32:47Z yllar $
 
 */
 

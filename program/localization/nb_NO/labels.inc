@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/nb_NO/labels.inc                                             |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -15,7 +15,7 @@
 | Author: Odd Henriksen <odd@digicon.no>                                |
 +-----------------------------------------------------------------------+
 
-@version $Id: labels.inc 2784 2009-07-22 12:23:12Z yllar $
+@version $Id: labels.inc 2784 2010-07-22 12:23:12Z yllar $
 
 */
 

@@ -1,4 +1,4 @@
-function rcube_list_widget(_1,p){
+function cmail_list_widget(_1,p){
 this.ENTER_KEY=13;
 this.DELETE_KEY=46;
 this.BACKSPACE_KEY=8;
@@ -30,7 +30,7 @@ this[n]=p[n];
 }
 }
 };
-rcube_list_widget.prototype={init:function(){
+cmail_list_widget.prototype={init:function(){
 if(this.list&&this.list.tBodies[0]){
 this.rows=new Array();
 this.rowcount=0;
@@ -46,8 +46,8 @@ this.rowcount++;
 }
 this.frame=this.list.parentNode;
 if(this.keyboard){
-rcube_event.add_listener({element:document,event:bw.opera?"keypress":"keydown",object:this,method:"key_press"});
-rcube_event.add_listener({element:document,event:"keydown",object:this,method:"key_down"});
+cmail_event.add_listener({element:document,event:bw.opera?"keypress":"keydown",object:this,method:"key_press"});
+cmail_event.add_listener({element:document,event:"keydown",object:this,method:"key_down"});
 }
 }
 },init_row:function(_6){
@@ -109,7 +109,7 @@ $(this.rows[id].obj).addClass("selected").removeClass("unfocused");
 }
 }
 if(e||(e=window.event)){
-rcube_event.cancel(e);
+cmail_event.cancel(e);
 }
 },blur:function(){
 var id;
@@ -121,24 +121,24 @@ $(this.rows[id].obj).removeClass("selected").addClass("unfocused");
 }
 }
 },drag_row:function(e,id){
-var _18=rcube_event.get_target(e);
+var _18=cmail_event.get_target(e);
 var _19=_18.tagName.toLowerCase();
 if(this.dont_select||(_18&&(_19=="input"||_19=="img"))){
 return true;
 }
-if(rcube_event.get_button(e)==2){
+if(cmail_event.get_button(e)==2){
 return true;
 }
 this.in_selection_before=this.in_selection(id)?id:false;
 if(!this.in_selection_before){
-var _1a=rcube_event.get_modifier(e);
+var _1a=cmail_event.get_modifier(e);
 this.select_row(id,_1a,false);
 }
 if(this.draggable&&this.selection.length){
 this.drag_start=true;
-this.drag_mouse_start=rcube_event.get_mouse_pos(e);
-rcube_event.add_listener({element:document,event:"mousemove",object:this,method:"drag_mouse_move"});
-rcube_event.add_listener({element:document,event:"mouseup",object:this,method:"drag_mouse_up"});
+this.drag_mouse_start=cmail_event.get_mouse_pos(e);
+cmail_event.add_listener({element:document,event:"mousemove",object:this,method:"drag_mouse_move"});
+cmail_event.add_listener({element:document,event:"mouseup",object:this,method:"drag_mouse_up"});
 var _1b=document.getElementsByTagName("iframe");
 this.iframe_events=Object();
 for(var n in _1b){
@@ -170,15 +170,15 @@ _1d.attachEvent("onmousemove",this.iframe_events[n]);
 _1d["onmousemove"]=this.iframe_events[n];
 }
 }
-rcube_event.add_listener({element:_1d,event:"mouseup",object:this,method:"drag_mouse_up"});
+cmail_event.add_listener({element:_1d,event:"mouseup",object:this,method:"drag_mouse_up"});
 }
 }
 }
 return false;
 },click_row:function(e,id){
 var now=new Date().getTime();
-var _24=rcube_event.get_modifier(e);
-var _25=rcube_event.get_target(e);
+var _24=cmail_event.get_modifier(e);
+var _25=cmail_event.get_target(e);
 var _26=_25.tagName.toLowerCase();
 if((_25&&(_26=="input"||_26=="img"))){
 return true;
@@ -199,7 +199,7 @@ this.triggerEvent("dblclick");
 this.triggerEvent("click");
 }
 if(!this.drag_active){
-rcube_event.cancel(e);
+cmail_event.cancel(e);
 }
 this.rows[id].clicked=now;
 return false;
@@ -418,26 +418,26 @@ $(this.rows[id].obj).removeClass("selected").removeClass("unfocused");
 if(this.focused!=true){
 return true;
 }
-var _50=rcube_event.get_keycode(e);
-var _51=rcube_event.get_modifier(e);
+var _50=cmail_event.get_keycode(e);
+var _51=cmail_event.get_modifier(e);
 switch(_50){
 case 40:
 case 38:
 case 63233:
 case 63232:
-rcube_event.cancel(e);
+cmail_event.cancel(e);
 return this.use_arrow_key(_50,_51);
 default:
 this.shiftkey=e.shiftKey;
 this.key_pressed=_50;
 this.triggerEvent("keypress");
 if(this.key_pressed==this.BACKSPACE_KEY){
-return rcube_event.cancel(e);
+return cmail_event.cancel(e);
 }
 }
 return true;
 },key_down:function(e){
-switch(rcube_event.get_keycode(e)){
+switch(cmail_event.get_keycode(e)){
 case 27:
 if(this.drag_active){
 return this.drag_mouse_up(e);
@@ -446,8 +446,8 @@ case 40:
 case 38:
 case 63233:
 case 63232:
-if(!rcube_event.get_modifier(e)&&this.focused){
-return rcube_event.cancel(e);
+if(!cmail_event.get_modifier(e)&&this.focused){
+return cmail_event.cancel(e);
 }
 default:
 }
@@ -480,7 +480,7 @@ this.frame.scrollTop=(_58+Number(row.offsetHeight))-Number(this.frame.offsetHeig
 }
 },drag_mouse_move:function(e){
 if(this.drag_start){
-var m=rcube_event.get_mouse_pos(e);
+var m=cmail_event.get_mouse_pos(e);
 if(!this.drag_mouse_start||(Math.abs(m.x-this.drag_mouse_start.x)<3&&Math.abs(m.y-this.drag_mouse_start.y)<3)){
 return false;
 }
@@ -523,7 +523,7 @@ this.drag_active=true;
 this.triggerEvent("dragstart");
 }
 if(this.drag_active&&this.draglayer){
-var pos=rcube_event.get_mouse_pos(e);
+var pos=cmail_event.get_mouse_pos(e);
 this.draglayer.css({left:(pos.x+20)+"px",top:(pos.y-5+(bw.ie?document.documentElement.scrollTop:0))+"px"});
 this.triggerEvent("dragmove",e?e:window.event);
 }
@@ -540,8 +540,8 @@ this.draglayer.hide();
 }
 this.drag_active=false;
 this.triggerEvent("dragend");
-rcube_event.remove_listener({element:document,event:"mousemove",object:this,method:"drag_mouse_move"});
-rcube_event.remove_listener({element:document,event:"mouseup",object:this,method:"drag_mouse_up"});
+cmail_event.remove_listener({element:document,event:"mousemove",object:this,method:"drag_mouse_move"});
+cmail_event.remove_listener({element:document,event:"mouseup",object:this,method:"drag_mouse_up"});
 var _64=document.getElementsByTagName("iframe");
 for(var n in _64){
 var _66;
@@ -568,10 +568,10 @@ _66["onmousemove"]=null;
 }
 }
 }
-rcube_event.remove_listener({element:_66,event:"mouseup",object:this,method:"drag_mouse_up"});
+cmail_event.remove_listener({element:_66,event:"mouseup",object:this,method:"drag_mouse_up"});
 }
 }
-return rcube_event.cancel(e);
+return cmail_event.cancel(e);
 },set_background_mode:function(_67){
 if(_67){
 this.background=document.createElement("tbody");
@@ -582,7 +582,7 @@ this.background=null;
 }
 }
 }};
-rcube_list_widget.prototype.addEventListener=rcube_event_engine.prototype.addEventListener;
-rcube_list_widget.prototype.removeEventListener=rcube_event_engine.prototype.removeEventListener;
-rcube_list_widget.prototype.triggerEvent=rcube_event_engine.prototype.triggerEvent;
+cmail_list_widget.prototype.addEventListener=cmail_event_engine.prototype.addEventListener;
+cmail_list_widget.prototype.removeEventListener=cmail_event_engine.prototype.removeEventListener;
+cmail_list_widget.prototype.triggerEvent=cmail_event_engine.prototype.triggerEvent;
 

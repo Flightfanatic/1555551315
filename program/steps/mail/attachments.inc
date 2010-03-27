@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/attachments.inc                                    |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Upload, remove, display attachments in compose form                 |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: compose.inc 2081 2008-11-23 12:38:44Z thomasb $
@@ -74,7 +74,7 @@ if (!is_array($_SESSION['compose']['attachments'])) {
 // clear all stored output properties (like scripts and env vars)
 $OUTPUT->reset();
 
-$uploadid = get_input_value('_uploadid', RCUBE_INPUT_GET);
+$uploadid = get_input_value('_uploadid', cmail_INPUT_GET);
 
 if (is_array($_FILES['_attachments']['tmp_name'])) {
   foreach ($_FILES['_attachments']['tmp_name'] as $i => $filepath) {
@@ -96,17 +96,17 @@ if (is_array($_FILES['_attachments']['tmp_name'])) {
       if (($icon = $_SESSION['compose']['deleteicon']) && is_file($icon)) {
         $button = html::img(array(
           'src' => $icon,
-          'alt' => rcube_label('delete')
+          'alt' => cmail_label('delete')
         ));
       }
       else {
-        $button = Q(rcube_label('delete'));
+        $button = Q(cmail_label('delete'));
       }
 
       $content = html::a(array(
         'href' => "#delete",
         'onclick' => sprintf("return %s.command('remove-attachment','rcmfile%s', this)", JS_OBJECT_NAME, $id),
-        'title' => rcube_label('delete'),
+        'title' => cmail_label('delete'),
       ), $button);
 
       $content .= Q($attachment['name']);
@@ -120,13 +120,13 @@ if (is_array($_FILES['_attachments']['tmp_name'])) {
     else {  // upload failed
       $err = $_FILES['_attachments']['error'][$i];
       if ($err == UPLOAD_ERR_INI_SIZE || $err == UPLOAD_ERR_FORM_SIZE) {
-        $msg = rcube_label(array('name' => 'filesizeerror', 'vars' => array('size' => show_bytes(parse_bytes(ini_get('upload_max_filesize'))))));
+        $msg = cmail_label(array('name' => 'filesizeerror', 'vars' => array('size' => show_bytes(parse_bytes(ini_get('upload_max_filesize'))))));
       }
       else if ($attachment['error']) {
         $msg = $attachment['error'];
       }
       else {
-        $msg = rcube_label('fileuploaderror');
+        $msg = cmail_label('fileuploaderror');
       }
     
       $OUTPUT->command('display_message', $msg, 'error');
@@ -138,9 +138,9 @@ else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // if filesize exceeds post_max_size then $_FILES array is empty,
   // show filesizeerror instead of fileuploaderror
   if ($maxsize = ini_get('post_max_size'))
-    $msg = rcube_label(array('name' => 'filesizeerror', 'vars' => array('size' => show_bytes(parse_bytes($maxsize)))));
+    $msg = cmail_label(array('name' => 'filesizeerror', 'vars' => array('size' => show_bytes(parse_bytes($maxsize)))));
   else
-    $msg = rcube_label('fileuploaderror');
+    $msg = cmail_label('fileuploaderror');
   $OUTPUT->command('display_message', $msg, 'error');
   $OUTPUT->command('remove_from_attachment_list', $uploadid);
 }

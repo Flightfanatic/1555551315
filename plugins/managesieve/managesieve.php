@@ -13,7 +13,7 @@
  * Configuration (see config.inc.php.dist):
  */
 
-class managesieve extends rcube_plugin
+class managesieve extends cmail_plugin
 {
   public $task = 'settings';
 
@@ -57,10 +57,10 @@ class managesieve extends rcube_plugin
     ));
 
     require_once($this->home . '/lib/Net/Sieve.php');
-    require_once($this->home . '/lib/rcube_sieve.php');
+    require_once($this->home . '/lib/cmail_sieve.php');
 
     // try to connect to managesieve server and to fetch the script
-    $this->sieve = new rcube_sieve($_SESSION['username'],
+    $this->sieve = new cmail_sieve($_SESSION['username'],
 	$this->rc->decrypt($_SESSION['password']), 
 	str_replace('%h', $_SESSION['imap_host'], $this->rc->config->get('managesieve_host', 'localhost')),
 	$this->rc->config->get('managesieve_port', 2000),
@@ -115,9 +115,9 @@ class managesieve extends rcube_plugin
     $error = $this->managesieve_start();
 
     // Handle user requests
-    if ($action = get_input_value('_act', RCUBE_INPUT_GPC))
+    if ($action = get_input_value('_act', cmail_INPUT_GPC))
     {
-      $fid = (int) get_input_value('_fid', RCUBE_INPUT_GET);
+      $fid = (int) get_input_value('_fid', cmail_INPUT_GET);
 
       if ($action=='up' && !$error)
       {
@@ -166,7 +166,7 @@ class managesieve extends rcube_plugin
       }
       elseif ($action=='ruleadd')
       {
-        $rid = get_input_value('_rid', RCUBE_INPUT_GPC);
+        $rid = get_input_value('_rid', cmail_INPUT_GPC);
         $id = $this->genid();
         $content = $this->rule_div($fid, $id, false);
 
@@ -174,7 +174,7 @@ class managesieve extends rcube_plugin
       }
       elseif ($action=='actionadd')
       {
-        $aid = get_input_value('_aid', RCUBE_INPUT_GPC);
+        $aid = get_input_value('_aid', cmail_INPUT_GPC);
         $id = $this->genid();
         $content = $this->action_div($fid, $id, false);
     
@@ -195,9 +195,9 @@ class managesieve extends rcube_plugin
     // add/edit action
     if (isset($_POST['_name']))
     {
-      $name = trim(get_input_value('_name', RCUBE_INPUT_POST));
-      $fid = trim(get_input_value('_fid', RCUBE_INPUT_POST));
-      $join = trim(get_input_value('_join', RCUBE_INPUT_POST));
+      $name = trim(get_input_value('_name', cmail_INPUT_POST));
+      $fid = trim(get_input_value('_fid', cmail_INPUT_POST));
+      $join = trim(get_input_value('_join', cmail_INPUT_POST));
   
       // and arrays
       $headers = $_POST['_header'];
@@ -444,7 +444,7 @@ class managesieve extends rcube_plugin
       $result[] = array('managesieve.filtername' => $filter['name'], 'id' => $idx);
     
     // create XHTML table
-    $out = rcube_table_output($attrib, $result, $a_show_cols, 'id');
+    $out = cmail_table_output($attrib, $result, $a_show_cols, 'id');
 
     // set client env
     $this->rc->output->add_gui_object('filterslist', $attrib['id']);
@@ -476,7 +476,7 @@ class managesieve extends rcube_plugin
     if (!$attrib['id'])
       $attrib['id'] = 'rcmfilterform';
 
-    $fid = get_input_value('_fid', RCUBE_INPUT_GPC);
+    $fid = get_input_value('_fid', cmail_INPUT_GPC);
     $scr = isset($this->form) ? $this->form : $this->script[$fid];
 
     $hiddenfields = new html_hiddenfield(array('name' => '_task', 'value' => $this->rc->task));
@@ -755,7 +755,7 @@ class managesieve extends rcube_plugin
     foreach ($a_folders as $folder)
     {
       $utf7folder = $this->rc->imap->mod_mailbox($folder);
-      $names = explode($delimiter, rcube_charset_convert($folder, 'UTF7-IMAP'));
+      $names = explode($delimiter, cmail_charset_convert($folder, 'UTF7-IMAP'));
       $name = $names[sizeof($names)-1];
     
       if ($replace_delimiter = $this->rc->config->get('managesieve_replace_delimiter'))
@@ -796,7 +796,7 @@ class managesieve extends rcube_plugin
 
   private function genid()
   {
-    $result = intval(rcube_timer());
+    $result = intval(cmail_timer());
     return $result;
   }
 
@@ -860,7 +860,7 @@ class managesieve extends rcube_plugin
  
   private function mbox_encode($text, $encoding)
   {
-    return rcube_charset_convert($text, 'UTF7-IMAP', $encoding);
+    return cmail_charset_convert($text, 'UTF7-IMAP', $encoding);
   }
 }
 

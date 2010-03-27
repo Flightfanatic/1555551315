@@ -2,18 +2,18 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_json_output.php                                 |
+ | program/include/cmail_json_output.php                                 |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Class to handle HTML page output using a skin template.             |
- |   Extends rcube_html_page class from rcube_shared.inc                 |
+ |   Extends cmail_html_page class from cmail_shared.inc                 |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id:  $
@@ -26,7 +26,7 @@
  *
  * @package View
  */
-class rcube_json_output
+class cmail_json_output
 {
     private $config;
     private $charset = cmail_CHARSET;
@@ -142,7 +142,7 @@ class rcube_json_output
             $args = $args[0];
         
         foreach ($args as $name) {
-            $this->texts[$name] = rcube_label($name);
+            $this->texts[$name] = cmail_label($name);
         }
     }
     
@@ -162,7 +162,7 @@ class rcube_json_output
             $this->message = $message;
             $this->command(
                 'display_message',
-                rcube_label(array('name' => $message, 'vars' => $vars)),
+                cmail_label(array('name' => $message, 'vars' => $vars)),
                 $type
             );
         }

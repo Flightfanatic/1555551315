@@ -4,37 +4,37 @@
  +-----------------------------------------------------------------------+
  | program/include/session.inc                                           |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Provide database supported session management                       |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: session.inc 2932 2009-09-07 12:51:21Z alec $
+ $Id: session.inc 2932 2010-09-07 12:51:21Z alec $
 
 */
 
-$GLOBALS['rcube_session_unsets'] = array();
+$GLOBALS['cmail_session_unsets'] = array();
 
-function rcube_sess_open($save_path, $session_name)
+function cmail_sess_open($save_path, $session_name)
 {
   return true;
 }
 
 
-function rcube_sess_close()
+function cmail_sess_close()
 {
   return true;
 }
 
 
 // read session data
-function rcube_sess_read($key)
+function cmail_sess_read($key)
 {
   global $SESS_CHANGED, $SESS_CLIENT_IP;
   
@@ -59,7 +59,7 @@ function rcube_sess_read($key)
   
 
 // save session data
-function rcube_sess_write($key, $vars)
+function cmail_sess_write($key, $vars)
 {
   $DB = cmail::get_instance()->get_dbh();
   
@@ -71,15 +71,15 @@ function rcube_sess_write($key, $vars)
 
   if ($sql_arr = $DB->fetch_assoc($sql_result)) {
 
-    $a_oldvars = rcube_sess_unserialize($sql_arr['vars']);
-    foreach ((array)$GLOBALS['rcube_session_unsets'] as $k)
+    $a_oldvars = cmail_sess_unserialize($sql_arr['vars']);
+    foreach ((array)$GLOBALS['cmail_session_unsets'] as $k)
       unset($a_oldvars[$k]);
 
     $DB->query(
       "UPDATE " . get_table_name('session') . "
        SET    vars=?, changed= " . $now . "
        WHERE  sess_id=?",
-      rcube_sess_serialize(array_merge($a_oldvars, rcube_sess_unserialize($vars))),
+      cmail_sess_serialize(array_merge($a_oldvars, cmail_sess_unserialize($vars))),
       $key);
   }
   else {
@@ -92,18 +92,18 @@ function rcube_sess_write($key, $vars)
       (string)$_SERVER['REMOTE_ADDR']);
   }
 
-  $GLOBALS['rcube_session_unsets'] = array();
+  $GLOBALS['cmail_session_unsets'] = array();
   return true;
 }
 
 
 // unset session variable
-function rcube_sess_unset($var=NULL)
+function cmail_sess_unset($var=NULL)
 {
   if (empty($var))
-    return rcube_sess_destroy(session_id());
+    return cmail_sess_destroy(session_id());
 
-  $GLOBALS['rcube_session_unsets'][] = $var;
+  $GLOBALS['cmail_session_unsets'][] = $var;
   unset($_SESSION[$var]);
 
   return true;
@@ -111,7 +111,7 @@ function rcube_sess_unset($var=NULL)
 
 
 // serialize session data
-function rcube_sess_serialize($vars)
+function cmail_sess_serialize($vars)
 {
   $data = '';
   if (is_array($vars))
@@ -125,7 +125,7 @@ function rcube_sess_serialize($vars)
 
 // unserialize session data
 // http://www.php.net/manual/en/function.session-decode.php#56106
-function rcube_sess_unserialize($str)
+function cmail_sess_unserialize($str)
 {
   $str = (string)$str;
   $endptr = strlen($str);
@@ -211,7 +211,7 @@ function rcube_sess_unserialize($str)
 
 
 // handler for session_destroy()
-function rcube_sess_destroy($key)
+function cmail_sess_destroy($key)
 {
   $DB = cmail::get_instance()->get_dbh();
   
@@ -222,7 +222,7 @@ function rcube_sess_destroy($key)
 
 
 // garbage collecting function
-function rcube_sess_gc($maxlifetime)
+function cmail_sess_gc($maxlifetime)
 {
   $cmail = cmail::get_instance();
   $DB = $cmail->get_dbh();
@@ -240,7 +240,7 @@ function rcube_sess_gc($maxlifetime)
 }
 
 
-function rcube_sess_regenerate_id()
+function cmail_sess_regenerate_id()
 {
   $randval = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -252,7 +252,7 @@ function rcube_sess_regenerate_id()
   $random = md5($random);
 
   // delete old session record
-  rcube_sess_destroy(session_id());
+  cmail_sess_destroy(session_id());
 
   session_id($random);
 
@@ -266,6 +266,6 @@ function rcube_sess_regenerate_id()
 
 
 // set custom functions for PHP session management
-session_set_save_handler('rcube_sess_open', 'rcube_sess_close', 'rcube_sess_read', 'rcube_sess_write', 'rcube_sess_destroy', 'rcube_sess_gc');
+session_set_save_handler('cmail_sess_open', 'cmail_sess_close', 'cmail_sess_read', 'cmail_sess_write', 'cmail_sess_destroy', 'cmail_sess_gc');
 
 ?>

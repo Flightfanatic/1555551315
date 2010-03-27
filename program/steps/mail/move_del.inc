@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/move_del.inc                                       |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Move the submitted messages to a specific mailbox or delete them    |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: move_del.inc 2960 2009-09-17 12:36:32Z alec $
+ $Id: move_del.inc 2960 2010-09-17 12:36:32Z alec $
 
 */
 
@@ -29,9 +29,9 @@ $old_pages = ceil($old_count / $IMAP->page_size);
 
 // move messages
 if ($cmail->action=='moveto' && !empty($_POST['_uid']) && !empty($_POST['_target_mbox'])) {
-    $count = sizeof(explode(',', ($uids = get_input_value('_uid', RCUBE_INPUT_POST))));
-    $target = get_input_value('_target_mbox', RCUBE_INPUT_POST);
-    $mbox = get_input_value('_mbox', RCUBE_INPUT_POST);
+    $count = sizeof(explode(',', ($uids = get_input_value('_uid', cmail_INPUT_POST))));
+    $target = get_input_value('_target_mbox', cmail_INPUT_POST);
+    $mbox = get_input_value('_mbox', cmail_INPUT_POST);
 
     $moved = $IMAP->move_message($uids, $target, $mbox);
   
@@ -48,8 +48,8 @@ if ($cmail->action=='moveto' && !empty($_POST['_uid']) && !empty($_POST['_target
 }
 // delete messages 
 else if ($cmail->action=='delete' && !empty($_POST['_uid'])) {
-    $count = sizeof(explode(',', ($uids = get_input_value('_uid', RCUBE_INPUT_POST))));
-    $mbox = get_input_value('_mbox', RCUBE_INPUT_POST);
+    $count = sizeof(explode(',', ($uids = get_input_value('_uid', cmail_INPUT_POST))));
+    $mbox = get_input_value('_mbox', cmail_INPUT_POST);
     $del = $IMAP->delete_message($uids, $mbox);
   
     if (!$del) {
@@ -69,13 +69,13 @@ else {
 }
 
 // refresh saved search set after moving some messages
-if (($search_request = get_input_value('_search', RCUBE_INPUT_GPC)) && $IMAP->search_set) {
+if (($search_request = get_input_value('_search', cmail_INPUT_GPC)) && $IMAP->search_set) {
     $_SESSION['search'][$search_request] = $IMAP->refresh_search();
 }
 
 if ($_POST['_from'] == 'show')
 {
-  if ($next = get_input_value('_next_uid', RCUBE_INPUT_GPC))
+  if ($next = get_input_value('_next_uid', cmail_INPUT_GPC))
     $OUTPUT->command('show_message', $next);
   else
     $OUTPUT->command('command', 'list');

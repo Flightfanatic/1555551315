@@ -31,7 +31,7 @@
  * r:	Reply to message
  * R:	Reply to all of message
  */
-class keyboard_shortcuts extends rcube_plugin
+class keyboard_shortcuts extends cmail_plugin
 {
     public $task = 'mail';
     

@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/settings/edit_identity.inc                              |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Show edit form for a identity record or to add a new one            |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: edit_identity.inc 2755 2009-07-15 09:49:35Z thomasb $
+ $Id: edit_identity.inc 2755 2010-07-15 09:49:35Z thomasb $
 
 */
 
@@ -23,7 +23,7 @@ define('IDENTITIES_LEVEL', intval($cmail->config->get('identities_level', 0)));
 
 // edit-identity
 if (($_GET['_iid'] || $_POST['_iid']) && $cmail->action=='edit-identity') {
-  $IDENTITY_RECORD = $USER->get_identity(get_input_value('_iid', RCUBE_INPUT_GPC));
+  $IDENTITY_RECORD = $USER->get_identity(get_input_value('_iid', cmail_INPUT_GPC));
   
   if (is_array($IDENTITY_RECORD))
     $OUTPUT->set_env('iid', $IDENTITY_RECORD['identity_id']);
@@ -47,11 +47,11 @@ else {
 }
 
 
-function rcube_identity_form($attrib)
+function cmail_identity_form($attrib)
   {
   global $IDENTITY_RECORD, $cmail, $OUTPUT;
 
-  rcube_html_editor('identity');
+  cmail_html_editor('identity');
 
   // add some labels to client
   $OUTPUT->add_label('noemailwarning', 'nonamewarning', 'converting', 'editorwarning');
@@ -115,7 +115,7 @@ function rcube_identity_form($attrib)
 
     $out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label></td><td>%s</td></tr>\n",
                     $colprop['id'],
-                    Q(rcube_label($label)),
+                    Q(cmail_label($label)),
                     $value);
     }
 
@@ -125,10 +125,10 @@ function rcube_identity_form($attrib)
   }
 
 $OUTPUT->include_script('list.js');
-$OUTPUT->add_handler('identityform', 'rcube_identity_form');
+$OUTPUT->add_handler('identityform', 'cmail_identity_form');
 $OUTPUT->set_env('identities_level', IDENTITIES_LEVEL);
 
-$OUTPUT->set_pagetitle(rcube_label(($cmail->action=='add-identity' ? 'newidentity' : 'edititem')));
+$OUTPUT->set_pagetitle(cmail_label(($cmail->action=='add-identity' ? 'newidentity' : 'edititem')));
 
 if ($cmail->action=='add-identity' && $OUTPUT->template_exists('addidentity'))
   $OUTPUT->send('addidentity');

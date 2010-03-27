@@ -8,7 +8,7 @@
  * @version 1.0
  * @author Thomas Bruederli
  */
-class squirrelmail_usercopy extends rcube_plugin
+class squirrelmail_usercopy extends cmail_plugin
 {
 	private $prefs = null;
 	private $abook = array();

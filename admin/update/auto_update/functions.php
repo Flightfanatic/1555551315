@@ -17,7 +17,7 @@
  *                       include using CURL and fsockopen *
  *     3.5     Dec 2008    Improvements, including        *
  *   single fire, silent db connect, fire time in minutes *
- *     3.6     Oct 2009    Version check added            *
+ *     3.6     Oct 2010    Version check added            *
  *  NOTES:                                                *
  *        Requires:  PHP and MySQL                        *
  **********************************************************/

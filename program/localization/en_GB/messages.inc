@@ -5,15 +5,15 @@
  +-----------------------------------------------------------------------+
  | language/en_GB/messages.inc                                           |
  |                                                                       |
- | Language file of the RoundCube Webmail client                         |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | Language file of the Crystal Webmail client                         |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
  | Author: Weiran Zhang (weiran@weiran.co.uk)                            |
  +-----------------------------------------------------------------------+
 
- @version $Id: messages.inc 2713 2009-07-06 09:13:10Z alec $
+ @version $Id: messages.inc 2713 2010-07-06 09:13:10Z alec $
 
 */
 

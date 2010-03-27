@@ -1,15 +1,15 @@
 <?php
 
-	/** start RoundCube specific code */
+	/** start Crystal specific code */
 	
 	define('INSTALL_PATH', preg_replace('/program[\\\\\/]js[\\\\\/].+$/', '', getcwd()));
 	require_once INSTALL_PATH . 'program/include/iniset.php';
 	
-	$cmail_config = new rcube_config();
+	$cmail_config = new cmail_config();
 	$config['general.engine'] = $cmail_config->get('spellcheck_engine') == 'pspell' ? 'PSpell' : 'GoogleSpell';
 	$config['GoogleSpell.rpc_uri'] = $cmail_config->get('spellcheck_uri');
 	
-	/** end RoundCube specific code */
+	/** end Crystal specific code */
 
 	// General settings
 	//$config['general.engine'] = 'GoogleSpell';

@@ -14,10 +14,10 @@
  *   class myCustom_attachments extends filesystem_attachments
  *
  * @author Ziba Scott <ziba@umich.edu>
- * @author Thomas Bruederli <roundcube@gmail.com>
+ * @author Thomas Bruederli <Crystal@gmail.com>
  * 
  */
-class filesystem_attachments extends rcube_plugin
+class filesystem_attachments extends cmail_plugin
 {
     public $task = 'mail';
     

@@ -24,7 +24,7 @@ function password_save($curpass, $passwd)
 	else if (!is_array($dsn) && !preg_match('/\?new_link=true/', $dsn))
 	  $dsn .= '?new_link=true';
 
-        $db = new rcube_mdb2($dsn, '', FALSE);
+        $db = new cmail_mdb2($dsn, '', FALSE);
         $db->set_debug((bool)$cmail->config->get('sql_debug'));
         $db->db_connect('w');
     } else {

@@ -5,18 +5,18 @@
 +-----------------------------------------------------------------------+
 | language/nl_NL/labels.inc                                             |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
 | Author: Mark Moses <mark@katmoda.com>                                 |
-|         Lazlo Westerhof <roundcube@lazlo.me>                          |
+|         Lazlo Westerhof <Crystal@lazlo.me>                          |
 |         Laurens Vets <laurens@daemon.be>                              |
 |         Frits Letteboer <f.letteboer@radiotwenterand.nl>              |
 +-----------------------------------------------------------------------+
 
-@version $Id: labels.inc 3029 2009-10-09 11:46:23Z alec $
+@version $Id: labels.inc 3029 2010-10-09 11:46:23Z alec $
 
 */
 

@@ -3,18 +3,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/mark.inc                                           |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Mark the submitted messages with the specified flag                 |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: mark.inc 2960 2009-09-17 12:36:32Z alec $
+ $Id: mark.inc 2960 2010-09-17 12:36:32Z alec $
 
 */
 
@@ -30,7 +30,7 @@ $a_flags_map = array(
   'flagged' => 'FLAGGED',
   'unflagged' => 'UNFLAGGED');
 
-if (($uids = get_input_value('_uid', RCUBE_INPUT_POST)) && ($flag = get_input_value('_flag', RCUBE_INPUT_POST)))
+if (($uids = get_input_value('_uid', cmail_INPUT_POST)) && ($flag = get_input_value('_flag', cmail_INPUT_POST)))
 {
   $flag = $a_flags_map[$flag] ? $a_flags_map[$flag] : strtoupper($flag);
 
@@ -53,7 +53,7 @@ if (($uids = get_input_value('_uid', RCUBE_INPUT_POST)) && ($flag = get_input_va
   }
 
   if($flag == 'DELETED' && $CONFIG['read_when_deleted'] && !empty($_POST['_ruid'])) {
-    $uids = get_input_value('_ruid', RCUBE_INPUT_POST);
+    $uids = get_input_value('_ruid', cmail_INPUT_POST);
     $read = $IMAP->set_flag($uids, 'SEEN');
     
     if ($read != -1 && !$CONFIG['skip_deleted'])
@@ -65,13 +65,13 @@ if (($uids = get_input_value('_uid', RCUBE_INPUT_POST)) && ($flag = get_input_va
   }
   else if ($flag == 'DELETED' && $CONFIG['skip_deleted']) {
     if ($_POST['_from'] == 'show') {
-      if ($next = get_input_value('_next_uid', RCUBE_INPUT_GPC))
+      if ($next = get_input_value('_next_uid', cmail_INPUT_GPC))
         $OUTPUT->command('show_message', $next);
       else
         $OUTPUT->command('command', 'list');
     } else {
       // refresh saved search set after moving some messages
-      if (($search_request = get_input_value('_search', RCUBE_INPUT_GPC)) && $IMAP->search_set) {
+      if (($search_request = get_input_value('_search', cmail_INPUT_GPC)) && $IMAP->search_set) {
         $_SESSION['search'][$search_request] = $IMAP->refresh_search();
       }
 

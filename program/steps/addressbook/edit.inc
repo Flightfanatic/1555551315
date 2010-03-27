@@ -4,23 +4,23 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/edit.inc                                    |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Show edit form for a contact entry or to add a new one              |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: edit.inc 2755 2009-07-15 09:49:35Z thomasb $
+ $Id: edit.inc 2755 2010-07-15 09:49:35Z thomasb $
 
 */
 
 
-if (($cid = get_input_value('_cid', RCUBE_INPUT_GPC)) && ($record = $CONTACTS->get_record($cid, true)))
+if (($cid = get_input_value('_cid', cmail_INPUT_GPC)) && ($record = $CONTACTS->get_record($cid, true)))
   $OUTPUT->set_env('cid', $record['ID']);
 
 // adding not allowed here
@@ -67,7 +67,7 @@ function cmail_contact_editform($attrib)
     $value = cmail_get_edit_field($col, $record[$col], $attrib);
     $out .= sprintf("<tr><td class=\"title\"><label for=\"%s\">%s</label></td><td>%s</td></tr>\n",
                     $attrib['id'],
-                    Q(rcube_label($col)),
+                    Q(cmail_label($col)),
                     $value);
   }
 
@@ -87,7 +87,7 @@ function get_form_tags($attrib)
   $form_start = $form_end = '';
   
   if (empty($EDIT_FORM)) {
-    $hiddenfields = new html_hiddenfield(array('name' => '_source', 'value' => get_input_value('_source', RCUBE_INPUT_GPC)));
+    $hiddenfields = new html_hiddenfield(array('name' => '_source', 'value' => get_input_value('_source', cmail_INPUT_GPC)));
     
     if (($result = $CONTACTS->get_result()) && ($record = $result->first()))
       $hiddenfields->add(array('name' => '_cid', 'value' => $record['ID']));

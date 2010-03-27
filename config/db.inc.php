@@ -4,8 +4,8 @@
  +-----------------------------------------------------------------------+
  | Configuration file for database access                                |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
@@ -20,7 +20,7 @@ $cmail_config = array();
 // currently supported db_providers: mysql, mysqli, pgsql, sqlite, mssql
 
 $cmail_config['db_dsnw'] = 'mysql://user:mail@localhost/crystal';
-// postgres example: 'pgsql://roundcube:pass@localhost/roundcubemail';
+// postgres example: 'pgsql://Crystal:pass@localhost/Crystalmail';
 // Warning: for SQLite use absolute path in DSN:
 // sqlite example: 'sqlite:////full/path/to/sqlite.db?mode=0646';
 

@@ -1,65 +1,65 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><roundcube:object name="pagetitle" /></title>
-<roundcube:include file="/includes/links.html" />
+<title><crystal:object name="pagetitle" /></title>
+<crystal:include file="/includes/links.html" />
 <script type="text/javascript" src="/splitter.js"></script>
 <script type="text/javascript" src="/functions.js"></script>
 <style type="text/css">
-#mailboxlist-container { width: <roundcube:exp expression="!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv-5 : 170" />px; }
-#messageframe { left: <roundcube:exp expression="!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv+5 : 180" />px;
-<roundcube:exp expression="browser:ie ? ('width: expression((parseInt(this.parentNode.offsetWidth)-'.(!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv+5 : 180).')+\\'px\\');') : ''" />
+#mailboxlist-container { width: <crystal:exp expression="!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv-5 : 170" />px; }
+#messageframe { left: <crystal:exp expression="!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv+5 : 180" />px;
+<crystal:exp expression="browser:ie ? ('width: expression((parseInt(this.parentNode.offsetWidth)-'.(!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv+5 : 180).')+\\'px\\');') : ''" />
 }
 </style>
 </head>
-<body onload="rcube_init_mail_ui()">
+<body onload="cmail_init_mail_ui()">
 
-<roundcube:include file="/includes/taskbar.html" />
-<roundcube:include file="/includes/header.html" />
+<crystal:include file="/includes/taskbar.html" />
+<crystal:include file="/includes/header.html" />
 
 <div id="messagetoolbar">
-<roundcube:button command="list" type="link" class="button back" classAct="button back" classSel="button backSel" title="backtolist" content=" " />
-<roundcube:button command="compose" type="link" class="button compose" classAct="button compose" classSel="button composeSel" title="writenewmessage" content=" " />
-<roundcube:button command="reply" type="link" class="buttonPas reply" classAct="button reply" classSel="button replySel" title="replytomessage" content=" " />
-<roundcube:button command="reply-all" type="link" class="buttonPas replyAll" classAct="button replyAll" classSel="button replyAllSel" title="replytoallmessage" content=" " />
-<roundcube:button command="forward" type="link" class="buttonPas forward" classAct="button forward" classSel="button forwardSel" title="forwardmessage" content=" " />
-<roundcube:button command="delete" type="link" class="buttonPas delete" classAct="button delete" classSel="button deleteSel" title="deletemessage" content=" " />
-<roundcube:container name="toolbar" id="messagetoolbar" />
-<roundcube:button name="messagemenulink" id="messagemenulink" type="link" class="button messagemenu" title="messageactions" onclick="cmail_ui.show_messagemenu();return false" content=" " />
-<roundcube:object name="mailboxlist" type="select" noSelection="moveto" maxlength="25" onchange="cmail.command('moveto', this.options[this.selectedIndex].value)" class="mboxlist" />
+<crystal:button command="list" type="link" class="button back" classAct="button back" classSel="button backSel" title="backtolist" content=" " />
+<crystal:button command="compose" type="link" class="button compose" classAct="button compose" classSel="button composeSel" title="writenewmessage" content=" " />
+<crystal:button command="reply" type="link" class="buttonPas reply" classAct="button reply" classSel="button replySel" title="replytomessage" content=" " />
+<crystal:button command="reply-all" type="link" class="buttonPas replyAll" classAct="button replyAll" classSel="button replyAllSel" title="replytoallmessage" content=" " />
+<crystal:button command="forward" type="link" class="buttonPas forward" classAct="button forward" classSel="button forwardSel" title="forwardmessage" content=" " />
+<crystal:button command="delete" type="link" class="buttonPas delete" classAct="button delete" classSel="button deleteSel" title="deletemessage" content=" " />
+<crystal:container name="toolbar" id="messagetoolbar" />
+<crystal:button name="messagemenulink" id="messagemenulink" type="link" class="button messagemenu" title="messageactions" onclick="cmail_ui.show_messagemenu();return false" content=" " />
+<crystal:object name="mailboxlist" type="select" noSelection="moveto" maxlength="25" onchange="cmail.command('moveto', this.options[this.selectedIndex].value)" class="mboxlist" />
 
-<roundcube:include file="/includes/messagemenu.html" />
+<crystal:include file="/includes/messagemenu.html" />
 </div>
 
 <div id="mainscreen">
 <div id="mailleftcontainer">
 <div id="mailboxlist-container">
-<div id="mailboxlist-header"><roundcube:label name="mailboxlist" /></div>
-<roundcube:object name="mailboxlist" id="mailboxlist" maxlength="25" />
+<div id="mailboxlist-header"><crystal:label name="mailboxlist" /></div>
+<crystal:object name="mailboxlist" id="mailboxlist" maxlength="25" />
 </div>
 </div>
 
 <div id="messageframe">
 <div id="messagecanvas">
-<roundcube:object name="messageHeaders" class="headers-table" cellspacing="0" cellpadding="2" addicon="/images/icons/silhouette.png" summary="Message headers" />
-<roundcube:object name="messageAttachments" id="attachment-list" />
+<crystal:object name="messageHeaders" class="headers-table" cellspacing="0" cellpadding="2" addicon="/images/icons/silhouette.png" summary="Message headers" />
+<crystal:object name="messageAttachments" id="attachment-list" />
 
-<roundcube:object name="blockedObjects" id="remote-objects-message" />
-<roundcube:object name="messageBody" id="messagebody" />
+<crystal:object name="blockedObjects" id="remote-objects-message" />
+<crystal:object name="messageBody" id="messagebody" />
 </div>
 </div>
 
 <div id="countcontrols" class="pagenav">
-  <roundcube:button command="lastmessage" type="link" class="buttonPas lastpage" classAct="button lastpage" classSel="button lastpageSel" title="lastmessage" content=" " />
-  <roundcube:button command="nextmessage" type="link" class="buttonPas nextpage" classAct="button nextpage" classSel="button nextpageSel" title="nextmessage" content=" " />
-  <roundcube:object name="messageCountDisplay" style="padding:0 .5em; float:right" />
-  <roundcube:button command="previousmessage" type="link" class="buttonPas prevpage" classAct="button prevpage" classSel="button prevpageSel" title="previousmessage" content=" " />
-  <roundcube:button command="firstmessage" type="link" class="buttonPas firstpage" classAct="button firstpage" classSel="button firstpageSel" title="firstmessage" content=" " />
+  <crystal:button command="lastmessage" type="link" class="buttonPas lastpage" classAct="button lastpage" classSel="button lastpageSel" title="lastmessage" content=" " />
+  <crystal:button command="nextmessage" type="link" class="buttonPas nextpage" classAct="button nextpage" classSel="button nextpageSel" title="nextmessage" content=" " />
+  <crystal:object name="messageCountDisplay" style="padding:0 .5em; float:right" />
+  <crystal:button command="previousmessage" type="link" class="buttonPas prevpage" classAct="button prevpage" classSel="button prevpageSel" title="previousmessage" content=" " />
+  <crystal:button command="firstmessage" type="link" class="buttonPas firstpage" classAct="button firstpage" classSel="button firstpageSel" title="firstmessage" content=" " />
 </div>
 </div>
 
 <script type="text/javascript">
-    var mailviewsplitv = new rcube_splitter({id:'mailviewsplitterv', p1: 'mailboxlist-container', p2: 'messageframe', orientation: 'v', relative: true, start: 165});
+    var mailviewsplitv = new cmail_splitter({id:'mailviewsplitterv', p1: 'mailboxlist-container', p2: 'messageframe', orientation: 'v', relative: true, start: 165});
     cmail.add_onload('mailviewsplitv.init()');
 </script>
 

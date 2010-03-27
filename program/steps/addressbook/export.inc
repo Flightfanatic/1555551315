@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/export.inc                                  |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Export the selected address book as vCard file                      |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id:  $
@@ -27,10 +27,10 @@ $result = $CONTACTS->list_records();
 // send downlaod headers
 send_nocacheing_headers();
 header('Content-Type: text/x-vcard; charset='.cmail_CHARSET);
-header('Content-Disposition: attachment; filename="rcube_contacts.vcf"');
+header('Content-Disposition: attachment; filename="cmail_contacts.vcf"');
 
 while ($result && ($row = $result->next())) {
-  $vcard = new rcube_vcard($row['vcard']);
+  $vcard = new cmail_vcard($row['vcard']);
   $vcard->set('displayname', $row['name']);
   $vcard->set('firstname', $row['firstname']);
   $vcard->set('surname', $row['surname']);

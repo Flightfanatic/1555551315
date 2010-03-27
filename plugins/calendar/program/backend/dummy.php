@@ -1,6 +1,6 @@
 <?php
 /**
- * RoundCube Calendar
+ * Crystal Calendar
  *
  * A dummy backend which simply demonstrates functionality
  * without the need for a fully configured backend.

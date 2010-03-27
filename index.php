@@ -1,10 +1,10 @@
 <?php
 /*
  +-------------------------------------------------------------------------+
- | RoundCube Webmail IMAP Client                                           |
- | Version 0.3.1-20091031                                                  |
+ | Crystal Webmail IMAP Client                                           |
+ | Version 0.3.1-20101031                                                  |
  |                                                                         |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                   |
+ | Copyright (C) 2005-2010, Crystal Dev. - United States                   |
  |                                                                         |
  | This program is free software; you can redistribute it and/or modify    |
  | it under the terms of the GNU General Public License version 2          |
@@ -20,10 +20,10 @@
  | 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.             |
  |                                                                         |
  +-------------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                          |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                          |
  +-------------------------------------------------------------------------+
 
- $Id: index.php 3081 2009-10-31 13:20:02Z thomasb $
+ $Id: index.php 3081 2010-10-31 13:20:02Z thomasb $
 
 */
 //include message file
@@ -68,7 +68,7 @@ if ($cmail->action=='error' && !empty($_GET['_code'])) {
 // check if https is required (for login) and redirect if necessary
 if (empty($_SESSION['user_id']) && ($force_https = $cmail->config->get('force_https', false))) {
   $https_port = is_bool($force_https) ? 443 : $force_https;
-  if (!rcube_https_check($https_port)) {
+  if (!cmail_https_check($https_port)) {
     header('Location: https://' . $_SERVER['HTTP_HOST'] . ($https_port != 443 ? ':' . $https_port : '') . $_SERVER['REQUEST_URI']);
     exit;
   }
@@ -86,9 +86,9 @@ if ($cmail->action=='login' && $cmail->task=='mail') {
   
   $auth = $cmail->plugins->exec_hook('authenticate', array(
     'host' => $cmail->autoselect_host(),
-    'user' => trim(get_input_value('_user', RCUBE_INPUT_POST)),
+    'user' => trim(get_input_value('_user', cmail_INPUT_POST)),
     'cookiecheck' => true,
-  )) + array('pass' => get_input_value('_pass', RCUBE_INPUT_POST, true, 'ISO-8859-1'));
+  )) + array('pass' => get_input_value('_pass', cmail_INPUT_POST, true, 'ISO-8859-1'));
 
   // check if client supports cookies
   if ($auth['cookiecheck'] && empty($_COOKIE)) {
@@ -98,8 +98,8 @@ if ($cmail->action=='login' && $cmail->task=='mail') {
             !empty($auth['user']) && isset($auth['pass']) && 
             $cmail->login($auth['user'], $auth['pass'], $auth['host'])) {
     // create new session ID
-    rcube_sess_unset('temp');
-    rcube_sess_regenerate_id();
+    cmail_sess_unset('temp');
+    cmail_sess_regenerate_id();
 
     // send auth cookie if necessary
     $cmail->authenticate_session();
@@ -114,7 +114,7 @@ if ($cmail->action=='login' && $cmail->task=='mail') {
     
     // restore original request parameters
     $query = array();
-    if ($url = get_input_value('_url', RCUBE_INPUT_POST))
+    if ($url = get_input_value('_url', cmail_INPUT_POST))
       parse_str($url, $query);
 
     // allow plugins to control the redirect url after login success
@@ -153,7 +153,7 @@ $request_check_whitelist = array('login'=>1, 'spell'=>1);
 
 // check client X-header to verify request origin
 if ($OUTPUT->ajax_call) {
-  if (!$cmail->config->get('devel_mode') && rc_request_header('X-RoundCube-Request') != $cmail->get_request_token() && !empty($cmail->user->ID)) {
+  if (!$cmail->config->get('devel_mode') && rc_request_header('X-Crystal-Request') != $cmail->get_request_token() && !empty($cmail->user->ID)) {
     header('HTTP/1.1 404 Not Found');
     die("Invalid Request");
   }
@@ -176,8 +176,8 @@ if (empty($cmail->user->ID)) {
   if ($cmail->config->get('enable_installer') && is_readable('./installer/index.php')) {
     $OUTPUT->add_footer(html::div(array('style' => "background:#ef9398; border:2px solid #dc5757; padding:0.5em; margin:2em auto; width:50em"),
       html::tag('h2', array('style' => "margin-top:0.2em"), "Installer script is still accessible") .
-      html::p(null, "The install script of your RoundCube installation is still stored in its default location!") .
-      html::p(null, "Please <b>remove</b> the whole <tt>installer</tt> folder from the RoundCube directory because .
+      html::p(null, "The install script of your Crystal installation is still stored in its default location!") .
+      html::p(null, "Please <b>remove</b> the whole <tt>installer</tt> folder from the Crystal directory because .
         these files may expose sensitive configuration data like server passwords and encryption keys
         to the public. Make sure you cannot access the <a href=\"./installer/\">installer script</a> from your browser.")
       )
@@ -196,7 +196,7 @@ if ($cmail->action == 'keep-alive') {
 }
 // save preference value
 else if ($cmail->action == 'save-pref') {
-  $cmail->user->save_prefs(array(get_input_value('_name', RCUBE_INPUT_POST) => get_input_value('_value', RCUBE_INPUT_POST)));
+  $cmail->user->save_prefs(array(get_input_value('_name', cmail_INPUT_POST) => get_input_value('_value', cmail_INPUT_POST)));
   $OUTPUT->reset();
   $OUTPUT->send();
 }

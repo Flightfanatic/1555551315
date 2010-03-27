@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/include/cmail.php                                            |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Application class providing core functions and holding              |
  |   instances of all 'global' objects like db- and imap-connections     |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: cmail.php 328 2006-08-30 17:41:21Z thomasb $
@@ -21,7 +21,7 @@
 
 
 /**
- * Application class of RoundCube Webmail
+ * Application class of Crystal Webmail
  * implemented as singleton
  *
  * @package Core
@@ -68,7 +68,7 @@ class cmail
   private function __construct()
   {
     // load configuration
-    $this->config = new rcube_config();
+    $this->config = new cmail_config();
     
     register_shutdown_function(array($this, 'shutdown'));
   }
@@ -86,14 +86,14 @@ class cmail
 
     // initialize syslog
     if ($this->config->get('log_driver') == 'syslog') {
-      $syslog_id = $this->config->get('syslog_id', 'roundcube');
+      $syslog_id = $this->config->get('syslog_id', 'Crystal');
       $syslog_facility = $this->config->get('syslog_facility', LOG_USER);
       openlog($syslog_id, LOG_ODELAY, $syslog_facility);
     }
 
     // set task and action properties
-    $this->set_task(get_input_value('_task', RCUBE_INPUT_GPC));
-    $this->action = asciiwords(get_input_value('_action', RCUBE_INPUT_GPC));
+    $this->set_task(get_input_value('_task', cmail_INPUT_GPC));
+    $this->action = asciiwords(get_input_value('_action', cmail_INPUT_GPC));
 
     // connect to database
     $GLOBALS['DB'] = $this->get_dbh();
@@ -121,11 +121,11 @@ class cmail
     }
 
     // create user object
-    $this->set_user(new rcube_user($_SESSION['user_id']));
+    $this->set_user(new cmail_user($_SESSION['user_id']));
 
     // reset some session parameters when changing task
     if ($_SESSION['task'] != $this->task)
-      rcube_sess_unset('page');
+      cmail_sess_unset('page');
 
     // set current task to session
     $_SESSION['task'] = $this->task;
@@ -135,7 +135,7 @@ class cmail
       $this->imap_init();
       
     // create plugin API and load plugins
-    $this->plugins = rcube_plugin_api::get_instance();
+    $this->plugins = cmail_plugin_api::get_instance();
   }
   
   
@@ -158,7 +158,7 @@ class cmail
   /**
    * Setter for system user object
    *
-   * @param object rcube_user Current user instance
+   * @param object cmail_user Current user instance
    */
   public function set_user($user)
   {
@@ -189,7 +189,7 @@ class cmail
    */
   private function language_prop($lang)
   {
-    static $rcube_languages, $rcube_language_aliases;
+    static $cmail_languages, $cmail_language_aliases;
     
     // user HTTP_ACCEPT_LANGUAGE if no language is specified
     if (empty($lang) || $lang == 'auto') {
@@ -197,29 +197,29 @@ class cmail
        $lang = str_replace('-', '_', $accept_langs[0]);
      }
      
-    if (empty($rcube_languages)) {
+    if (empty($cmail_languages)) {
       @include(INSTALL_PATH . 'program/localization/index.inc');
     }
     
     // check if we have an alias for that language
-    if (!isset($rcube_languages[$lang]) && isset($rcube_language_aliases[$lang])) {
-      $lang = $rcube_language_aliases[$lang];
+    if (!isset($cmail_languages[$lang]) && isset($cmail_language_aliases[$lang])) {
+      $lang = $cmail_language_aliases[$lang];
     }
     // try the first two chars
-    else if (!isset($rcube_languages[$lang])) {
+    else if (!isset($cmail_languages[$lang])) {
       $short = substr($lang, 0, 2);
      
       // check if we have an alias for the short language code
-      if (!isset($rcube_languages[$short]) && isset($rcube_language_aliases[$short])) {
-        $lang = $rcube_language_aliases[$short];
+      if (!isset($cmail_languages[$short]) && isset($cmail_language_aliases[$short])) {
+        $lang = $cmail_language_aliases[$short];
       }
       // expand 'nn' to 'nn_NN'
-      else if (!isset($rcube_languages[$short])) {
+      else if (!isset($cmail_languages[$short])) {
         $lang = $short.'_'.strtoupper($short);
       }
     }
 
-    if (!isset($rcube_languages[$lang]) || !is_dir(INSTALL_PATH . 'program/localization/' . $lang)) {
+    if (!isset($cmail_languages[$lang]) || !is_dir(INSTALL_PATH . 'program/localization/' . $lang)) {
       $lang = 'en_US';
     }
 
@@ -230,14 +230,14 @@ class cmail
   /**
    * Get the current database connection
    *
-   * @return object rcube_mdb2  Database connection object
+   * @return object cmail_mdb2  Database connection object
    */
   public function get_dbh()
   {
     if (!$this->db) {
       $config_all = $this->config->all();
 
-      $this->db = new rcube_mdb2($config_all['db_dsnw'], $config_all['db_dsnr'], $config_all['db_persistent']);
+      $this->db = new cmail_mdb2($config_all['db_dsnw'], $config_all['db_dsnr'], $config_all['db_persistent']);
       $this->db->sqlite_initials = INSTALL_PATH . 'SQL/sqlite.initial.sql';
       $this->db->set_debug((bool)$config_all['sql_debug']);
       $this->db->db_connect('w');
@@ -251,7 +251,7 @@ class cmail
    * Return instance of the internal address book class
    *
    * @param boolean True if the address book needs to be writeable
-   * @return object rcube_contacts Address book object
+   * @return object cmail_contacts Address book object
    */
   public function get_address_book($id, $writeable = false)
   {
@@ -261,27 +261,27 @@ class cmail
 
     $plugin = $this->plugins->exec_hook('get_address_book', array('id' => $id, 'writeable' => $writeable));
     
-    // plugin returned instance of a rcube_addressbook
-    if ($plugin['instance'] instanceof rcube_addressbook) {
+    // plugin returned instance of a cmail_addressbook
+    if ($plugin['instance'] instanceof cmail_addressbook) {
       $contacts = $plugin['instance'];
     }
     else if ($id && $ldap_config[$id]) {
-      $contacts = new rcube_ldap($ldap_config[$id], $this->config->get('ldap_debug'), $this->config->mail_domain($_SESSION['imap_host']));
+      $contacts = new cmail_ldap($ldap_config[$id], $this->config->get('ldap_debug'), $this->config->mail_domain($_SESSION['imap_host']));
     }
     else if ($id === '0') {
-      $contacts = new rcube_contacts($this->db, $this->user->ID);
+      $contacts = new cmail_contacts($this->db, $this->user->ID);
     }
     else if ($abook_type == 'ldap') {
       // Use the first writable LDAP address book.
       foreach ($ldap_config as $id => $prop) {
         if (!$writeable || $prop['writable']) {
-          $contacts = new rcube_ldap($prop, $this->config->get('ldap_debug'), $this->config->mail_domain($_SESSION['imap_host']));
+          $contacts = new cmail_ldap($prop, $this->config->get('ldap_debug'), $this->config->mail_domain($_SESSION['imap_host']));
           break;
         }
       }
     }
     else {
-      $contacts = new rcube_contacts($this->db, $this->user->ID);
+      $contacts = new cmail_contacts($this->db, $this->user->ID);
     }
     
     return $contacts;
@@ -294,13 +294,13 @@ class cmail
    * environment vars according to the current session and configuration
    *
    * @param boolean True if this request is loaded in a (i)frame
-   * @return object rcube_template Reference to HTML output object
+   * @return object cmail_template Reference to HTML output object
    */
   public function load_gui($framed = false)
   {
     // init output page
-    if (!($this->output instanceof rcube_template))
-      $this->output = new rcube_template($this->task, $framed);
+    if (!($this->output instanceof cmail_template))
+      $this->output = new cmail_template($this->task, $framed);
 
     // set keep-alive/check-recent interval
     if ($keep_alive = $this->config->get('keep_alive')) {
@@ -330,12 +330,12 @@ class cmail
   /**
    * Create an output object for JSON responses
    *
-   * @return object rcube_json_output Reference to JSON output object
+   * @return object cmail_json_output Reference to JSON output object
    */
   public function init_json()
   {
-    if (!($this->output instanceof rcube_json_output))
-      $this->output = new rcube_json_output($this->task);
+    if (!($this->output instanceof cmail_json_output))
+      $this->output = new cmail_json_output($this->task);
     
     return $this->output;
   }
@@ -348,7 +348,7 @@ class cmail
    */
   public function smtp_init($connect = false)
   {
-    $this->smtp = new rcube_smtp();
+    $this->smtp = new cmail_smtp();
   
     if ($connect)
       $this->smtp->connect();
@@ -363,7 +363,7 @@ class cmail
    */
   public function imap_init($connect = false)
   {
-    $this->imap = new rcube_imap($this->db);
+    $this->imap = new cmail_imap($this->db);
     $this->imap->debug_level = $this->config->get('debug_level');
     $this->imap->skip_deleted = $this->config->get('skip_deleted');
     $this->imap->index_sort = $this->config->get('index_sort', true);
@@ -477,7 +477,7 @@ class cmail
 
     // try to resolve email address from virtuser table
     if (strpos($username, '@'))
-      if ($virtuser = rcube_user::email2user($username))
+      if ($virtuser = cmail_user::email2user($username))
         $username = $virtuser;
 
     // lowercase username if it's an e-mail address (#1484473)
@@ -485,7 +485,7 @@ class cmail
       $username = mb_strtolower($username);
 
     // user already registered -> overwrite username
-    if ($user = rcube_user::query($username, $host))
+    if ($user = cmail_user::query($username, $host))
       $username = $user->data['username'];
 
     // exit if IMAP login failed
@@ -498,7 +498,7 @@ class cmail
     }
     // create new system user
     else if ($config['auto_create_user']) {
-      if ($created = rcube_user::create($username, $host)) {
+      if ($created = cmail_user::create($username, $host)) {
         $user = $created;
 
         // get existing mailboxes (but why?)
@@ -586,7 +586,7 @@ class cmail
     $host = null;
     
     if (is_array($default_host)) {
-      $post_host = get_input_value('_host', RCUBE_INPUT_POST);
+      $post_host = get_input_value('_host', cmail_INPUT_POST);
       
       // direct match in default_host array
       if ($default_host[$post_host] || in_array($post_host, array_values($default_host))) {
@@ -594,7 +594,7 @@ class cmail
       }
       
       // try to select host by mail domain
-      list($user, $domain) = explode('@', get_input_value('_user', RCUBE_INPUT_POST));
+      list($user, $domain) = explode('@', get_input_value('_user', cmail_INPUT_POST));
       if (!empty($domain)) {
         foreach ($default_host as $imap_host => $mail_domains) {
           if (is_array($mail_domains) && in_array($domain, $mail_domains)) {
@@ -610,7 +610,7 @@ class cmail
       }
     }
     else if (empty($default_host)) {
-      $host = get_input_value('_host', RCUBE_INPUT_POST);
+      $host = get_input_value('_host', cmail_INPUT_POST);
     }
     else
       $host = $default_host;
@@ -761,7 +761,7 @@ class cmail
           if ($name{0}=='.' || !is_dir(INSTALL_PATH . 'program/localization/' . $name))
             continue;
 
-          if ($label = $rcube_languages[$name])
+          if ($label = $cmail_languages[$name])
             $sa_languages[$name] = $label;
         }
         closedir($dh);
@@ -815,7 +815,7 @@ class cmail
   {
     $this->plugins->exec_hook('kill_session');
     
-    rcube_sess_unset();
+    cmail_sess_unset();
     $_SESSION = array('language' => $this->user->language, 'auth_time' => time(), 'temp' => true);
     cmail::setcookie('sessauth', '-del-', time() - 60);
     $this->user->reset();
@@ -892,7 +892,7 @@ class cmail
    * @param int Request method
    * @return boolean True if request token is valid false if not
    */
-  public function check_request($mode = RCUBE_INPUT_POST)
+  public function check_request($mode = cmail_INPUT_POST)
   {
     $token = get_input_value('_token', $mode);
     return !empty($token) && $_SESSION['request_tokens'][$this->task] == $token;
@@ -1024,7 +1024,7 @@ class cmail
   }
 
   /**
-   * Build a valid URL to this instance of RoundCube
+   * Build a valid URL to this instance of Crystal
    *
    * @param mixed Either a string with the action or url parameters as key-value pairs
    * @return string Valid application URL

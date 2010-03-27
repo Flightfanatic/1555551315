@@ -9,7 +9,7 @@
  * @version 1.0
  * @author Thomas Bruederli
  */
-class markasjunk extends rcube_plugin
+class markasjunk extends cmail_plugin
 {
   public $task = 'mail';
 
@@ -37,8 +37,8 @@ class markasjunk extends rcube_plugin
     $GLOBALS['IMAP_FLAGS']['JUNK'] = 'Junk';
     $GLOBALS['IMAP_FLAGS']['NONJUNK'] = 'NonJunk';
     
-    $uids = get_input_value('_uid', RCUBE_INPUT_POST);
-    $mbox = get_input_value('_mbox', RCUBE_INPUT_POST);
+    $uids = get_input_value('_uid', cmail_INPUT_POST);
+    $mbox = get_input_value('_mbox', cmail_INPUT_POST);
     
     $cmail = cmail::get_instance();
     $cmail->imap->unset_flag($uids, 'NONJUNK');

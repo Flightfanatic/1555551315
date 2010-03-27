@@ -1,7 +1,7 @@
 var tinymce = {
 	majorVersion : '3',
 	minorVersion : '2.3',
-	releaseDate : '2009-04-23',
+	releaseDate : '2010-04-23',
 
 	_init : function() {
 		var t = this, d = document, w = window, na = navigator, ua = na.userAgent, i, nl, n, base, p, v;
@@ -3310,7 +3310,7 @@ tinymce.create('static tinymce.util.XHR', {
 
 /*
  * Sizzle CSS Selector Engine - v1.0
- *  Copyright 2009, The Dojo Foundation
+ *  Copyright 2010, The Dojo Foundation
  *  Released under the MIT, BSD, and GPL Licenses.
  *  More information: http://sizzlejs.com/
  */

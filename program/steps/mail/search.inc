@@ -8,7 +8,7 @@
  |                                                                       |
  +-----------------------------------------------------------------------+
  | Author: Benjamin Smith <defitro@gmail.com>                            |
- |         Thomas Bruederli <roundcube@gmail.com>                        |
+ |         Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
 */
@@ -25,10 +25,10 @@ $_SESSION['page'] = 1;
 $imap_charset = cmail_CHARSET;
 
 // get search string
-$str = get_input_value('_q', RCUBE_INPUT_GET);
-$filter = get_input_value('_filter', RCUBE_INPUT_GET);
-$mbox = get_input_value('_mbox', RCUBE_INPUT_GET);
-$headers = get_input_value('_headers', RCUBE_INPUT_GET);
+$str = get_input_value('_q', cmail_INPUT_GET);
+$filter = get_input_value('_filter', cmail_INPUT_GET);
+$mbox = get_input_value('_mbox', cmail_INPUT_GET);
+$headers = get_input_value('_headers', cmail_INPUT_GET);
 $search_request = md5($mbox.$filter.$str);
 
 // add list filter string

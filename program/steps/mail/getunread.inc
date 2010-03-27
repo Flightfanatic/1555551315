@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/getunread.inc                                      |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Check all mailboxes for unread messages and update GUI              |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: getunread.inc 2966 2009-09-18 10:15:17Z alec $
+ $Id: getunread.inc 2966 2010-09-18 10:15:17Z alec $
 
 */
 

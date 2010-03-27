@@ -19,13 +19,13 @@ define('SIEVE_ERROR_ACTIVATE', 5);	// script activation
 define('SIEVE_ERROR_OTHER', 255);	// other/unknown error
 
 
-class rcube_sieve
+class cmail_sieve
 {
   var $sieve;				// Net_Sieve object
   var $error = false; 			// error flag 
   var $list = array(); 			// scripts list 
 
-  public $script;			// rcube_sieve_script object
+  public $script;			// cmail_sieve_script object
   private $disabled;			// array of disabled extensions
 
   /**
@@ -68,10 +68,10 @@ class rcube_sieve
       if (!$script)
 	$script = '/* empty script */';
 
-      if (PEAR::isError($this->sieve->installScript('roundcube', $script)))
+      if (PEAR::isError($this->sieve->installScript('Crystal', $script)))
     	return $this->_set_error(SIEVE_ERROR_INSTALL);
 
-      if (PEAR::isError($this->sieve->setActive('roundcube')))
+      if (PEAR::isError($this->sieve->setActive('Crystal')))
     	return $this->_set_error(SIEVE_ERROR_ACTIVATE);
 
       return true;
@@ -103,9 +103,9 @@ class rcube_sieve
       if (PEAR::isError($this->list))
     	return $this->_set_error(SIEVE_ERROR_OTHER);
     
-      if (in_array('roundcube', $this->list))
+      if (in_array('Crystal', $this->list))
         {
-          $script = $this->sieve->getScript('roundcube');
+          $script = $this->sieve->getScript('Crystal');
     
           if (PEAR::isError($script))
     	    return $this->_set_error(SIEVE_ERROR_OTHER);
@@ -117,11 +117,11 @@ class rcube_sieve
 
           $script = $this->_convert_from_squirrel_rules($script);
 
-          $this->script = new rcube_sieve_script($script, $this->disabled);
+          $this->script = new cmail_sieve_script($script, $this->disabled);
        
           $this->save();
 
-          $script = $this->sieve->getScript('roundcube');
+          $script = $this->sieve->getScript('Crystal');
 
           if (PEAR::isError($script))
             return $this->_set_error(SIEVE_ERROR_OTHER);
@@ -132,7 +132,7 @@ class rcube_sieve
           $script = '';
 	}
 
-      $this->script = new rcube_sieve_script($script, $this->disabled);
+      $this->script = new cmail_sieve_script($script, $this->disabled);
     }
     
   private function _convert_from_squirrel_rules($script)
@@ -166,7 +166,7 @@ class rcube_sieve
     }    
 }
 
-class rcube_sieve_script
+class cmail_sieve_script
 {
   var $content = array();	// script rules array   
 

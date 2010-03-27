@@ -17,7 +17,7 @@
  *
  * @version 1.0
  * @author Ziba Scott
- * @website http://roundcube.net
+ * @website http://Crystal.net
  * 
  * Example:
  *
@@ -44,25 +44,25 @@
  *
  * logs/master (after reloading the main page):
  *
- *   [17-Feb-2009 16:51:37 -0500] start: Task: mail. 
- *   [17-Feb-2009 16:51:37 -0500]   start: my test
- *   [17-Feb-2009 16:51:37 -0500]     my message
- *   [17-Feb-2009 16:51:37 -0500]     shell exec: cp -r * /dev/null
- *   [17-Feb-2009 16:51:37 -0500]     start: my sql calls
- *   [17-Feb-2009 16:51:37 -0500]       sql: select * from example
- *   [17-Feb-2009 16:51:37 -0500]       sql: select * from example
- *   [17-Feb-2009 16:51:37 -0500]       sql: select * from example
- *   [17-Feb-2009 16:51:37 -0500]     end: my sql calls - 0.0018 seconds shell exec: 1, sql: 3, 
- *   [17-Feb-2009 16:51:37 -0500]   end: my test - 0.0055 seconds shell exec: 1, sql: 3, 
- *   [17-Feb-2009 16:51:38 -0500] end: Task: mail.  - 0.8854 seconds shell exec: 1, sql: 3, 
+ *   [17-Feb-2010 16:51:37 -0500] start: Task: mail. 
+ *   [17-Feb-2010 16:51:37 -0500]   start: my test
+ *   [17-Feb-2010 16:51:37 -0500]     my message
+ *   [17-Feb-2010 16:51:37 -0500]     shell exec: cp -r * /dev/null
+ *   [17-Feb-2010 16:51:37 -0500]     start: my sql calls
+ *   [17-Feb-2010 16:51:37 -0500]       sql: select * from example
+ *   [17-Feb-2010 16:51:37 -0500]       sql: select * from example
+ *   [17-Feb-2010 16:51:37 -0500]       sql: select * from example
+ *   [17-Feb-2010 16:51:37 -0500]     end: my sql calls - 0.0018 seconds shell exec: 1, sql: 3, 
+ *   [17-Feb-2010 16:51:37 -0500]   end: my test - 0.0055 seconds shell exec: 1, sql: 3, 
+ *   [17-Feb-2010 16:51:38 -0500] end: Task: mail.  - 0.8854 seconds shell exec: 1, sql: 3, 
  * 
  * logs/sql (after reloading the main page):
  *
- *   [17-Feb-2009 16:51:37 -0500]       sql: select * from example
- *   [17-Feb-2009 16:51:37 -0500]       sql: select * from example
- *   [17-Feb-2009 16:51:37 -0500]       sql: select * from example
+ *   [17-Feb-2010 16:51:37 -0500]       sql: select * from example
+ *   [17-Feb-2010 16:51:37 -0500]       sql: select * from example
+ *   [17-Feb-2010 16:51:37 -0500]       sql: select * from example
  */
-class debug_logger extends rcube_plugin
+class debug_logger extends cmail_plugin
 {
     function init()
     {
@@ -106,11 +106,11 @@ class debug_logger extends rcube_plugin
 
         if(!isset($args[1])){
             // This could be extended to detect types based on the 
-            // file which called console.  For now only rcube_imap.inc is supported
+            // file which called console.  For now only cmail_imap.inc is supported
             $bt = debug_backtrace();
             $file  = $bt[3]['file'];
             switch(basename($file)){
-                case 'rcube_imap.php':
+                case 'cmail_imap.php':
                     $type = 'imap';
                     break;
                 default:

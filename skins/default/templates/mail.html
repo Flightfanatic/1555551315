@@ -1,52 +1,52 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><roundcube:object name="pagetitle" /></title>
-<roundcube:include file="/includes/links.html" />
+<title><crystal:object name="pagetitle" /></title>
+<crystal:include file="/includes/links.html" />
 <script type="text/javascript" src="/splitter.js"></script>
 <script type="text/javascript" src="/functions.js"></script>
 <style type="text/css">
-<roundcube:if condition="config:preview_pane == true" />
-#mailcontframe { height: <roundcube:exp expression="!empty(cookie:mailviewsplitter) ? cookie:mailviewsplitter-5 : 195" />px; }
-#mailpreviewframe { top: <roundcube:exp expression="!empty(cookie:mailviewsplitter) ? cookie:mailviewsplitter+5 : 205" />px;
-<roundcube:exp expression="browser:ie ? ('height: expression((parseInt(this.parentNode.offsetHeight)-'.(!empty(cookie:mailviewsplitter) ? cookie:mailviewsplitter+25 : 245).')+\\'px\\');') : ''" />
+<crystal:if condition="config:preview_pane == true" />
+#mailcontframe { height: <crystal:exp expression="!empty(cookie:mailviewsplitter) ? cookie:mailviewsplitter-5 : 195" />px; }
+#mailpreviewframe { top: <crystal:exp expression="!empty(cookie:mailviewsplitter) ? cookie:mailviewsplitter+5 : 205" />px;
+<crystal:exp expression="browser:ie ? ('height: expression((parseInt(this.parentNode.offsetHeight)-'.(!empty(cookie:mailviewsplitter) ? cookie:mailviewsplitter+25 : 245).')+\\'px\\');') : ''" />
 }
-<roundcube:endif />
-#mailleftcontainer { width: <roundcube:exp expression="!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv-5 : 175" />px; }
-#mailrightcontainer { left: <roundcube:exp expression="!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv+5 : 185" />px;
-<roundcube:exp expression="browser:ie ? ('width: expression((parseInt(this.parentNode.offsetWidth)-'.(!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv+5 : 180).')+\\'px\\');') : ''" />
+<crystal:endif />
+#mailleftcontainer { width: <crystal:exp expression="!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv-5 : 175" />px; }
+#mailrightcontainer { left: <crystal:exp expression="!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv+5 : 185" />px;
+<crystal:exp expression="browser:ie ? ('width: expression((parseInt(this.parentNode.offsetWidth)-'.(!empty(cookie:mailviewsplitterv) ? cookie:mailviewsplitterv+5 : 180).')+\\'px\\');') : ''" />
 }
 </style>
 </head>
-<body onload="rcube_init_mail_ui()">
+<body onload="cmail_init_mail_ui()">
 
-<roundcube:include file="/includes/taskbar.html" />
-<roundcube:include file="/includes/header.html" />
+<crystal:include file="/includes/taskbar.html" />
+<crystal:include file="/includes/header.html" />
 
 <div id="mainscreen">
 <div id="mailleftcontainer">
 <div id="mailboxlist-container">
-<h3 id="mailboxlist-header"><roundcube:label name="mailboxlist" /></h3>
-<roundcube:object name="mailboxlist" id="mailboxlist" maxlength="16" />
+<h3 id="mailboxlist-header"><crystal:label name="mailboxlist" /></h3>
+<crystal:object name="mailboxlist" id="mailboxlist" maxlength="16" />
 </div>
 
 <script type="text/javascript">
-  var mailviewsplitv = new rcube_splitter({id:'mailviewsplitterv', p1: 'mailleftcontainer', p2: 'mailrightcontainer', orientation: 'v', relative: true, start: 165});
+  var mailviewsplitv = new cmail_splitter({id:'mailviewsplitterv', p1: 'mailleftcontainer', p2: 'mailrightcontainer', orientation: 'v', relative: true, start: 165});
   cmail.add_onload('mailviewsplitv.init()');
 </script>
 
 <div id="mailboxcontrols">
-<span><roundcube:label name="folder" />:&nbsp;</span>
-<roundcube:button command="expunge" type="link" title="compact" class="buttonPas expunge" classAct="button expunge" classSel="button expungesel" content=" " />
-  <roundcube:button command="purge" type="link" title="empty" class="buttonPas purge" classAct="button purge" classSel="button purgesel" content=" " />
-  <roundcube:container name="mailboxcontrols" id="mailboxcontrols" />
+<span><crystal:label name="folder" />:&nbsp;</span>
+<crystal:button command="expunge" type="link" title="compact" class="buttonPas expunge" classAct="button expunge" classSel="button expungesel" content=" " />
+  <crystal:button command="purge" type="link" title="empty" class="buttonPas purge" classAct="button purge" classSel="button purgesel" content=" " />
+  <crystal:container name="mailboxcontrols" id="mailboxcontrols" />
 </div>
 </div>
 
 <div id="mailrightcontainer">
 <div id="mailrightcontent">
 <div id="mailcontframe">
-<roundcube:object name="messages"
+<crystal:object name="messages"
   id="messagelist"
   cellspacing="0"
   columns=""
@@ -62,88 +62,88 @@
   unflaggedIcon="/images/icons/blank.gif" />
 </div>
 
-<roundcube:if condition="config:preview_pane == true" />
+<crystal:if condition="config:preview_pane == true" />
 
 <script type="text/javascript">
-  var mailviewsplit = new rcube_splitter({id:'mailviewsplitter', p1: 'mailcontframe', p2: 'mailpreviewframe', orientation: 'h', relative: true, start: 205});
+  var mailviewsplit = new cmail_splitter({id:'mailviewsplitter', p1: 'mailcontframe', p2: 'mailpreviewframe', orientation: 'h', relative: true, start: 205});
   cmail.add_onload('mailviewsplit.init()');
 </script>
 
 <div id="mailpreviewframe">
-<roundcube:object name="messagecontentframe" id="messagecontframe" width="100%" height="100%" frameborder="0" src="/watermark.html" />
+<crystal:object name="messagecontentframe" id="messagecontframe" width="100%" height="100%" frameborder="0" src="/watermark.html" />
 </div>
 
-<roundcube:endif />
+<crystal:endif />
 </div>
 
 <div id="listcontrols">
-      <span><roundcube:label name="select" />:&nbsp;</span>
-      <roundcube:button command="select-all" type="link" title="all" class="buttonPas all" classAct="button all" classSel="button allsel" content=" " />
-      <roundcube:button command="select-all" type="link" prop="unread" title="unread" class="buttonPas unread" classAct="button unread" classSel="button unreadsel" content=" " />
-      <roundcube:button command="select-all" type="link" prop="invert" title="invert" class="buttonPas invert" classAct="button invert" classSel="button invertsel" content=" " />
-      <roundcube:button command="select-none" type="link" title="none" class="buttonPas none" classAct="button none" classSel="button nonesel" content=" " />
-      <roundcube:container name="listcontrols" id="listcontrols" />
-  <roundcube:if condition="env:quota" />
-  <span style="margin-left: 20px; margin-right: 5px"><roundcube:label name="quota" />:</span>
-  <roundcube:object name="quotaDisplay" display="image" width="100" height="14" id="quotadisplay" />
-  <roundcube:endif />
+      <span><crystal:label name="select" />:&nbsp;</span>
+      <crystal:button command="select-all" type="link" title="all" class="buttonPas all" classAct="button all" classSel="button allsel" content=" " />
+      <crystal:button command="select-all" type="link" prop="unread" title="unread" class="buttonPas unread" classAct="button unread" classSel="button unreadsel" content=" " />
+      <crystal:button command="select-all" type="link" prop="invert" title="invert" class="buttonPas invert" classAct="button invert" classSel="button invertsel" content=" " />
+      <crystal:button command="select-none" type="link" title="none" class="buttonPas none" classAct="button none" classSel="button nonesel" content=" " />
+      <crystal:container name="listcontrols" id="listcontrols" />
+  <crystal:if condition="env:quota" />
+  <span style="margin-left: 20px; margin-right: 5px"><crystal:label name="quota" />:</span>
+  <crystal:object name="quotaDisplay" display="image" width="100" height="14" id="quotadisplay" />
+  <crystal:endif />
 </div>
 
 <div id="countcontrols" class="pagenav">
-    <roundcube:button command="lastpage" type="link" class="buttonPas lastpage" classAct="button lastpage" classSel="button lastpageSel" title="lastmessages" content=" " />
-    <roundcube:button command="nextpage" type="link" class="buttonPas nextpage" classAct="button nextpage" classSel="button nextpageSel" title="nextmessages" content=" " />
-    <roundcube:object name="messageCountDisplay" style="padding:0 .5em; float:right" />
-    <roundcube:button command="previouspage" type="link" class="buttonPas prevpage" classAct="button prevpage" classSel="button prevpageSel" title="previousmessages" content=" " />
-    <roundcube:button command="firstpage" type="link" class="buttonPas firstpage" classAct="button firstpage" classSel="button firstpageSel" title="firstmessages" content=" " />
+    <crystal:button command="lastpage" type="link" class="buttonPas lastpage" classAct="button lastpage" classSel="button lastpageSel" title="lastmessages" content=" " />
+    <crystal:button command="nextpage" type="link" class="buttonPas nextpage" classAct="button nextpage" classSel="button nextpageSel" title="nextmessages" content=" " />
+    <crystal:object name="messageCountDisplay" style="padding:0 .5em; float:right" />
+    <crystal:button command="previouspage" type="link" class="buttonPas prevpage" classAct="button prevpage" classSel="button prevpageSel" title="previousmessages" content=" " />
+    <crystal:button command="firstpage" type="link" class="buttonPas firstpage" classAct="button firstpage" classSel="button firstpageSel" title="firstmessages" content=" " />
 </div>
 
 </div>
 </div>
 
 <div id="messagetoolbar">
-<roundcube:button command="checkmail" type="link" class="button checkmail" classAct="button checkmail" classSel="button checkmailSel" title="checkmail" content=" " />
-<roundcube:button command="compose" type="link" class="button compose" classAct="button compose" classSel="button composeSel" title="writenewmessage" content=" " />
-<roundcube:button command="reply" type="link" class="buttonPas reply" classAct="button reply" classSel="button replySel" title="replytomessage" content=" " />
-<roundcube:button command="reply-all" type="link" class="buttonPas replyAll" classAct="button replyAll" classSel="button replyAllSel" title="replytoallmessage" content=" " />
-<roundcube:button command="forward" type="link" class="buttonPas forward" classAct="button forward" classSel="button forwardSel" title="forwardmessage" content=" " />
-<roundcube:button command="delete" type="link" class="buttonPas delete" classAct="button delete" classSel="button deleteSel" title="deletemessage" content=" " />
-<roundcube:container name="toolbar" id="messagetoolbar" />
-<roundcube:button name="markreadbutton" id="markreadbutton" type="link" class="button markmessage" title="markmessages" onclick="cmail_ui.show_markmenu();return false" content=" " />
-<roundcube:button name="messagemenulink" id="messagemenulink" type="link" class="button messagemenu" title="messageactions" onclick="cmail_ui.show_messagemenu();return false" content=" " />
+<crystal:button command="checkmail" type="link" class="button checkmail" classAct="button checkmail" classSel="button checkmailSel" title="checkmail" content=" " />
+<crystal:button command="compose" type="link" class="button compose" classAct="button compose" classSel="button composeSel" title="writenewmessage" content=" " />
+<crystal:button command="reply" type="link" class="buttonPas reply" classAct="button reply" classSel="button replySel" title="replytomessage" content=" " />
+<crystal:button command="reply-all" type="link" class="buttonPas replyAll" classAct="button replyAll" classSel="button replyAllSel" title="replytoallmessage" content=" " />
+<crystal:button command="forward" type="link" class="buttonPas forward" classAct="button forward" classSel="button forwardSel" title="forwardmessage" content=" " />
+<crystal:button command="delete" type="link" class="buttonPas delete" classAct="button delete" classSel="button deleteSel" title="deletemessage" content=" " />
+<crystal:container name="toolbar" id="messagetoolbar" />
+<crystal:button name="markreadbutton" id="markreadbutton" type="link" class="button markmessage" title="markmessages" onclick="cmail_ui.show_markmenu();return false" content=" " />
+<crystal:button name="messagemenulink" id="messagemenulink" type="link" class="button messagemenu" title="messageactions" onclick="cmail_ui.show_messagemenu();return false" content=" " />
 
 <div id="markmessagemenu">
   <ul class="toolbarmenu">
-    <li><roundcube:button command="mark" prop="read" label="markread" classAct="readlink active" class="readlink" /></li>
-    <li><roundcube:button command="mark" prop="unread" label="markunread" classAct="unreadlink active" class="unreadlink" /></li>
-    <li><roundcube:button command="mark" prop="flagged" label="markflagged" classAct="flaggedlink active" class="flaggedlink" /></li>
-    <li><roundcube:button command="mark" prop="unflagged" label="markunflagged" classAct="unflaggedlink active" class="unflaggedlink" /></li>
-    <roundcube:container name="markmenu" id="markmessagemenu" />
+    <li><crystal:button command="mark" prop="read" label="markread" classAct="readlink active" class="readlink" /></li>
+    <li><crystal:button command="mark" prop="unread" label="markunread" classAct="unreadlink active" class="unreadlink" /></li>
+    <li><crystal:button command="mark" prop="flagged" label="markflagged" classAct="flaggedlink active" class="flaggedlink" /></li>
+    <li><crystal:button command="mark" prop="unflagged" label="markunflagged" classAct="unflaggedlink active" class="unflaggedlink" /></li>
+    <crystal:container name="markmenu" id="markmessagemenu" />
   </ul>
 </div>
 
-<roundcube:include file="/includes/messagemenu.html" />
+<crystal:include file="/includes/messagemenu.html" />
 
 </div>
 
 <div id="searchmenu">
   <ul class="toolbarmenu">
-    <li><input type="checkbox" name="s_mods[]" value="subject" id="s_mod_subject" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_subject"><roundcube:label name="subject" /></label></li>
-    <li><input type="checkbox" name="s_mods[]" value="from" id="s_mod_from" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_from"><roundcube:label name="from" /></label></li>
-    <li><input type="checkbox" name="s_mods[]" value="to" id="s_mod_to" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_to"><roundcube:label name="to" /></label></li>
-    <li><input type="checkbox" name="s_mods[]" value="cc" id="s_mod_cc" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_cc"><roundcube:label name="cc" /></label></li>
-    <li><input type="checkbox" name="s_mods[]" value="bcc" id="s_mod_bcc" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_bcc"><roundcube:label name="bcc" /></label></li>
-    <li><input type="checkbox" name="s_mods[]" value="text" id="s_mod_text" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_text"><roundcube:label name="msgtext" /></label></li>
+    <li><input type="checkbox" name="s_mods[]" value="subject" id="s_mod_subject" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_subject"><crystal:label name="subject" /></label></li>
+    <li><input type="checkbox" name="s_mods[]" value="from" id="s_mod_from" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_from"><crystal:label name="from" /></label></li>
+    <li><input type="checkbox" name="s_mods[]" value="to" id="s_mod_to" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_to"><crystal:label name="to" /></label></li>
+    <li><input type="checkbox" name="s_mods[]" value="cc" id="s_mod_cc" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_cc"><crystal:label name="cc" /></label></li>
+    <li><input type="checkbox" name="s_mods[]" value="bcc" id="s_mod_bcc" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_bcc"><crystal:label name="bcc" /></label></li>
+    <li><input type="checkbox" name="s_mods[]" value="text" id="s_mod_text" onclick="cmail_ui.set_searchmod(this)" /><label for="s_mod_text"><crystal:label name="msgtext" /></label></li>
   </ul>
 </div>
 
 <div id="quicksearchbar">
 <div id="searchfilter">
-  <label for="rcmlistfilter"><roundcube:label name="filter" /></label>:
-  <roundcube:object name="searchfilter" class="searchfilter" />
+  <label for="rcmlistfilter"><crystal:label name="filter" /></label>:
+  <crystal:object name="searchfilter" class="searchfilter" />
 </div>
-<roundcube:button name="searchmod" id="searchmod" image="/images/icons/glass_roll.png" onclick="cmail_ui.show_searchmenu();return false" title="searchmod" />
-<roundcube:object name="searchform" id="quicksearchbox" />
-<roundcube:button command="reset-search" id="searchreset" image="/images/icons/reset.gif" title="resetsearch" />
+<crystal:button name="searchmod" id="searchmod" image="/images/icons/glass_roll.png" onclick="cmail_ui.show_searchmenu();return false" title="searchmod" />
+<crystal:object name="searchform" id="quicksearchbox" />
+<crystal:button command="reset-search" id="searchreset" image="/images/icons/reset.gif" title="resetsearch" />
 </div>
 </body>
 </html>

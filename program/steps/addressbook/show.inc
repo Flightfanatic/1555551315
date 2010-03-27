@@ -4,24 +4,24 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/show.inc                                    |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Show contact details                                                |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: show.inc 2237 2009-01-17 01:55:39Z till $
+ $Id: show.inc 2237 2010-01-17 01:55:39Z till $
 
 */
 
 
 // read contact record
-if (($cid = get_input_value('_cid', RCUBE_INPUT_GPC)) && ($record = $CONTACTS->get_record($cid, true))) {
+if (($cid = get_input_value('_cid', cmail_INPUT_GPC)) && ($record = $CONTACTS->get_record($cid, true))) {
   $OUTPUT->set_env('cid', $record['ID']);
 }
 
@@ -51,7 +51,7 @@ function cmail_contact_details($attrib)
       $value = html::a(array(
         'href' => 'mailto:' . $record[$col],
         'onclick' => sprintf("return %s.command('compose','%s',this)", JS_OBJECT_NAME, JQ($record[$col])),
-        'title' => rcube_label('composeto'),
+        'title' => cmail_label('composeto'),
         'class' => $microformats[$col],
       ), Q($record[$col]));
     }
@@ -61,7 +61,7 @@ function cmail_contact_details($attrib)
     else
       $value = '';
     
-    $table->add('title', Q(rcube_label($col)));
+    $table->add('title', Q(cmail_label($col)));
     $table->add(null, $value);
   }
   

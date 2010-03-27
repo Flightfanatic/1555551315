@@ -1,16 +1,16 @@
 /*
  +-----------------------------------------------------------------------+
- | RoundCube editor js library                                           |
+ | Crystal editor js library                                           |
  |                                                                       |
- | This file is part of the RoundCube web development suite              |
- | Copyright (C) 2006, RoundCube Dev, - Switzerland                      |
+ | This file is part of the Crystal web development suite              |
+ | Copyright (C) 2006, Crystal Dev, - United States                      |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
  | Author: Eric Stadtherr <estadtherr@gmail.com>                         |
  +-----------------------------------------------------------------------+
 
- $Id: editor.js 000 2006-05-18 19:12:28Z roundcube $
+ $Id: editor.js 000 2006-05-18 19:12:28Z Crystal $
 */
 
 // Initialize HTML editor
@@ -62,7 +62,7 @@ function cmail_editor_init(skin_path, editor_lang, spellcheck, mode)
 // react to real individual tinyMCE editor init
 function cmail_editor_callback(editor)
 {
-  var input_from = rcube_find_object('_from');
+  var input_from = cmail_find_object('_from');
   if (input_from && input_from.type=='select-one')
     cmail.change_identity(input_from);
   // set tabIndex
@@ -94,7 +94,7 @@ function cmail_toggle_editor(ishtml, textAreaId, flagElement)
     cmail.plain2html(composeElement.value, textAreaId);
     tinyMCE.execCommand('mceAddControl', true, textAreaId);
     cmail_editor_tabindex();
-    if (flagElement && (flag = rcube_find_object(flagElement)))
+    if (flagElement && (flag = cmail_find_object(flagElement)))
       flag.value = '1';
     }
   else
@@ -107,7 +107,7 @@ function cmail_toggle_editor(ishtml, textAreaId, flagElement)
     cmail.html2plain(existingHtml, textAreaId);
     tinyMCE.execCommand('mceRemoveControl', true, textAreaId);
     cmail.display_spellcheck_controls(true);
-    if (flagElement && (flag = rcube_find_object(flagElement)))
+    if (flagElement && (flag = cmail_find_object(flagElement)))
       flag.value = '0';
     }
 };

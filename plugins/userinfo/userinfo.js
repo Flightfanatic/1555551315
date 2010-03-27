@@ -2,7 +2,7 @@
 
 if (window.cmail) {
   cmail.addEventListener('init', function(evt) {
-    // <span id="settingstabdefault" class="tablink"><roundcube:button command="preferences" type="link" label="preferences" title="editpreferences" /></span>
+    // <span id="settingstabdefault" class="tablink"><crystal:button command="preferences" type="link" label="preferences" title="editpreferences" /></span>
     var tab = $('<span>').attr('id', 'settingstabpluginuserinfo').addClass('tablink');
     
     var button = $('<a>').attr('href', cmail.env.comm_path+'&_action=plugin.userinfo').html(cmail.gettext('userinfo', 'userinfo')).appendTo(tab);

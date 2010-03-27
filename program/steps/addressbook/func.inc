@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/func.inc                                    |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Provide addressbook functionality and GUI objects                   |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: func.inc 2894 2009-08-29 20:56:00Z alec $
+ $Id: func.inc 2894 2010-08-29 20:56:00Z alec $
 
 */
 
@@ -23,7 +23,7 @@
 $js_list = array();
 if (strtolower($CONFIG['address_book_type']) != 'ldap') {
   // We are using the DB address book, add it.
-  $js_list['0'] = array('id' => 0, 'name' => rcube_label('personaladrbook'), 'readonly' => false);
+  $js_list['0'] = array('id' => 0, 'name' => cmail_label('personaladrbook'), 'readonly' => false);
 }
 if (is_array($CONFIG['ldap_public'])) {
   foreach ($CONFIG['ldap_public'] as $id => $prop)
@@ -34,7 +34,7 @@ $plugin = $cmail->plugins->exec_hook('address_sources', array('sources' => $js_l
 $js_list = $plugin['sources'];
 
 // select source
-$source = get_input_value('_source', RCUBE_INPUT_GPC);
+$source = get_input_value('_source', cmail_INPUT_GPC);
 
 // if source is not set use first directory
 if (empty($source))
@@ -71,7 +71,7 @@ function cmail_directory_list($attrib)
 
   $out = '';
   $local_id = '0';
-  $current = get_input_value('_source', RCUBE_INPUT_GPC);
+  $current = get_input_value('_source', cmail_INPUT_GPC);
   $line_templ = html::tag('li', array('id' => 'rcmli%s', 'class' => '%s'),
     html::a(array('href' => '%s', 'onclick' => "return ".JS_OBJECT_NAME.".command('list','%s',this)"), '%s'));
 
@@ -114,7 +114,7 @@ function cmail_contacts_list($attrib)
   $a_show_cols = array('name');
 
   // create XHTML table
-  $out = rcube_table_output($attrib, $result->records, $a_show_cols, $CONTACTS->primary_key);
+  $out = cmail_table_output($attrib, $result->records, $a_show_cols, $CONTACTS->primary_key);
   
   // set client env
   $OUTPUT->add_gui_object('contactslist', $attrib['id']);
@@ -193,9 +193,9 @@ function cmail_get_rowcount_text()
     $result = $CONTACTS->count();
   
   if ($result->count == 0)
-    $out = rcube_label('nocontactsfound');
+    $out = cmail_label('nocontactsfound');
   else
-    $out = rcube_label(array(
+    $out = cmail_label(array(
       'name' => 'contactsfromto',
       'vars' => array(
         'from'  => $result->first + 1,
@@ -207,7 +207,7 @@ function cmail_get_rowcount_text()
   }
 
 
-$OUTPUT->set_pagetitle(rcube_label('addressbook'));
+$OUTPUT->set_pagetitle(cmail_label('addressbook'));
   
 // register UI objects
 $OUTPUT->add_handlers(array(

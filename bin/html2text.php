@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | bin/html2text.php                                                     |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Convert HTML message to plain text                                  |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: html2text.php 2237 2009-01-17 01:55:39Z till $
+ $Id: html2text.php 2237 2010-01-17 01:55:39Z till $
 
 */
 

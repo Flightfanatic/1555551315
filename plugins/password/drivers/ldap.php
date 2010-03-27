@@ -6,7 +6,7 @@
  * Driver for passwords stored in LDAP
  * This driver use the PEAR Net_LDAP2 class (http://pear.php.net/package/Net_LDAP2).
  *
- * @version 1.0 (2009-06-24)
+ * @version 1.0 (2010-06-24)
  * @author Edouard MOREAU <edouard.moreau@ensma.fr>
  *
  * function hashPassword based on code from the phpLDAPadmin development team (http://phpldapadmin.sourceforge.net/).

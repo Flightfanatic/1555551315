@@ -9,9 +9,9 @@
  *
  * @version 1.2
  * @author Andre Rodier, Thomas Bruederli, Roland 'rosali' Liebl
- * @website http://myroundcube.googlecode.com 
+ * @website http://myCrystal.googlecode.com 
  */
-class archivefolder extends rcube_plugin
+class archivefolder extends cmail_plugin
 {
   public $task = 'mail|settings';
 
@@ -38,7 +38,7 @@ class archivefolder extends rcube_plugin
     else{
       if(isset($_SESSION['username'])){
         $skin  = $cmail->config->get('skin');
-        $_skin = get_input_value('_skin', RCUBE_INPUT_POST);
+        $_skin = get_input_value('_skin', cmail_INPUT_POST);
 
         if($_skin != "")
           $skin = $_skin;
@@ -134,8 +134,8 @@ class archivefolder extends rcube_plugin
   function request_action()
   {
     $this->add_texts('localization');      
-    $uids = get_input_value('_uid', RCUBE_INPUT_POST);
-    $mbox = get_input_value('_mbox', RCUBE_INPUT_POST);
+    $uids = get_input_value('_uid', cmail_INPUT_POST);
+    $mbox = get_input_value('_mbox', cmail_INPUT_POST);
     
     $cmail = cmail::get_instance();
     
@@ -169,7 +169,7 @@ class archivefolder extends rcube_plugin
   function save_prefs($args)
   {
     if ($args['section'] == 'folders') {  
-      $args['prefs']['archive_mbox'] = get_input_value('_archive_mbox', RCUBE_INPUT_POST);  
+      $args['prefs']['archive_mbox'] = get_input_value('_archive_mbox', cmail_INPUT_POST);  
       return $args;  
     }
   }

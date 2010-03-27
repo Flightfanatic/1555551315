@@ -2,7 +2,7 @@
 
 if (window.cmail) {
   cmail.addEventListener('init', function(evt) {
-    // <span id="settingstabdefault" class="tablink"><roundcube:button command="preferences" type="link" label="preferences" title="editpreferences" /></span>
+    // <span id="settingstabdefault" class="tablink"><crystal:button command="preferences" type="link" label="preferences" title="editpreferences" /></span>
     var tab = $('<span>').attr('id', 'settingstabpluginmanagesieve').addClass('tablink');
     
     var button = $('<a>').attr('href', cmail.env.comm_path+'&_action=plugin.managesieve')
@@ -31,7 +31,7 @@ if (window.cmail) {
 	
         if (cmail.gui_objects.filterslist) {
 	    var p = cmail;
-    	    cmail.filters_list = new rcube_list_widget(cmail.gui_objects.filterslist, {multiselect:false, draggable:false, keyboard:false});
+    	    cmail.filters_list = new cmail_list_widget(cmail.gui_objects.filterslist, {multiselect:false, draggable:false, keyboard:false});
     	    cmail.filters_list.addEventListener('select', function(o){ p.managesieve_select(o); });
     	    cmail.filters_list.init();
     	    cmail.filters_list.focus();
@@ -43,13 +43,13 @@ if (window.cmail) {
   /*********     Managesieve filters methods       *********/
   /*********************************************************/
 
-  rcube_webmail.prototype.managesieve_add = function()
+  cmail_webmail.prototype.managesieve_add = function()
     {
       this.load_managesieveframe();
       this.filters_list.clear_selection();
     };
 
-  rcube_webmail.prototype.managesieve_del = function()
+  cmail_webmail.prototype.managesieve_del = function()
     {
     var id = this.filters_list.get_single_selection();
 
@@ -58,21 +58,21 @@ if (window.cmail) {
 	    '_act=delete&_fid='+this.filters_list.rows[id].uid, true);
     };
 
-  rcube_webmail.prototype.managesieve_up = function()
+  cmail_webmail.prototype.managesieve_up = function()
     {
     var id = this.filters_list.get_single_selection();
     this.http_request('plugin.managesieve',
     	    '_act=up&_fid='+this.filters_list.rows[id].uid, true);
     };
 
-  rcube_webmail.prototype.managesieve_down = function()
+  cmail_webmail.prototype.managesieve_down = function()
     {
     var id = this.filters_list.get_single_selection();
     this.http_request('plugin.managesieve',
     	    '_act=down&_fid='+this.filters_list.rows[id].uid, true);
     };
 
-  rcube_webmail.prototype.managesieve_rowid = function(id)
+  cmail_webmail.prototype.managesieve_rowid = function(id)
     {
     var rows = this.filters_list.rows;
     
@@ -81,7 +81,7 @@ if (window.cmail) {
 	return i;
     }
 
-  rcube_webmail.prototype.managesieve_updatelist = function(action, name, id)
+  cmail_webmail.prototype.managesieve_updatelist = function(action, name, id)
     {
     this.set_busy(true);
 
@@ -194,14 +194,14 @@ if (window.cmail) {
 
     };
 
-  rcube_webmail.prototype.managesieve_select = function(list)
+  cmail_webmail.prototype.managesieve_select = function(list)
     {
     var id = list.get_single_selection();
     if (id != null)
       this.load_managesieveframe(list.rows[id].uid);
     };
 
-  rcube_webmail.prototype.managesieve_save = function()
+  cmail_webmail.prototype.managesieve_save = function()
     {
       if (parent.cmail && parent.cmail.filters_list)
         {
@@ -213,7 +213,7 @@ if (window.cmail) {
     };
 
   // load filter frame
-  rcube_webmail.prototype.load_managesieveframe = function(id)
+  cmail_webmail.prototype.load_managesieveframe = function(id)
     {
     if (typeof(id) != 'undefined' && id != null)
       {
@@ -232,7 +232,7 @@ if (window.cmail) {
     };
 
   // enable/disable Up/Down buttons
-  rcube_webmail.prototype.filters_listbuttons = function()
+  cmail_webmail.prototype.filters_listbuttons = function()
     {
     var id = this.filters_list.get_single_selection();
     var rows = this.filters_list.rows;
@@ -263,12 +263,12 @@ if (window.cmail) {
     };
 
   // operations on filters form
-  rcube_webmail.prototype.managesieve_ruleadd = function(id)
+  cmail_webmail.prototype.managesieve_ruleadd = function(id)
     {
       this.http_post('plugin.managesieve', '_act=ruleadd&_rid='+id);
     };
 
-  rcube_webmail.prototype.managesieve_rulefill = function(content, id, after)
+  cmail_webmail.prototype.managesieve_rulefill = function(content, id, after)
     {
       if (content != '')
         {
@@ -286,7 +286,7 @@ if (window.cmail) {
 	}
     };
 
-  rcube_webmail.prototype.managesieve_ruledel = function(id)
+  cmail_webmail.prototype.managesieve_ruledel = function(id)
     {
       if (confirm(this.get_label('managesieve.ruledeleteconfirm')))
 	{
@@ -296,12 +296,12 @@ if (window.cmail) {
 	}
     };
 
-  rcube_webmail.prototype.managesieve_actionadd = function(id)
+  cmail_webmail.prototype.managesieve_actionadd = function(id)
     {
       this.http_post('plugin.managesieve', '_act=actionadd&_aid='+id);
     };
 
-  rcube_webmail.prototype.managesieve_actionfill = function(content, id, after)
+  cmail_webmail.prototype.managesieve_actionfill = function(content, id, after)
     {
       if (content != '')
         {
@@ -318,7 +318,7 @@ if (window.cmail) {
 	}
     };
 
-  rcube_webmail.prototype.managesieve_actiondel = function(id)
+  cmail_webmail.prototype.managesieve_actiondel = function(id)
     {
       if (confirm(this.get_label('managesieve.actiondeleteconfirm')))
 	{
@@ -329,7 +329,7 @@ if (window.cmail) {
     };
 
   // insert rule/action row in specified place on the list
-  rcube_webmail.prototype.managesieve_insertrow = function(div, row, after)
+  cmail_webmail.prototype.managesieve_insertrow = function(div, row, after)
     {
       for (var i=0; i<div.childNodes.length; i++)
 	{
@@ -344,7 +344,7 @@ if (window.cmail) {
     }
 
   // update Delete buttons status
-  rcube_webmail.prototype.managesieve_formbuttons = function(div)
+  cmail_webmail.prototype.managesieve_formbuttons = function(div)
     {
       var buttons = new Array();
       var i, j=0;

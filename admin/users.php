@@ -1,3 +1,2 @@
 <?php die(); ?>
-admin,admin
-hello,hello
+admin,admin,

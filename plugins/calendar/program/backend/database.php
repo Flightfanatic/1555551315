@@ -1,6 +1,6 @@
 <?php
 /**
- * RoundCube Calendar
+ * Crystal Calendar
  *
  * Database backend
  *

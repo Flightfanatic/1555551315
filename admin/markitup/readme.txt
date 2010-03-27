@@ -1,7 +1,7 @@
 markItUp! 1.1.5
 
 CHANGE LOG
-markItUp! 1.1.5 2009-05-01
+markItUp! 1.1.5 2010-05-01
 - Modified: http://drupal.org/project/wysiwyg compatibility
 - Modified: Alt/Ctrl/Alt+Tab are now disabled
 

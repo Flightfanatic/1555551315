@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Czech translation for Roundcube managesieve plugin
+ * Czech translation for Crystal managesieve plugin
  *
- * @version 1.0 (2009-09-29)
+ * @version 1.0 (2010-09-29)
  * @author Daniel Kolar <kolar@g2n.cz>
  *
  */

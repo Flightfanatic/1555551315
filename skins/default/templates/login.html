@@ -12,24 +12,24 @@
 }, 10000);
  });
   </script>
-<title><roundcube:object name="pagetitle" /></title>
+<title><crystal:object name="pagetitle" /></title>
 <meta name="Robots" content="noindex,nofollow" />
-<roundcube:include file="/includes/links.html" />
+<crystal:include file="/includes/links.html" />
 </head>
 <body>
-<img src="/images/crystal_logo.png" border="0" alt="<roundcube:object name='productname' />" style="margin:0 11px" />
+<img src="/images/crystal_logo.png" border="0" alt="<crystal:object name='productname' />" style="margin:0 11px" />
 
-<roundcube:object name="message" id="message" />
+<crystal:object name="message" id="message" />
 
 <div id="login-form">
-<div class="boxtitle"><roundcube:label name="welcome" /></div>
+<div class="boxtitle"><crystal:label name="welcome" /></div>
 <div class="boxcontent">
 
 <form name="form" action="./" method="post">
-<roundcube:object name="loginform" form="form" autocomplete="off" />
+<crystal:object name="loginform" form="form" autocomplete="off" />
 
 
-<p style="text-align:center;"><input type="submit" class="button mainaction" value="<roundcube:label name='login' />" /></p>
+<p style="text-align:center;"><input type="submit" class="button mainaction" value="<crystal:label name='login' />" /></p>
 
 </form>
 <?php

@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | bin/modcss.php                                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2007-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2007-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Modify CSS source from a URL                                        |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: modcss.php 2853 2009-08-12 10:44:46Z thomasb $
+ $Id: modcss.php 2853 2010-08-12 10:44:46Z thomasb $
 
 */
 

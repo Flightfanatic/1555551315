@@ -2,7 +2,7 @@
 
 /* pwtools plugin */
 
-// navigation config (requires plugin settings @website http://dl.roland-liebl.de/RoundCube/plugins/settings)
+// navigation config (requires plugin settings @website http://dl.roland-liebl.de/Crystal/plugins/settings)
 $cmail_config['settingsnav'][] = array('part' => '', 'locale' => 'settings.pwreminder', 'href' => './?_task=settings&_action=plugin.pwtools', 'onclick' => '', 'descr' => 'pwtools');
 
 // admin email

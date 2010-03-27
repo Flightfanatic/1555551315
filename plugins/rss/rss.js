@@ -7,7 +7,7 @@ function show_rss_link(){
   url = window.location.protocol + "//" + window.location.host + window.location.pathname + '?_task=mail&_action=plugin.rss&_mbox='+urlencode(cmail.env.mailbox) + add_url;
   input = prompt("RSS Feed URL", url);
   if(input){
-    if(parent.roundcube_wrapper)
+    if(parent.Crystal_wrapper)
       parent.location.href = input;
     else
       document.location.href = input;

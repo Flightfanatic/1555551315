@@ -5,8 +5,8 @@
  +-----------------------------------------------------------------------+
  | bin/decrypt.php                                                       |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -29,7 +29,7 @@
  *
  * Received: from DzgkvJBO5+bw+oje5JACeNIa/uSI4mRw2cy5YoPBba73eyBmjtyHnQ==
  * 	[my0nUbjZXKtl7KVBZcsvWOxxtyVFxza4]
- *	with HTTP/1.1 (POST); Thu, 14 May 2009 19:17:28 +0200
+ *	with HTTP/1.1 (POST); Thu, 14 May 2010 19:17:28 +0200
  *
  * In this example, the two encrypted components are the sender host name
  * (DzgkvJBO5+bw+oje5JACeNIa/uSI4mRw2cy5YoPBba73eyBmjtyHnQ==) and the IP

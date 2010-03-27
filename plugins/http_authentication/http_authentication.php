@@ -8,7 +8,7 @@
  * @version 1.0
  * @author Thomas Bruederli
  */
-class http_authentication extends rcube_plugin
+class http_authentication extends cmail_plugin
 {
 
   function init()

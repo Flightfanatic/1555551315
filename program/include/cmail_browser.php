@@ -2,31 +2,31 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_browser.php                                     |
+ | program/include/cmail_browser.php                                     |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2007-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2007-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Class representing the client browser's properties                  |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_browser.php 328 2006-08-30 17:41:21Z thomasb $
+ $Id: cmail_browser.php 328 2006-08-30 17:41:21Z thomasb $
 
 */
 
 /** 
- * rcube_browser
+ * cmail_browser
  * 
  * Provide details about the client's browser based on the User-Agent header
  *
  * @package Core
  */
-class rcube_browser
+class cmail_browser
 {
     function __construct()
     {

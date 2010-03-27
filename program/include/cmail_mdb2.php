@@ -2,10 +2,10 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_mdb2.php                                        |
+ | program/include/cmail_mdb2.php                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -16,7 +16,7 @@
  | Author: Lukas Kahwe Smith <smith@pooteeweet.org>                      |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_mdb2.php 2920 2009-09-04 13:07:48Z alec $
+ $Id: cmail_mdb2.php 2920 2010-09-04 13:07:48Z alec $
 
 */
 
@@ -28,12 +28,12 @@
  *
  * @package    Database
  * @author     David Saez Padros <david@ols.es>
- * @author     Thomas Bruederli <roundcube@gmail.com>
+ * @author     Thomas Bruederli <Crystal@gmail.com>
  * @author     Lukas Kahwe Smith <smith@pooteeweet.org>
  * @version    1.16
  * @link       http://pear.php.net/package/MDB2
  */
-class rcube_mdb2
+class cmail_mdb2
   {
   var $db_dsnw;               // DSN for write operations
   var $db_dsnr;               // DSN for read operations
@@ -414,8 +414,8 @@ class rcube_mdb2
    *
    * @param  string  Value to quote
    * @return string  Quoted string for use in query
-   * @deprecated     Replaced by rcube_MDB2::quote_identifier
-   * @see            rcube_mdb2::quote_identifier
+   * @deprecated     Replaced by cmail_MDB2::quote_identifier
+   * @see            cmail_mdb2::quote_identifier
    * @access public
    */
   function quoteIdentifier($str)
@@ -687,17 +687,17 @@ class rcube_mdb2
    */
   function _sqlite_prepare()
     {
-    include_once('include/rcube_sqlite.inc');
+    include_once('include/cmail_sqlite.inc');
 
     // we emulate via callback some missing MySQL function
-    sqlite_create_function($this->db_handle->connection, "from_unixtime", "rcube_sqlite_from_unixtime");
-    sqlite_create_function($this->db_handle->connection, "unix_timestamp", "rcube_sqlite_unix_timestamp");
-    sqlite_create_function($this->db_handle->connection, "now", "rcube_sqlite_now");
-    sqlite_create_function($this->db_handle->connection, "md5", "rcube_sqlite_md5");
+    sqlite_create_function($this->db_handle->connection, "from_unixtime", "cmail_sqlite_from_unixtime");
+    sqlite_create_function($this->db_handle->connection, "unix_timestamp", "cmail_sqlite_unix_timestamp");
+    sqlite_create_function($this->db_handle->connection, "now", "cmail_sqlite_now");
+    sqlite_create_function($this->db_handle->connection, "md5", "cmail_sqlite_md5");
     }
 
 
-  }  // end class rcube_db
+  }  // end class cmail_db
 
 
 /* this is our own debug handler for the MDB2 connection */

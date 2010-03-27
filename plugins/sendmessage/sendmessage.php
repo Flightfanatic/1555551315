@@ -5,9 +5,9 @@
  *
  * Plugin sends system messages
  *
- * @version 1.0 - 07.06.2009
+ * @version 1.0 - 07.06.2010
  * @author Roland 'rosali' Liebl
- * @website http://myroundcube.googlecode.com
+ * @website http://myCrystal.googlecode.com
  * @licence GNU GPL
  *
  **/
@@ -19,7 +19,7 @@
  *
  **/
  
-class sendmessage extends rcube_plugin
+class sendmessage extends cmail_plugin
 {
 
   function init()
@@ -65,7 +65,7 @@ class sendmessage extends rcube_plugin
       $headers['Received'] = $http_header;
     }
     $headers['Date'] = date('r');
-    $headers['From'] = rcube_charset_convert(trim($from), cmail_CHARSET, $message_charset);
+    $headers['From'] = cmail_charset_convert(trim($from), cmail_CHARSET, $message_charset);
     $headers['To'] = trim($to);
 
     // add subject
@@ -79,10 +79,10 @@ class sendmessage extends rcube_plugin
       $headers['User-Agent'] = $CONFIG['useragent'];
     
     // fetch message body
-    $message_body = rcube_charset_convert(trim($body), cmail_CHARSET, $message_charset);
+    $message_body = cmail_charset_convert(trim($body), cmail_CHARSET, $message_charset);
 
     // create extended PEAR::Mail_mime instance
-    $MAIL_MIME = new rcube_mail_mime($cmail->config->header_delimiter());
+    $MAIL_MIME = new cmail_mail_mime($cmail->config->header_delimiter());
 
     // For HTML-formatted messages, construct the MIME message with both
     // the HTML part and the plain-text part
@@ -152,8 +152,8 @@ class sendmessage extends rcube_plugin
 
 
     if(!function_exists("smtp_mail")){
-      include_once("./program/include/rcube_smtp.inc");
-      //include_once("./program/include/rcube_imap.inc"); 
+      include_once("./program/include/cmail_smtp.inc");
+      //include_once("./program/include/cmail_imap.inc"); 
     } 
 
     $msg_body = $message->get();

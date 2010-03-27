@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/settings/save_identity.inc                              |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Save an identity record or to add a new one                         |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: save_identity.inc 2778 2009-07-21 16:02:33Z thomasb $
+ $Id: save_identity.inc 2778 2010-07-21 16:02:33Z thomasb $
 
 */
 
@@ -40,7 +40,7 @@ foreach ($a_save_cols as $col)
 {
   $fname = '_'.$col;
   if (isset($_POST[$fname]))
-    $save_data[$col] = get_input_value($fname, RCUBE_INPUT_POST, in_array($col, $a_html_cols));
+    $save_data[$col] = get_input_value($fname, cmail_INPUT_POST, in_array($col, $a_html_cols));
 }
 
 // set "off" values for checkboxes that were not checked, and therefore
@@ -60,7 +60,7 @@ if (IDENTITIES_LEVEL == 1 || IDENTITIES_LEVEL == 3)
 // update an existing contact
 if ($_POST['_iid'])
 {
-  $iid = get_input_value('_iid', RCUBE_INPUT_POST);
+  $iid = get_input_value('_iid', cmail_INPUT_POST);
   $plugin = $cmail->plugins->exec_hook('save_identity', array('id' => $iid, 'record' => $save_data));
   $save_data = $plugin['record'];
 
@@ -69,7 +69,7 @@ if ($_POST['_iid'])
     $OUTPUT->show_message('successfullysaved', 'confirmation');
     
     if (!empty($_POST['_standard']))
-      $default_id = get_input_value('_iid', RCUBE_INPUT_POST);
+      $default_id = get_input_value('_iid', cmail_INPUT_POST);
     
     if ($_POST['_framed'])
     {

@@ -1,4 +1,4 @@
--- RoundCube Webmail initial database structure
+-- Crystal Webmail initial database structure
 
 --
 -- Sequence "user_ids"

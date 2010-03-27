@@ -4,7 +4,7 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/spell_pspell.inc                                   |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
+ | This file is part of the Crystal Webmail client                       |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -46,7 +46,7 @@ $text = html_entity_decode($text, ENT_QUOTES, cmail_CHARSET);
 $words = preg_split('/[ !"#$%&()*+\\,\/\n:;<=>?@\[\]^_{|}-]+|\.[^\w]/', $text, NULL,  PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE );
 
 // init spellchecker
-$plink = pspell_new(get_input_value('lang', RCUBE_INPUT_GET), null, null, cmail_CHARSET, PSPELL_FAST);
+$plink = pspell_new(get_input_value('lang', cmail_INPUT_GET), null, null, cmail_CHARSET, PSPELL_FAST);
 
 // send output
 $out = '<?xml version="1.0" encoding="'.cmail_CHARSET.'"?><spellresult charschecked="'.mb_strlen($text).'">';

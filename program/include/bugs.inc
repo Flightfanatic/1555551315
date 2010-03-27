@@ -5,17 +5,17 @@
  | program/include/bugs.inc                                              |
  |                                                                       |
  | This file is part of the RoudCube Webmail client                      |
- | Copyright (C) 2005-2009, RoudCube Dev - Switzerland                   |
+ | Copyright (C) 2005-2010, RoudCube Dev - United States                   |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Provide error handling and logging functions                        |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: bugs.inc 2862 2009-08-17 09:54:53Z thomasb $
+ $Id: bugs.inc 2862 2010-08-17 09:54:53Z thomasb $
 
 */
 

@@ -6,9 +6,9 @@ if (php_sapi_name() != 'cli') {
 define('INSTALL_PATH', realpath(dirname(__FILE__) . '/..') . '/' );
 
 require_once INSTALL_PATH . 'program/include/iniset.php';
-require_once INSTALL_PATH . 'installer/rcube_install.php';
+require_once INSTALL_PATH . 'installer/cmail_install.php';
 
-$RCI = rcube_install::get_instance();
+$RCI = cmail_install::get_instance();
 $RCI->load_config();
 
 if ($RCI->configured) {
@@ -103,13 +103,13 @@ if ($RCI->configured) {
 
   }
   else {
-    echo "This instance of RoundCube is up-to-date.\n";
+    echo "This instance of Crystal is up-to-date.\n";
     echo "Have fun!\n";
   }
 }
 else {
-  echo "This instance of RoundCube is not yet configured!\n";
-  echo "Open http://url-to-roundcube/installer/ in your browser and follow the instuctions.\n";
+  echo "This instance of Crystal is not yet configured!\n";
+  echo "Open http://url-to-Crystal/installer/ in your browser and follow the instuctions.\n";
 }
 
 echo "\n";

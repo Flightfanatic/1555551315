@@ -2,17 +2,17 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_html_page.php                                   |
+ | program/include/cmail_html_page.php                                   |
  |                                                                       |
- | This file is part of the RoundCube PHP suite                          |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal PHP suite                          |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | CONTENTS:                                                             |
  |   Class to build XHTML page output                                    |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id:  $
@@ -24,7 +24,7 @@
  *
  * @package HTML
  */
-class rcube_html_page
+class cmail_html_page
 {
     protected $scripts_path = '';
     protected $script_files = array();
@@ -148,7 +148,7 @@ class rcube_html_page
 
         // set default page title
         if (empty($this->title)) {
-            $this->title = 'RoundCube Mail';
+            $this->title = 'Crystal Mail';
         }
 
         // replace specialchars in content
@@ -254,7 +254,7 @@ class rcube_html_page
         $output = str_replace('$__skin_path', $base_path, $output);
 
         if ($this->charset != cmail_CHARSET)
-	    echo rcube_charset_convert($output, cmail_CHARSET, $this->charset);
+	    echo cmail_charset_convert($output, cmail_CHARSET, $this->charset);
 	else
 	    echo $output;
     }

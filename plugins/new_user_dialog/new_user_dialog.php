@@ -10,7 +10,7 @@
  * @version 1.0
  * @author Thomas Bruederli
  */
-class new_user_dialog extends rcube_plugin
+class new_user_dialog extends cmail_plugin
 {
   public $task = 'mail';
   
@@ -87,8 +87,8 @@ class new_user_dialog extends rcube_plugin
     $identities_level = intval($cmail->config->get('identities_level', 0));
     
     $save_data = array(
-      'name' => get_input_value('_name', RCUBE_INPUT_POST),
-      'email' => get_input_value('_email', RCUBE_INPUT_POST),
+      'name' => get_input_value('_name', cmail_INPUT_POST),
+      'email' => get_input_value('_email', cmail_INPUT_POST),
     );
     
     // don't let the user alter the e-mail address if disabled by config
@@ -98,7 +98,7 @@ class new_user_dialog extends rcube_plugin
     // save data if not empty
     if (!empty($save_data['name']) && !empty($save_data['email'])) {
       $cmail->user->update_identity($identity['identity_id'], $save_data);
-      rcube_sess_unset('plugin.newuserdialog');
+      cmail_sess_unset('plugin.newuserdialog');
     }
     
     $cmail->output->redirect('');

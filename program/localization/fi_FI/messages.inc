@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/fi/messages.inc                                              |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -15,7 +15,7 @@
 |         Jorma Tuomainen <jt@wiza.fi>                                  |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 2572 2009-05-29 17:39:35Z alec $
+@version $Id: messages.inc 2572 2010-05-29 17:39:35Z alec $
 
 */
 

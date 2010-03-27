@@ -4,28 +4,28 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/delete.inc                                  |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Delete the submitted contacts (CIDs) from the users address book    |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: delete.inc 2758 2009-07-16 15:01:05Z thomasb $
+ $Id: delete.inc 2758 2010-07-16 15:01:05Z thomasb $
 
 */
 
 if ($OUTPUT->ajax_call &&
-    ($cid = get_input_value('_cid', RCUBE_INPUT_POST)) &&
+    ($cid = get_input_value('_cid', cmail_INPUT_POST)) &&
     (preg_match('/^[0-9]+(,[0-9]+)*$/', $cid) ||
      preg_match('/^[a-zA-Z0-9=]+(,[a-zA-Z0-9=]+)*$/', $cid))
    )
   {
-  $plugin = $cmail->plugins->exec_hook('delete_contact', array('id' => $cid, 'source' => get_input_value('_source', RCUBE_INPUT_GPC)));
+  $plugin = $cmail->plugins->exec_hook('delete_contact', array('id' => $cid, 'source' => get_input_value('_source', cmail_INPUT_GPC)));
   
   $deleted = !$plugin['abort'] ? $CONTACTS->delete($cid) : false;
   if (!$deleted)

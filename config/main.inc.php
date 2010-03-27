@@ -1,4 +1,4 @@
-<?php
+         <?php
 
 $cmail_config = array();
 
@@ -27,7 +27,7 @@ $cmail_config['log_dir'] = 'logs/';
 $cmail_config['temp_dir'] = 'temp/';
 
 // List of active plugins (in plugins/ directory)
-$cmail_config['plugins'] = array('rss');
+$cmail_config['plugins'] = array(sieverules, contextmenu);
 
 // enable caching of messages and mailbox data in the local database.
 // this is recommended if the IMAP server does not run on the same machine
@@ -193,7 +193,7 @@ $cmail_config['trash_mbox'] = 'Trash';
 $cmail_config['default_imap_folders'] = array('INBOX', 'Drafts', 'Sent', 'Junk', Archive, 'Trash');
 
 // automatically create the above listed default folders on login
-$cmail_config['create_default_folders'] = FALSE;
+$cmail_config['create_default_folders'] = TRUE;
 
 // protect the default folders from renames, deletes, and subscription changes
 $cmail_config['protect_default_folders'] = TRUE;
@@ -442,4 +442,4 @@ $cmail_config['display_next'] = FALSE;
 $cmail_config['index_sort'] = TRUE;
 
 // end of config file
-?>    
+?>             

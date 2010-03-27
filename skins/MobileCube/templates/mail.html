@@ -1,27 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><roundcube:object name="pagetitle" /></title>
-		<roundcube:include file="/includes/links.html" />
+		<title><crystal:object name="pagetitle" /></title>
+		<crystal:include file="/includes/links.html" />
 		<link rel="stylesheet" type="text/css" href="/mail.css" />
 		<script type="text/javascript" src="/splitter.js"></script>
 		<script type="text/javascript" src="/functions.js"></script>
 	</head>
-	<body onload="rcube_init_mail_ui()">
-		<roundcube:include file="/includes/taskbar.html" />
+	<body onload="cmail_init_mail_ui()">
+		<crystal:include file="/includes/taskbar.html" />
 		<div id="mainscreen">
 		<div id="mailboxlist-container">
-			<roundcube:object name="mailboxlist" id="mailboxlist" maxlength="16" />
+			<crystal:object name="mailboxlist" id="mailboxlist" maxlength="16" />
 		</div>
 		<div id="mailboxcontrols">
-				<roundcube:button command="expunge" label="compact" classAct="active" title="compact" />&nbsp;
-				<roundcube:button command="purge" label="empty" classAct="active2" title="purge" />&nbsp;
+				<crystal:button command="expunge" label="compact" classAct="active" title="compact" />&nbsp;
+				<crystal:button command="purge" label="empty" classAct="active2" title="purge" />&nbsp;
 		</div>
 		
 		<div id="mailrightcontainer">
 		
 			<div id="mailcontframe">
-				<roundcube:object name="messages"
+				<crystal:object name="messages"
 			  	id="messagelist"
 			  	columns=""
 			  	cellspacing="0"
@@ -37,14 +37,14 @@
 			  	attachmentIcon="/images/icons/attachment.png" />
 			</div>
 
-			<roundcube:if condition="config:preview_pane == true" />
+			<crystal:if condition="config:preview_pane == true" />
 			<script type="text/javascript">
-  			var mailviewsplit = new rcube_splitter({id:'mailviewsplitter', p1: 'mailcontframe', p2: 'mailpreviewframe', orientation: 'h', relative: true, start: 210});
+  			var mailviewsplit = new cmail_splitter({id:'mailviewsplitter', p1: 'mailcontframe', p2: 'mailpreviewframe', orientation: 'h', relative: true, start: 210});
   			cmail.add_onload('mailviewsplit.init()');
 			</script>
 
 			<div id="mailpreviewframe">
-			<roundcube:object name="messagecontentframe" id="messagecontframe" width="100%" height="100%" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" /><table width="100%" height="100%"><tr><td align="center" valign="middle"><img src="/images/previewpane.png"></td></tr></table>
+			<crystal:object name="messagecontentframe" id="messagecontframe" width="100%" height="100%" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" /><table width="100%" height="100%"><tr><td align="center" valign="middle"><img src="/images/previewpane.png"></td></tr></table>
 			</div>
 
 			<style type="text/css">
@@ -53,28 +53,28 @@
 					height: 279px;
 				}
 			</style>
-			<roundcube:endif />
+			<crystal:endif />
 
 			<div id="messagecountbar">
 				<span class="messagecountbarbuttons">
-				<roundcube:object name="messageCountDisplay" />
-				<roundcube:button command="previouspage" imageSel="/images/buttons/previous_sel.png" imageAct="/images/buttons/previous_act.png" imagePas="/images/buttons/previous_pas.png" width="20" height="17" title="previousmessages" /><roundcube:button command="nextpage" imageSel="/images/buttons/next_sel.png" imageAct="/images/buttons/next_act.png" imagePas="/images/buttons/next_pas.png" width="20" height="17" title="nextmessages" />
+				<crystal:object name="messageCountDisplay" />
+				<crystal:button command="previouspage" imageSel="/images/buttons/previous_sel.png" imageAct="/images/buttons/previous_act.png" imagePas="/images/buttons/previous_pas.png" width="20" height="17" title="previousmessages" /><crystal:button command="nextpage" imageSel="/images/buttons/next_sel.png" imageAct="/images/buttons/next_act.png" imagePas="/images/buttons/next_pas.png" width="20" height="17" title="nextmessages" />
 			</div>	
 			<div id="listcontrols">
-      			<roundcube:container name="listcontrols" id="listcontrols" />
-      			<span style="margin-left: 10px;"><roundcube:label name="select" />:&nbsp;</span>
-      			<roundcube:button command="select-all" type="link" title="all" class="buttonPas all" classAct="button all" classSel="button allsel" content=" " />
-      			<roundcube:button command="select-all" type="link" prop="unread" title="unread" class="buttonPas unread" classAct="button unread" classSel="button unreadsel" content=" " />
-      			<roundcube:button command="select-all" type="link" prop="invert" title="invert" class="buttonPas invert" classAct="button invert" classSel="button invertsel" content=" " />
-      			<roundcube:button command="select-none" type="link" title="none" class="buttonPas none" classAct="button none" classSel="button nonesel" content=" " />
-				<roundcube:if condition="env:quota" />
-  					<span style="margin-left: 150px; margin-right: 5px"><roundcube:label name="quota" />:</span>
-  					<roundcube:object name="quotaDisplay" display="image" width="100" height="14" id="quotadisplay" />
-  				<roundcube:endif />
+      			<crystal:container name="listcontrols" id="listcontrols" />
+      			<span style="margin-left: 10px;"><crystal:label name="select" />:&nbsp;</span>
+      			<crystal:button command="select-all" type="link" title="all" class="buttonPas all" classAct="button all" classSel="button allsel" content=" " />
+      			<crystal:button command="select-all" type="link" prop="unread" title="unread" class="buttonPas unread" classAct="button unread" classSel="button unreadsel" content=" " />
+      			<crystal:button command="select-all" type="link" prop="invert" title="invert" class="buttonPas invert" classAct="button invert" classSel="button invertsel" content=" " />
+      			<crystal:button command="select-none" type="link" title="none" class="buttonPas none" classAct="button none" classSel="button nonesel" content=" " />
+				<crystal:if condition="env:quota" />
+  					<span style="margin-left: 150px; margin-right: 5px"><crystal:label name="quota" />:</span>
+  					<crystal:object name="quotaDisplay" display="image" width="100" height="14" id="quotadisplay" />
+  				<crystal:endif />
   			</div>
 		</div>
 
-		<roundcube:object name="message" id="message" />
+		<crystal:object name="message" id="message" />
 
 		</div>
 	</body>

@@ -4,15 +4,15 @@
 +-----------------------------------------------------------------------+
 | language/hy_AM/messages.inc                                           |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
 | Author: Vahan Yerkanian <vahan@arminco.com>                           |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 2359 2009-03-19 07:53:16Z thomasb $
+@version $Id: messages.inc 2359 2010-03-19 07:53:16Z thomasb $
 
 */
 

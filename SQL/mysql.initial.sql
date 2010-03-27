@@ -1,4 +1,4 @@
--- RoundCube Webmail initial database structure
+-- Crystal Webmail initial database structure
 
 
 /*!40014  SET FOREIGN_KEY_CHECKS=0 */;

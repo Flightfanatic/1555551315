@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/ast/messages.inc                                             |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2008, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2008, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -15,7 +15,7 @@
 |         http://softastur.org                                          |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 2036 2009-02-02 04:37:58Z mikelg $
+@version $Id: messages.inc 2036 2010-02-02 04:37:58Z mikelg $
 
 */
 

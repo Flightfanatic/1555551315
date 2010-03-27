@@ -68,7 +68,7 @@ include("../config/admin.inc.php");
 			<img src="img/avatar.jpg" id="avatar" alt="avatar" />
 			<p>Welcome <strong>Admin</strong>. <a href="?logout=1">Log out?</a></p>
 			<p>System Version:<a href="http://crystalwebmail.com/?versionfeatures=<?php echo systemversion; ?>"><?php echo systemversion; ?></a></p>
-			<p class="last_login">Last login: 21:03 12.05.2009</p>
+			<p class="last_login">Last login: 21:03 12.05.2010</p>
 		</div>
 		<div id="logo"><h1><a href="/">AdmintTheme</a></h1></div>
 		

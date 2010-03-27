@@ -1,23 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><roundcube:object name="pagetitle" /></title>
-<roundcube:include file="/includes/links.html" />
+<title><crystal:object name="pagetitle" /></title>
+<crystal:include file="/includes/links.html" />
 <link rel="stylesheet" type="text/css" href="/settings.css" />
 <script type="text/javascript" src="/functions.js"></script>
 </head>
 <body class="iframe">
-<div id="prefs-title" class="boxtitle"><roundcube:label name="pwtools.pwreminder" /></div>
+<div id="prefs-title" class="boxtitle"><crystal:label name="pwtools.pwreminder" /></div>
 <form name="pwtoolsform" action="./?_task=settings&_action=plugin.pwtools-save" method="post">
 <div id="prefs-details">
-<roundcube:object name="plugin.pwtools_form" />
-<roundcube:container name="userprefs" id="userprefscontainer" />
+<crystal:object name="plugin.pwtools_form" />
+<crystal:container name="userprefs" id="userprefscontainer" />
 </div>
 <div id="formfooter">
 <div class="footerleft">
-<roundcube:button command="plugin.pwtools-save" type="input" class="button mainaction" label="save" />
+<crystal:button command="plugin.pwtools-save" type="input" class="button mainaction" label="save" />
 <span>&nbsp;</span>
-<input type="button" onclick="document.location.href='./?_task=settings&_action=edit-prefs&_section=accountlink&_framed=1'" class="button" value="<roundcube:label name="pwtools.pwtoolsexit" />" />
+<input type="button" onclick="document.location.href='./?_task=settings&_action=edit-prefs&_section=accountlink&_framed=1'" class="button" value="<crystal:label name="pwtools.pwtoolsexit" />" />
 </div>
 </div>
 

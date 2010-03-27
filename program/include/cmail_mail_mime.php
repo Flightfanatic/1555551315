@@ -2,17 +2,17 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_mail_mime.php                                   |
+ | program/include/cmail_mail_mime.php                                   |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2007-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2007-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Extend PEAR:Mail_mime class and override encodeHeaders method       |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: sendmail.inc 506 2007-03-14 00:39:51Z thomasb $
@@ -25,7 +25,7 @@
  *
  * @package Mail
  */
-class rcube_mail_mime extends Mail_mime
+class cmail_mail_mime extends Mail_mime
 {
 
   protected $mime_content;
@@ -128,7 +128,7 @@ class rcube_mail_mime extends Mail_mime
     {
       // if header contains e-mail addresses
       if (preg_match('/\s<.+@[a-z0-9\-\.]+\.[a-z]+>/U', $hdr_value)) {
-        $chunks = rcube_explode_quoted_string(',', $hdr_value);
+        $chunks = cmail_explode_quoted_string(',', $hdr_value);
       }
       else {
         $chunks = array($hdr_value);

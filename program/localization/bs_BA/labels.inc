@@ -5,15 +5,15 @@
  +-----------------------------------------------------------------------+
  | language/bs_BA/labels.inc                                             |
  |                                                                       |
- | Language file of the RoundCube Webmail client                         |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | Language file of the Crystal Webmail client                         |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
  | Author: Begzudin Omerovic <Begzudin.Omerovic@gmail.com>               |
  +-----------------------------------------------------------------------+
 
- @version $Id: labels.inc 2513 2009-05-21 12:59:19Z alec $
+ @version $Id: labels.inc 2513 2010-05-21 12:59:19Z alec $
 
 */
 

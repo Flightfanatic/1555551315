@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/show.inc                                           |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Display a mail message similar as a usual mail application does     |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: show.inc 2933 2009-09-08 08:04:17Z alec $
+ $Id: show.inc 2933 2010-09-08 08:04:17Z alec $
 
 */
 
@@ -23,7 +23,7 @@ $PRINT_MODE = $cmail->action=='print' ? TRUE : FALSE;
 
 // similar code as in program/steps/mail/get.inc
 if ($_GET['_uid']) {
-  $MESSAGE = new rcube_message(get_input_value('_uid', RCUBE_INPUT_GET));
+  $MESSAGE = new cmail_message(get_input_value('_uid', cmail_INPUT_GET));
 
   // if message not found (wrong UID)...
   if (empty($MESSAGE->headers)) {
@@ -210,13 +210,13 @@ function cmail_remote_objects_msg($attrib)
   if (!$attrib['id'])
     $attrib['id'] = 'rcmremoteobjmsg';
   
-  $msg = Q(rcube_label('blockedimages')) . '&nbsp;';
-  $msg .= html::a(array('href' => "#loadimages", 'onclick' => JS_OBJECT_NAME.".command('load-images')"), Q(rcube_label('showimages')));
+  $msg = Q(cmail_label('blockedimages')) . '&nbsp;';
+  $msg .= html::a(array('href' => "#loadimages", 'onclick' => JS_OBJECT_NAME.".command('load-images')"), Q(cmail_label('showimages')));
   
   // add link to save sender in addressbook and reload message
   if ($MESSAGE->sender['mailto'] && $cmail->config->get('show_images') == 1) {
     $msg .= ' ' . html::a(array('href' => "#alwaysload", 'onclick' => JS_OBJECT_NAME.".command('always-load')", 'style' => "white-space:nowrap"),
-      Q(rcube_label(array('name' => 'alwaysshow', 'vars' => array('sender' => $MESSAGE->sender['mailto'])))));
+      Q(cmail_label(array('name' => 'alwaysshow', 'vars' => array('sender' => $MESSAGE->sender['mailto'])))));
   }
   
   $cmail->output->add_gui_object('remoteobjectsmsg', $attrib['id']);

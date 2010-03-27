@@ -4,22 +4,22 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/save.inc                                    |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Save a contact entry or to add a new one                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: save.inc 2889 2009-08-29 18:41:17Z alec $
+ $Id: save.inc 2889 2010-08-29 18:41:17Z alec $
 
 */
 
-$cid = get_input_value('_cid', RCUBE_INPUT_POST);
+$cid = get_input_value('_cid', cmail_INPUT_POST);
 $return_action = empty($cid) ? 'add' : 'show';
 
 // cannot edit record
@@ -31,7 +31,7 @@ if ($CONTACTS->readonly)
 }
 
 // check input
-if ((!get_input_value('_name', RCUBE_INPUT_POST) || !get_input_value('_email', RCUBE_INPUT_POST)))
+if ((!get_input_value('_name', cmail_INPUT_POST) || !get_input_value('_email', cmail_INPUT_POST)))
 {
   $OUTPUT->show_message('formincomplete', 'warning');
   cmail_overwrite_action($return_action);
@@ -48,13 +48,13 @@ foreach ($a_save_cols as $col)
 {
   $fname = '_'.$col;
   if (isset($_POST[$fname]))
-    $a_record[$col] = get_input_value($fname, RCUBE_INPUT_POST);
+    $a_record[$col] = get_input_value($fname, cmail_INPUT_POST);
 }
 
 // update an existing contact
 if (!empty($cid))
 {
-  $plugin = $cmail->plugins->exec_hook('save_contact', array('id' => $cid, 'record' => $a_record, 'source' => get_input_value('_source', RCUBE_INPUT_GPC)));
+  $plugin = $cmail->plugins->exec_hook('save_contact', array('id' => $cid, 'record' => $a_record, 'source' => get_input_value('_source', cmail_INPUT_GPC)));
   $a_record = $plugin['record'];
   
   if (!$plugin['abort'] && ($result = $CONTACTS->update($cid, $a_record)))
@@ -102,7 +102,7 @@ else
     return;
   }
 
-  $plugin = $cmail->plugins->exec_hook('create_contact', array('record' => $a_record, 'source' => get_input_value('_source', RCUBE_INPUT_GPC)));
+  $plugin = $cmail->plugins->exec_hook('create_contact', array('record' => $a_record, 'source' => get_input_value('_source', cmail_INPUT_GPC)));
   $a_record = $plugin['record'];
 
   // insert record and send response

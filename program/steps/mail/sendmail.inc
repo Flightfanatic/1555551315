@@ -4,8 +4,8 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/sendmail.inc                                       |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -13,10 +13,10 @@
  |   and send it using the PEAR::Net_SMTP class or with PHP mail()       |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: sendmail.inc 3042 2009-10-14 10:52:27Z alec $
+ $Id: sendmail.inc 3042 2010-10-14 10:52:27Z alec $
 
 */
 
@@ -82,7 +82,7 @@ function cmail_get_identity($id)
     else
       $name = $sql_arr['name'];
 
-    $out['string'] = rcube_charset_convert($name, cmail_CHARSET, $OUTPUT->get_charset());
+    $out['string'] = cmail_charset_convert($name, cmail_CHARSET, $OUTPUT->get_charset());
     if ($sql_arr['email'])
       $out['string'] .= ' <' . $sql_arr['email'] . '>';
 
@@ -160,7 +160,7 @@ function cmail_email_input_format($mailto)
   $mailto = trim(preg_replace($regexp, $replace, $mailto));
 
   $result = array();
-  $items = rcube_explode_quoted_string(',', $mailto);
+  $items = cmail_explode_quoted_string(',', $mailto);
 
   foreach($items as $item) {
     $item = trim($item);
@@ -202,7 +202,7 @@ function cmail_email_input_format($mailto)
 /****** compose message ********/
 
 if (strlen($_POST['_draft_saveid']) > 3)
-  $olddraftmessageid = get_input_value('_draft_saveid', RCUBE_INPUT_POST);
+  $olddraftmessageid = get_input_value('_draft_saveid', cmail_INPUT_POST);
 
 $message_id = sprintf('<%s@%s>', md5(uniqid('cmail'.mt_rand(),true)), $cmail->config->mail_domain($_SESSION['imap_host']));
 
@@ -212,9 +212,9 @@ $message_charset = isset($_POST['_charset']) ? $_POST['_charset'] : $input_chars
 
 $EMAIL_FORMAT_ERROR = NULL;
 
-$mailto = cmail_email_input_format(get_input_value('_to', RCUBE_INPUT_POST, TRUE, $message_charset));
-$mailcc = cmail_email_input_format(get_input_value('_cc', RCUBE_INPUT_POST, TRUE, $message_charset));
-$mailbcc = cmail_email_input_format(get_input_value('_bcc', RCUBE_INPUT_POST, TRUE, $message_charset));
+$mailto = cmail_email_input_format(get_input_value('_to', cmail_INPUT_POST, TRUE, $message_charset));
+$mailcc = cmail_email_input_format(get_input_value('_cc', cmail_INPUT_POST, TRUE, $message_charset));
+$mailbcc = cmail_email_input_format(get_input_value('_bcc', cmail_INPUT_POST, TRUE, $message_charset));
 
 if ($EMAIL_FORMAT_ERROR) {
   $OUTPUT->show_message('emailformaterror', 'error', array('email' => $EMAIL_FORMAT_ERROR)); 
@@ -229,7 +229,7 @@ else if (empty($mailto))
   $mailto = 'undisclosed-recipients:;';
 
 // get sender name and address
-$from = get_input_value('_from', RCUBE_INPUT_POST, true, $message_charset);
+$from = get_input_value('_from', cmail_INPUT_POST, true, $message_charset);
 $identity_arr = cmail_get_identity($from);
 
 if (!$identity_arr && ($from = cmail_email_input_format($from))) {
@@ -286,7 +286,7 @@ if ($CONFIG['http_received_header'])
 }
 
 $headers['Date'] = date('r');
-$headers['From'] = rcube_charset_convert($identity_arr['string'], cmail_CHARSET, $message_charset);
+$headers['From'] = cmail_charset_convert($identity_arr['string'], cmail_CHARSET, $message_charset);
 $headers['To'] = $mailto;
 
 // additional recipients
@@ -300,13 +300,13 @@ if (!empty($identity_arr['bcc']))
   $headers['Bcc'] = ($headers['Bcc'] ? $headers['Bcc'].', ' : '') . $identity_arr['bcc'];
 
 // add subject
-$headers['Subject'] = trim(get_input_value('_subject', RCUBE_INPUT_POST, TRUE, $message_charset));
+$headers['Subject'] = trim(get_input_value('_subject', cmail_INPUT_POST, TRUE, $message_charset));
 
 if (!empty($identity_arr['organization']))
   $headers['Organization'] = $identity_arr['organization'];
 
 if (!empty($_POST['_replyto']))
-  $headers['Reply-To'] = cmail_email_input_format(get_input_value('_replyto', RCUBE_INPUT_POST, TRUE, $message_charset));
+  $headers['Reply-To'] = cmail_email_input_format(get_input_value('_replyto', cmail_INPUT_POST, TRUE, $message_charset));
 else if (!empty($identity_arr['reply-to']))
   $headers['Reply-To'] = $identity_arr['reply-to'];
 
@@ -337,11 +337,11 @@ $headers['X-Sender'] = $from;
 if (!empty($CONFIG['useragent']))
   $headers['User-Agent'] = $CONFIG['useragent'];
 
-$isHtmlVal = strtolower(get_input_value('_is_html', RCUBE_INPUT_POST));
+$isHtmlVal = strtolower(get_input_value('_is_html', cmail_INPUT_POST));
 $isHtml = ($isHtmlVal == "1");
 
 // fetch message body
-$message_body = get_input_value('_message', RCUBE_INPUT_POST, TRUE, $message_charset);
+$message_body = get_input_value('_message', cmail_INPUT_POST, TRUE, $message_charset);
 
 if (!$savedraft) {
   // remove signature's div ID
@@ -351,12 +351,12 @@ if (!$savedraft) {
   // generic footer for all messages
   if (!empty($CONFIG['generic_message_footer'])) {
     $footer = file_get_contents(realpath($CONFIG['generic_message_footer']));
-    $footer = rcube_charset_convert($footer, cmail_CHARSET, $message_charset);
+    $footer = cmail_charset_convert($footer, cmail_CHARSET, $message_charset);
   }
 }
 
 // create extended PEAR::Mail_mime instance
-$MAIL_MIME = new rcube_mail_mime($cmail->config->header_delimiter());
+$MAIL_MIME = new cmail_mail_mime($cmail->config->header_delimiter());
 
 // For HTML-formatted messages, construct the MIME message with both
 // the HTML part and the plain-text part
@@ -511,7 +511,7 @@ if (!$savedraft)
 if ($savedraft)
   $store_target = $CONFIG['drafts_mbox'];
 else	
-  $store_target = isset($_POST['_store_target']) ? get_input_value('_store_target', RCUBE_INPUT_POST) : $CONFIG['sent_mbox'];
+  $store_target = isset($_POST['_store_target']) ? get_input_value('_store_target', cmail_INPUT_POST) : $CONFIG['sent_mbox'];
 
 if ($store_target)
   {
@@ -582,9 +582,9 @@ else
   cmail_compose_cleanup();
 
   if ($store_folder && !$saved)
-    $OUTPUT->command('sent_successfully', 'error', rcube_label('errorsavingsent'));
+    $OUTPUT->command('sent_successfully', 'error', cmail_label('errorsavingsent'));
   else
-    $OUTPUT->command('sent_successfully', 'confirmation', rcube_label('messagesent'));
+    $OUTPUT->command('sent_successfully', 'confirmation', cmail_label('messagesent'));
   $OUTPUT->send('iframe');
   }
 

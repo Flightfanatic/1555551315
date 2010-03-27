@@ -2,7 +2,7 @@
 
 if (window.cmail) {
   cmail.addEventListener('init', function(evt) {
-    // <span id="settingstabdefault" class="tablink"><roundcube:button command="preferences" type="link" label="preferences" title="editpreferences" /></span>
+    // <span id="settingstabdefault" class="tablink"><crystal:button command="preferences" type="link" label="preferences" title="editpreferences" /></span>
     var tab = $('<span>').attr('id', 'settingstabpluginpassword').addClass('tablink');
     
     var button = $('<a>').attr('href', cmail.env.comm_path+'&_action=plugin.password').html(cmail.gettext('password')).appendTo(tab);
@@ -12,9 +12,9 @@ if (window.cmail) {
     cmail.add_element(tab, 'tabs');
     cmail.register_command('plugin.password', function() { cmail.goto_url('plugin.password') }, true);
     cmail.register_command('plugin.password-save', function() { 
-      var input_curpasswd = rcube_find_object('_curpasswd');
-      var input_newpasswd = rcube_find_object('_newpasswd');
-          var input_confpasswd = rcube_find_object('_confpasswd');
+      var input_curpasswd = cmail_find_object('_curpasswd');
+      var input_newpasswd = cmail_find_object('_newpasswd');
+          var input_confpasswd = cmail_find_object('_confpasswd');
     
       if (input_curpasswd && input_curpasswd.value=='') {
           alert(cmail.gettext('nocurpassword', 'password'));

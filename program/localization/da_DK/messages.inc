@@ -4,8 +4,8 @@
 +-----------------------------------------------------------------------+
 | language/da_DK/messages.inc                                           |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -14,7 +14,7 @@
 |         Søren Aggeboe <soren@aggeboe.dk>                              |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 2494 2009-05-17 11:56:53Z yllar $
+@version $Id: messages.inc 2494 2010-05-17 11:56:53Z yllar $
 
 */
 

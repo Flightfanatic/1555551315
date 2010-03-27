@@ -4,39 +4,39 @@
  +-----------------------------------------------------------------------+
  | program/include/main.inc                                              |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev, - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev, - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Provide basic functions for the webmail package                     |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: main.inc 3063 2009-10-27 09:43:39Z alec $
+ $Id: main.inc 3063 2010-10-27 09:43:39Z alec $
 
 */
 
 /**
- * RoundCube Webmail common functions
+ * Crystal Webmail common functions
  *
  * @package Core
- * @author Thomas Bruederli <roundcube@gmail.com>
+ * @author Thomas Bruederli <Crystal@gmail.com>
  */
 
 require_once('lib/utf7.inc');
-require_once('include/rcube_shared.inc');
+require_once('include/cmail_shared.inc');
 
 // fallback if not PHP modules are available
 @include_once('lib/des.inc');
 @include_once('lib/utf8.class.php');
 
 // define constannts for input reading
-define('RCUBE_INPUT_GET', 0x0101);
-define('RCUBE_INPUT_POST', 0x0102);
-define('RCUBE_INPUT_GPC', 0x0103);
+define('cmail_INPUT_GET', 0x0101);
+define('cmail_INPUT_POST', 0x0102);
+define('cmail_INPUT_GPC', 0x0103);
 
 
 
@@ -88,7 +88,7 @@ function get_sequence_name($sequence)
  * @return string Localized text
  * @see cmail::gettext()
  */
-function rcube_label($p, $domain=null)
+function cmail_label($p, $domain=null)
 {
   return cmail::get_instance()->gettext($p, $domain);
 }
@@ -178,7 +178,7 @@ function cmail_cache_gc()
  * @param  string Target charset to convert to; defaults to cmail_CHARSET
  * @return Converted string
  */
-function rcube_charset_convert($str, $from, $to=NULL)
+function cmail_charset_convert($str, $from, $to=NULL)
   {
   static $mbstring_loaded = null;
   static $mbstring_list = null;
@@ -187,8 +187,8 @@ function rcube_charset_convert($str, $from, $to=NULL)
   
   $error = false;
 
-  $to = empty($to) ? $to = strtoupper(cmail_CHARSET) : rcube_parse_charset($to);
-  $from = rcube_parse_charset($from);
+  $to = empty($to) ? $to = strtoupper(cmail_CHARSET) : cmail_parse_charset($to);
+  $from = cmail_parse_charset($from);
 
   if ($from == $to || empty($str) || empty($from))
     return $str;
@@ -230,7 +230,7 @@ function rcube_charset_convert($str, $from, $to=NULL)
         return $_str;
     }
     else if ($from == 'UTF-7') {
-      if ($_str = rcube_utf7_to_utf8($str))
+      if ($_str = cmail_utf7_to_utf8($str))
         return $_str;
     }
     else if (($from == 'ISO-8859-1') && function_exists('utf8_encode')) {
@@ -296,7 +296,7 @@ function rcube_charset_convert($str, $from, $to=NULL)
  * @param  string  Input charset name
  * @return The validated charset name
  */
-function rcube_parse_charset($charset)
+function cmail_parse_charset($charset)
   {
   $charset = strtoupper($charset);
 
@@ -347,7 +347,7 @@ function rcube_parse_charset($charset)
  * @param  string  Input string
  * @return The converted string
  */
-function rcube_utf7_to_utf8($str)
+function cmail_utf7_to_utf8($str)
 {
   $Index_64 = array(
     0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
@@ -389,7 +389,7 @@ function rcube_utf7_to_utf8($str)
         continue;
       }
 
-      $res .= rcube_utf16_to_utf8(base64_decode($ch));
+      $res .= cmail_utf16_to_utf8(base64_decode($ch));
     }
     else
     {
@@ -406,7 +406,7 @@ function rcube_utf7_to_utf8($str)
  * @param  string  Input string
  * @return The converted string
  */
-function rcube_utf16_to_utf8($str)
+function cmail_utf16_to_utf8($str)
 {
   $len = strlen($str);
   $dec = '';
@@ -549,11 +549,11 @@ function get_input_value($fname, $source, $allow_html=FALSE, $charset=NULL)
   global $OUTPUT;
   $value = NULL;
   
-  if ($source==RCUBE_INPUT_GET && isset($_GET[$fname]))
+  if ($source==cmail_INPUT_GET && isset($_GET[$fname]))
     $value = $_GET[$fname];
-  else if ($source==RCUBE_INPUT_POST && isset($_POST[$fname]))
+  else if ($source==cmail_INPUT_POST && isset($_POST[$fname]))
     $value = $_POST[$fname];
-  else if ($source==RCUBE_INPUT_GPC)
+  else if ($source==cmail_INPUT_GPC)
     {
     if (isset($_POST[$fname]))
       $value = $_POST[$fname];
@@ -579,7 +579,7 @@ function get_input_value($fname, $source, $allow_html=FALSE, $charset=NULL)
   
   // convert to internal charset
   if (is_object($OUTPUT))
-    return rcube_charset_convert($value, $OUTPUT->get_charset(), $charset);
+    return cmail_charset_convert($value, $OUTPUT->get_charset(), $charset);
   else
     return $value;
 }
@@ -591,10 +591,10 @@ function get_input_value($fname, $source, $allow_html=FALSE, $charset=NULL)
  * @param  int   Source to get value from (GPC)
  * @return array Hash array with all request parameters
  */
-function request2param($mode = RCUBE_INPUT_GPC)
+function request2param($mode = cmail_INPUT_GPC)
 {
   $out = array();
-  $src = $mode == RCUBE_INPUT_GET ? $_GET : ($mode == RCUBE_INPUT_POST ? $_POST : $_REQUEST);
+  $src = $mode == cmail_INPUT_GET ? $_GET : ($mode == cmail_INPUT_POST ? $_POST : $_REQUEST);
   foreach ($src as $key => $value) {
     $fname = $key[0] == '_' ? substr($key, 1) : $key;
     $out[$fname] = get_input_value($key, $mode);
@@ -646,7 +646,7 @@ function strip_newlines($str)
  * @param  string Name of the identifier col
  * @return string HTML table code
  */
-function rcube_table_output($attrib, $table_data, $a_show_cols, $id_col)
+function cmail_table_output($attrib, $table_data, $a_show_cols, $id_col)
   {
   global $cmail;
   
@@ -654,7 +654,7 @@ function rcube_table_output($attrib, $table_data, $a_show_cols, $id_col)
     
   // add table header
   foreach ($a_show_cols as $col)
-    $table->add_header($col, Q(rcube_label($col)));
+    $table->add_header($col, Q(cmail_label($col)));
   
   $c = 0;
   if (!is_array($table_data)) 
@@ -720,7 +720,7 @@ function cmail_get_edit_field($col, $value, $attrib, $type='text')
 
   // use value from post
   if (!empty($_POST[$fname]))
-    $value = get_input_value($fname, RCUBE_INPUT_POST,
+    $value = get_input_value($fname, cmail_INPUT_POST,
 	    $type == 'textarea' && strpos($attrib['class'], 'mce_editor')!==false ? true : false);
 
   $out = $input->show($value);
@@ -740,7 +740,7 @@ function cmail_get_edit_field($col, $value, $attrib, $type='text')
 function cmail_mod_css_styles($source, $container_id)
   {
   $last_pos = 0;
-  $replacements = new rcube_string_replacer;
+  $replacements = new cmail_string_replacer;
   
   // ignore the whole block if evil styles are detected
   $stripped = preg_replace('/[^a-z\(:]/', '', cmail_xss_entity_decode($source));
@@ -902,7 +902,7 @@ function format_date($date, $format=NULL)
 
   // define date format depending on current time  
   if ($CONFIG['prettydate'] && !$format && $timestamp > $today_limit && $timestamp < $now)
-    return sprintf('%s %s', rcube_label('today'), date($CONFIG['date_today'] ? $CONFIG['date_today'] : 'H:i', $timestamp));
+    return sprintf('%s %s', cmail_label('today'), date($CONFIG['date_today'] ? $CONFIG['date_today'] : 'H:i', $timestamp));
   else if ($CONFIG['prettydate'] && !$format && $timestamp > $week_limit && $timestamp < $now)
     $format = $CONFIG['date_short'] ? $CONFIG['date_short'] : 'D H:i';
   else if (!$format)
@@ -925,16 +925,16 @@ function format_date($date, $format=NULL)
       $out .= $format{$i};
     // weekday (short)
     else if ($format{$i}=='D')
-      $out .= rcube_label(strtolower(date('D', $timestamp)));
+      $out .= cmail_label(strtolower(date('D', $timestamp)));
     // weekday long
     else if ($format{$i}=='l')
-      $out .= rcube_label(strtolower(date('l', $timestamp)));
+      $out .= cmail_label(strtolower(date('l', $timestamp)));
     // month name (short)
     else if ($format{$i}=='M')
-      $out .= rcube_label(strtolower(date('M', $timestamp)));
+      $out .= cmail_label(strtolower(date('M', $timestamp)));
     // month name (long)
     else if ($format{$i}=='F')
-      $out .= rcube_label('long'.strtolower(date('M', $timestamp)));
+      $out .= cmail_label('long'.strtolower(date('M', $timestamp)));
     else if ($format{$i}=='x')
       $out .= strftime('%x %X', $timestamp);
     else
@@ -1059,7 +1059,7 @@ function write_log($name, $line)
 /**
  * @access private
  */
-function rcube_timer()
+function cmail_timer()
 {
   return microtime(true);
 }
@@ -1068,12 +1068,12 @@ function rcube_timer()
 /**
  * @access private
  */
-function rcube_print_time($timer, $label='Timer', $dest='console')
+function cmail_print_time($timer, $label='Timer', $dest='console')
 {
   static $print_count = 0;
   
   $print_count++;
-  $now = rcube_timer();
+  $now = cmail_timer();
   $diff = $now-$timer;
   
   if (empty($label))
@@ -1127,7 +1127,7 @@ function cmail_mailbox_list($attrib)
     
     // add no-selection option
     if ($attrib['noselection'])
-      $select->add(rcube_label($attrib['noselection']), '0');
+      $select->add(cmail_label($attrib['noselection']), '0');
     
     cmail_render_folder_tree_select($hook['list'], $mbox_name, $attrib['maxlength'], $select, $attrib['realnames']);
     $out = $select->show();
@@ -1196,7 +1196,7 @@ function cmail_build_folder_tree(&$arrFolders, $folder, $delm='/', $path='')
   if (!isset($arrFolders[$currentFolder])) {
     $arrFolders[$currentFolder] = array(
       'id' => $path,
-      'name' => rcube_charset_convert($currentFolder, 'UTF7-IMAP'),
+      'name' => cmail_charset_convert($currentFolder, 'UTF7-IMAP'),
       'virtual' => $virtual,
       'folders' => array());
   }
@@ -1227,7 +1227,7 @@ function cmail_render_folder_tree_html(&$arrFolders, &$mbox_name, &$jslist, $att
     $title = null;
 
     if (($folder_class = cmail_folder_classname($folder['id'])) && !$realnames) {
-      $foldername = rcube_label($folder_class);
+      $foldername = cmail_label($folder_class);
     }
     else {
       $foldername = $folder['name'];
@@ -1317,7 +1317,7 @@ function cmail_render_folder_tree_select(&$arrFolders, &$mbox_name, $maxlength, 
   foreach ($arrFolders as $key=>$folder)
     {
     if (!$realnames && ($folder_class = cmail_folder_classname($folder['id'])))
-      $foldername = rcube_label($folder_class);
+      $foldername = cmail_label($folder_class);
     else
       {
       $foldername = $folder['name'];
@@ -1369,9 +1369,9 @@ function cmail_folder_classname($folder_id)
 function cmail_localize_foldername($name)
 {
   if ($folder_class = cmail_folder_classname($name))
-    return rcube_label($folder_class);
+    return cmail_label($folder_class);
   else
-    return rcube_charset_convert($name, 'UTF7-IMAP');
+    return cmail_charset_convert($name, 'UTF7-IMAP');
 }
 
 
@@ -1380,7 +1380,7 @@ function cmail_localize_foldername($name)
  *
  * @param string Editor mode
  */
-function rcube_html_editor($mode='')
+function cmail_html_editor($mode='')
 {
   global $cmail, $CONFIG;
 
@@ -1406,7 +1406,7 @@ function rcube_html_editor($mode='')
  * @param integer HTTPS port number
  * @param boolean Enables 'use_https' option checking
  */
-function rcube_https_check($port=null, $use_https=true)
+function cmail_https_check($port=null, $use_https=true)
 {
   global $cmail;
   
@@ -1477,7 +1477,7 @@ function check_email($email)
  * Helper class to turn relative urls into absolute ones
  * using a predefined base
  */
-class rcube_base_replacer
+class cmail_base_replacer
 {
   private $base_url;
   

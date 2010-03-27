@@ -2,17 +2,17 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_plugin.php                                      |
+ | program/include/cmail_plugin.php                                      |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |  Abstract plugins interface/class                                     |
  |  All plugins need to extend this class                                |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: $
@@ -24,7 +24,7 @@
  *
  * @package Core
  */
-abstract class rcube_plugin
+abstract class cmail_plugin
 {
   public $ID;
   public $api;
@@ -159,7 +159,7 @@ abstract class rcube_plugin
   /**
    * Register a handler function for a template object
    *
-   * When parsing a template for display, tags like <roundcube:object name="plugin.myobject" />
+   * When parsing a template for display, tags like <crystal:object name="plugin.myobject" />
    * will be replaced by the return value if the registered callback function.
    *
    * @param string Object name (should be unique and start with 'plugin.')
@@ -195,7 +195,7 @@ abstract class rcube_plugin
    *
    * @param array Hash array with named parameters (as used in skin templates)
    * @param string Container name where the buttons should be added to
-   * @see rcube_remplate::button()
+   * @see cmail_remplate::button()
    */
   public function add_button($p, $container)
   {

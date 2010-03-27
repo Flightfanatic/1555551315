@@ -14,7 +14,7 @@
  * and then set the global preference
  * $cmail_config['use_subscriptions'] = true; // or false
  *
- * Roundcube caches folder lists.  When a user changes this option or visits
+ * Crystal caches folder lists.  When a user changes this option or visits
  * their folder list, this cache is refreshed.  If the option is on the
  * 'dont_override' list and the global option has changed, don't expect
  * to see the change until the folder list cache is refreshed.
@@ -22,7 +22,7 @@
  * @version 1.0
  * @author Ziba Scott
  */
-class subscriptions_option extends rcube_plugin
+class subscriptions_option extends cmail_plugin
 {
     public $task = 'mail|settings';
     

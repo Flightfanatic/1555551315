@@ -3,9 +3,9 @@
  * sound_notifier
  *
  *
- * @version 1.0 - 17.08.2009
+ * @version 1.0 - 17.08.2010
  * @author Roland 'rosali' Liebl
- * @website http://myroundcube.googlecode.com
+ * @website http://myCrystal.googlecode.com
  * @licence GNU GPL
  *
  **/
@@ -16,7 +16,7 @@
  *
  **/
 
-class sound_notifier extends rcube_plugin
+class sound_notifier extends cmail_plugin
 {
 
   public $task = 'mail|settings';
@@ -122,8 +122,8 @@ class sound_notifier extends rcube_plugin
   function save_prefs($args)
   {
     if($args['section'] == 'mailbox'){
-      $args['prefs']['sound_notifier'] = get_input_value('_sound_notifier', RCUBE_INPUT_POST);
-      $args['prefs']['sound_notifier_choice'] = get_input_value('_sound_notifier_choice', RCUBE_INPUT_POST);
+      $args['prefs']['sound_notifier'] = get_input_value('_sound_notifier', cmail_INPUT_POST);
+      $args['prefs']['sound_notifier_choice'] = get_input_value('_sound_notifier_choice', cmail_INPUT_POST);
       return $args;
     }
   }

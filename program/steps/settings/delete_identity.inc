@@ -4,25 +4,25 @@
  +-----------------------------------------------------------------------+
  | program/steps/settings/delete_identity.inc                            |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Delete the submitted identities (IIDs) from the database            |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: delete_identity.inc 2779 2009-07-21 16:13:42Z thomasb $
+ $Id: delete_identity.inc 2779 2010-07-21 16:13:42Z thomasb $
 
 */
 
-$iid = get_input_value('_iid', RCUBE_INPUT_GPC);
+$iid = get_input_value('_iid', cmail_INPUT_GPC);
 
 // check request token
-if (!$OUTPUT->ajax_call && !$cmail->check_request(RCUBE_INPUT_GPC)) {
+if (!$OUTPUT->ajax_call && !$cmail->check_request(cmail_INPUT_GPC)) {
   $OUTPUT->show_message('invalidrequest', 'error');
   cmail_overwrite_action('identities');
   return;

@@ -4,26 +4,26 @@
  +-----------------------------------------------------------------------+
  | program/steps/settings/edit_prefs.inc                                 |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Provide functionality for user's settings & preferences             |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: func.inc 2822 2009-07-31 09:07:54Z alec $
+ $Id: func.inc 2822 2010-07-31 09:07:54Z alec $
 
 */
 
 if (!$OUTPUT->ajax_call)
-  $OUTPUT->set_pagetitle(rcube_label('preferences'));
+  $OUTPUT->set_pagetitle(cmail_label('preferences'));
 
 
-$CURR_SECTION = get_input_value('_section', RCUBE_INPUT_GPC);
+$CURR_SECTION = get_input_value('_section', cmail_INPUT_GPC);
 list($SECTIONS,) = cmail_user_prefs($CURR_SECTION);
 
 function cmail_user_prefs_form($attrib)

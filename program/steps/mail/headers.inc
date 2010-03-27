@@ -3,8 +3,8 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/headers.inc                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -18,13 +18,13 @@
 
 */
 
-if ($uid = get_input_value('_uid', RCUBE_INPUT_POST))
+if ($uid = get_input_value('_uid', cmail_INPUT_POST))
 {
   $source = $IMAP->get_raw_headers($uid);
 
   if ($source)
     {
-    $browser = new rcube_browser;
+    $browser = new cmail_browser;
     
     if ($browser->ie)
       $source = rc_utf8_clean($source);	  

@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/steps/settings/identities.inc                                 |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Manage identities of a user account                                 |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: identities.inc 2006 2008-10-24 07:57:21Z alec $
@@ -21,7 +21,7 @@
 
 define('IDENTITIES_LEVEL', intval($cmail->config->get('identities_level', 0)));
 
-$OUTPUT->set_pagetitle(rcube_label('identities'));
+$OUTPUT->set_pagetitle(cmail_label('identities'));
 
 $OUTPUT->include_script('list.js');
 

@@ -4,15 +4,15 @@
 +-----------------------------------------------------------------------+
 | localization/ka_GE/labels.inc                                         |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
 | Author: Zaza Zviadadze 						                        |
 +-----------------------------------------------------------------------+
 
-@version $Id: labels.inc 842 2009-10-03 19:00:00  zaza$
+@version $Id: labels.inc 842 2010-10-03 19:00:00  zaza$
 
 */
 

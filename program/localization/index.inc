@@ -4,8 +4,8 @@
  +-----------------------------------------------------------------------+
  | program/localization/index.inc                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -13,10 +13,10 @@
  |   for keeping track of available languages                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: index.inc 2991 2009-09-25 12:23:46Z alec $
+ $Id: index.inc 2991 2010-09-25 12:23:46Z alec $
 
 */
 
@@ -24,7 +24,7 @@
 // country codes according to ISO 3166-1 (Alpha-2)
 // original names from http://www.mediaglyphs.org/mg/p/langnames.html
 
-$rcube_languages = array(
+$cmail_languages = array(
   'sq_AL' => 'Albanian (Shqip)',
   'ar_SA' => 'Arabic (العربية)',
   'hy_AM' => 'Armenian (Հայերեն)',
@@ -94,7 +94,7 @@ $rcube_languages = array(
   'cy_GB' => 'Welsh (Cymraeg)',
 );
 
-$rcube_language_aliases = array(
+$cmail_language_aliases = array(
   'am' => 'hy_AM',
   'ar' => 'ar_SA',
   'az' => 'az_AZ',

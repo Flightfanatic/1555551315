@@ -4,8 +4,8 @@
 +-----------------------------------------------------------------------+
 | language/es_ES/messages.inc                                           |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -16,7 +16,7 @@
 |         http://www.netsud.com                                         |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 1600 2009-01-13 11:40:30Z yllar $
+@version $Id: messages.inc 1600 2010-01-13 11:40:30Z yllar $
 
 */
 

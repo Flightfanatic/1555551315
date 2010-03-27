@@ -3,9 +3,9 @@
 /**
  * Password Reminder
  *
- * @version 1.0 - 29.06.2009
+ * @version 1.0 - 29.06.2010
  * @author Roland 'rosali' Liebl
- * @website http://myroundcube.googlecode.com
+ * @website http://myCrystal.googlecode.com
  * @licence GNU GPL
  *
  * @TODO Use hmail_autoban plugin by planned http_request plugin (TODO with calendar plugin)
@@ -30,7 +30,7 @@
  *
  **/
 
-class pwtools extends rcube_plugin
+class pwtools extends cmail_plugin
 {
 
   function init()
@@ -119,7 +119,7 @@ class pwtools extends rcube_plugin
       $user = trim(urldecode($_GET['_username']));
     }
     else{
-      $user = get_input_value('_username', RCUBE_INPUT_POST);
+      $user = get_input_value('_username', cmail_INPUT_POST);
     }
     
     if(class_exists("hmail_login")){
@@ -219,19 +219,19 @@ class pwtools extends rcube_plugin
       
     $cmail = cmail::get_instance();
     
-    $user =  get_input_value('_username', RCUBE_INPUT_POST);
-    $question = get_input_value('_pwtoolsquestion', RCUBE_INPUT_POST);
-    $answer = get_input_value('_pwtoolsanswer', RCUBE_INPUT_POST);
+    $user =  get_input_value('_username', cmail_INPUT_POST);
+    $question = get_input_value('_pwtoolsquestion', cmail_INPUT_POST);
+    $answer = get_input_value('_pwtoolsanswer', cmail_INPUT_POST);
     $pwtoolsanswer = $_SESSION['pwtools']['answer'];
     if($pwtoolsanswer != "")
       $pwtoolsanswer = $cmail->decrypt($pwtoolsanswer);
       
     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == TRUE) 
       $s = "s"; 
-    $roundcube_url = "http$s://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?_task=logout"; 
+    $Crystal_url = "http$s://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . "?_task=logout"; 
     
-    $link  = '<a target="_new" href="' . $roundcube_url . '">'; 
-    $link .= $roundcube_url; 
+    $link  = '<a target="_new" href="' . $Crystal_url . '">'; 
+    $link .= $Crystal_url; 
     $link .= '</a>'; 
   
     if(
@@ -349,10 +349,10 @@ class pwtools extends rcube_plugin
     $cmail = cmail::get_instance();
     $a_prefs = $cmail->user->get_prefs();  
  
-    $pwtools['pwtoolsenabled'] = get_input_value('_pwtoolsenabled', RCUBE_INPUT_POST);
-    $pwtools['pwtoolsaddress'] = get_input_value('_pwtoolsaddress', RCUBE_INPUT_POST);
-    $pwtools['pwtoolsquestion'] = get_input_value('_pwtoolsquestion', RCUBE_INPUT_POST);
-    $pwtools['pwtoolsanswer'] = $cmail->encrypt(get_input_value('_pwtoolsanswer', RCUBE_INPUT_POST));
+    $pwtools['pwtoolsenabled'] = get_input_value('_pwtoolsenabled', cmail_INPUT_POST);
+    $pwtools['pwtoolsaddress'] = get_input_value('_pwtoolsaddress', cmail_INPUT_POST);
+    $pwtools['pwtoolsquestion'] = get_input_value('_pwtoolsquestion', cmail_INPUT_POST);
+    $pwtools['pwtoolsanswer'] = $cmail->encrypt(get_input_value('_pwtoolsanswer', cmail_INPUT_POST));
     
     $a_prefs = array_merge($a_prefs,$pwtools);
     

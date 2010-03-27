@@ -5,17 +5,17 @@
 +-----------------------------------------------------------------------+
 | language/nl_NL/messages.inc                                           |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
 | Author: Mark Moses <mark@katmoda.com>                                 |
-|         Lazlo Westerhof <roundcube@lazlo.me>                        	|
+|         Lazlo Westerhof <Crystal@lazlo.me>                        	|
 |         Frits Letteboer <f.letteboer@radiotwenterand.nl>              |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 2798 2009-07-24 13:30:39Z robin $
+@version $Id: messages.inc 2798 2010-07-24 13:30:39Z robin $
 
 */
 

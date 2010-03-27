@@ -4,7 +4,7 @@
  * 
  * This plugin which provides database backed storage for temporary
  * attachment file handling.  The primary advantage of this plugin
- * is its compatibility with round-robin dns multi-server roundcube
+ * is its compatibility with round-robin dns multi-server Crystal
  * installations.
  *
  * This plugin relies on the core filesystem_attachments plugin

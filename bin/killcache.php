@@ -4,8 +4,8 @@
  +-----------------------------------------------------------------------+
  | bin/killcache.php                                                     |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -15,14 +15,14 @@
  | Author: Dennis P. Nikolaenko <dennis@nikolaenko.ru>                   |
  +-----------------------------------------------------------------------+
 
- $Id: killcache.php 2238 2009-01-17 03:27:41Z till $
+ $Id: killcache.php 2238 2010-01-17 03:27:41Z till $
 
 */
 
 define('INSTALL_PATH', realpath(dirname(__FILE__).'/..') . '/');
 require INSTALL_PATH . 'program/include/iniset.php';
 
-$config = new rcube_config();
+$config = new cmail_config();
 
 // don't allow public access if not in devel_mode
 if (!$config->get('devel_mode') && $_SERVER['REMOTE_ADDR']) {

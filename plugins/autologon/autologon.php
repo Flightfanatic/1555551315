@@ -4,7 +4,7 @@
  * Sample plugin to try out some hooks.
  * This performs an automatic login if accessed from localhost
  */
-class autologon extends rcube_plugin
+class autologon extends cmail_plugin
 {
 
   function init()

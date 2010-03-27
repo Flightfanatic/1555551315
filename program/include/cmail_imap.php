@@ -2,10 +2,10 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_imap.php                                        |
+ | program/include/cmail_imap.php                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -13,10 +13,10 @@
  |   See http://ilohamail.org/ for details                               |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_imap.php 3048 2009-10-19 07:47:10Z alec $
+ $Id: cmail_imap.php 3048 2010-10-19 07:47:10Z alec $
 
 */
 
@@ -35,11 +35,11 @@ require_once('lib/tnef_decoder.inc');
  * This is a wrapper that implements the Iloha IMAP Library (IIL)
  *
  * @package    Mail
- * @author     Thomas Bruederli <roundcube@gmail.com>
+ * @author     Thomas Bruederli <Crystal@gmail.com>
  * @version    1.5
  * @link       http://ilohamail.org
  */
-class rcube_imap
+class cmail_imap
 {
   var $db;
   var $conn;
@@ -428,7 +428,7 @@ class rcube_imap
    * Private method for mailbox listing
    *
    * @return  array   List of mailboxes/folders
-   * @see     rcube_imap::list_mailboxes()
+   * @see     cmail_imap::list_mailboxes()
    * @access  private
    */
   private function _list_mailboxes($root='', $filter='*')
@@ -481,7 +481,7 @@ class rcube_imap
    * Private method for getting nr of messages
    *
    * @access  private
-   * @see     rcube_imap::messagecount()
+   * @see     cmail_imap::messagecount()
    */
   private function _messagecount($mailbox='', $mode='ALL', $force=FALSE)
     {
@@ -561,7 +561,7 @@ class rcube_imap
    * Private method for listing message headers
    *
    * @access  private
-   * @see     rcube_imap::list_headers
+   * @see     cmail_imap::list_headers
    */
   private function _list_headers($mailbox='', $page=NULL, $sort_field=NULL, $sort_order=NULL, $recursive=FALSE, $slice=0)
     {
@@ -662,7 +662,7 @@ class rcube_imap
       return array();
     
     // use this class for message sorting
-    $sorter = new rcube_header_sorter();
+    $sorter = new cmail_header_sorter();
     $sorter->set_sequence_numbers($msg_index);
     $sorter->sort_headers($a_msg_headers);
 
@@ -683,7 +683,7 @@ class rcube_imap
    * @param   boolean  Number of slice items to extract from result array
    * @return  array    Indexed array with message header objects
    * @access  private
-   * @see     rcube_imap::list_header_set()
+   * @see     cmail_imap::list_header_set()
    */
   private function _list_header_set($mailbox, $page=NULL, $sort_field=NULL, $sort_order=NULL, $slice=0)
     {
@@ -713,7 +713,7 @@ class rcube_imap
       $this->_fetch_headers($mailbox, join(',',$msgs), $a_msg_headers, NULL);
 
       // I didn't found in RFC that FETCH always returns messages sorted by index
-      $sorter = new rcube_header_sorter();
+      $sorter = new cmail_header_sorter();
       $sorter->set_sequence_numbers($msgs);
       $sorter->sort_headers($a_msg_headers);
 
@@ -742,7 +742,7 @@ class rcube_imap
       // fetch headers
       $this->_fetch_headers($mailbox, join(',',$msgs), $a_msg_headers, NULL);
 
-      $sorter = new rcube_header_sorter();
+      $sorter = new cmail_header_sorter();
       $sorter->set_sequence_numbers($msgs);
       $sorter->sort_headers($a_msg_headers);
 
@@ -765,7 +765,7 @@ class rcube_imap
         if (!is_array($a_msg_headers) || empty($a_msg_headers))
           return array();
 
-        $sorter = new rcube_header_sorter();
+        $sorter = new cmail_header_sorter();
         $sorter->set_sequence_numbers($msgs);
         $sorter->sort_headers($a_msg_headers);
 
@@ -1067,7 +1067,7 @@ class rcube_imap
 	    {
 	    $string_offset = $m[1] + strlen($m[0]) + 4; // {}\r\n
 	    $string = substr($str, $string_offset - 1, $m[0]);
-	    $string = rcube_charset_convert($string, $charset, 'US-ASCII');
+	    $string = cmail_charset_convert($string, $charset, 'US-ASCII');
 	    if (!$string) continue;
 	    $res .= sprintf("%s{%d}\r\n%s", substr($str, $last, $m[1] - $last - 1), strlen($string), $string);
 	    $last = $m[0] + $string_offset - 1;
@@ -1092,7 +1092,7 @@ class rcube_imap
    *
    * @return array   search results as list of message ids
    * @access private
-   * @see rcube_imap::search()
+   * @see cmail_imap::search()
    */
   private function _search_index($mailbox, $criteria='ALL', $charset=NULL, $sort_field=NULL)
     {
@@ -1194,7 +1194,7 @@ class rcube_imap
    *
    * @param int Message UID to fetch
    * @param string Message BODYSTRUCTURE string (optional)
-   * @return object rcube_message_part Message part tree or False on failure
+   * @return object cmail_message_part Message part tree or False on failure
    */
   function &get_structure($uid, $structure_str='')
     {
@@ -1260,7 +1260,7 @@ class rcube_imap
    */
   function &_structure_part($part, $count=0, $parent='', $raw_headers=null)
     {
-    $struct = new rcube_message_part;
+    $struct = new cmail_message_part;
     $struct->mime_id = empty($parent) ? (string)$count : "$parent.$count";
 
     // multipart
@@ -1383,7 +1383,7 @@ class rcube_imap
    * Set attachment filename from message part structure 
    *
    * @access private
-   * @param  object rcube_message_part Part object
+   * @param  object cmail_message_part Part object
    * @param  string Part's raw headers
    */
   private function _set_part_filename(&$part, $headers=null)
@@ -1477,7 +1477,7 @@ class rcube_imap
 
     // decode filename
     if (!empty($filename_mime)) {
-      $part->filename = rcube_imap::decode_mime_string($filename_mime, 
+      $part->filename = cmail_imap::decode_mime_string($filename_mime, 
         $part->charset ? $part->charset : $this->struct_charset ? $this->struct_charset :
 	    rc_detect_encoding($filename_mime, $this->default_charset));
       } 
@@ -1487,7 +1487,7 @@ class rcube_imap
         $filename_charset = $fmatches[1];
         $filename_encoded = $fmatches[2];
         }
-      $part->filename = rcube_charset_convert(urldecode($filename_encoded), $filename_charset);
+      $part->filename = cmail_charset_convert(urldecode($filename_encoded), $filename_charset);
       }
     }
 
@@ -1514,7 +1514,7 @@ class rcube_imap
    *
    * @param  int    Message UID
    * @param  string Part number
-   * @param  object rcube_message_part Part object created by get_structure()
+   * @param  object cmail_message_part Part object created by get_structure()
    * @param  mixed  True to print part, ressource to write part contents in
    * @param  resource File pointer to save the message part
    * @return string Message/part body if not printed
@@ -1531,7 +1531,7 @@ class rcube_imap
         return false;
 
       $part_type = iml_GetPartTypeCode($structure, $part);
-      $o_part = new rcube_message_part;
+      $o_part = new cmail_message_part;
       $o_part->ctype_primary = $part_type==0 ? 'text' : ($part_type==2 ? 'message' : 'other');
       $o_part->encoding = strtolower(iml_GetPartEncodingString($structure, $part));
       $o_part->charset = iml_GetPartCharset($structure, $part);
@@ -1553,7 +1553,7 @@ class rcube_imap
       if (empty($o_part->charset) || strtolower($o_part->charset) == 'us-ascii')
         $o_part->charset = $this->default_charset;
 
-      $body = rcube_charset_convert($body, $o_part->charset);
+      $body = cmail_charset_convert($body, $o_part->charset);
       }
     
     return $body;
@@ -1565,12 +1565,12 @@ class rcube_imap
    *
    * @param  int    Message UID
    * @return string Message/part body
-   * @see    rcube_imap::get_message_part()
+   * @see    cmail_imap::get_message_part()
    */
   function &get_body($uid, $part=1)
     {
     $headers = $this->get_headers($uid);
-    return rcube_charset_convert($this->get_message_part($uid, $part, NULL),
+    return cmail_charset_convert($this->get_message_part($uid, $part, NULL),
       $headers->charset ? $headers->charset : $this->default_charset);
     }
 
@@ -1860,7 +1860,7 @@ class rcube_imap
   /**
    * Send IMAP expunge command and clear cache
    *
-   * @see rcube_imap::expunge()
+   * @see cmail_imap::expunge()
    * @param string 	Mailbox name
    * @param boolean 	False if cache should not be cleared
    * @param string 	List of UIDs to remove, separated by comma
@@ -2641,9 +2641,9 @@ class rcube_imap
   /**
    * Decode a Microsoft Outlook TNEF part (winmail.dat)
    *
-   * @param object rcube_message_part Message part to decode
+   * @param object cmail_message_part Message part to decode
    * @param string UID of the message
-   * @return array List of rcube_message_parts extracted from windmail.dat
+   * @return array List of cmail_message_parts extracted from windmail.dat
    */
   function tnef_decode(&$part, $uid)
   {
@@ -2654,7 +2654,7 @@ class rcube_imap
     $tnef_parts = array();
     $tnef_arr = tnef_decode($part->body);
     foreach ($tnef_arr as $winatt) {
-      $tpart = new rcube_message_part;
+      $tpart = new cmail_message_part;
       $tpart->filename = $winatt["name"];
       $tpart->encoding = 'stream';
       $tpart->ctype_primary = $winatt["type0"];
@@ -2681,7 +2681,7 @@ class rcube_imap
    */
   function decode_header($input, $remove_quotes=FALSE)
     {
-    $str = rcube_imap::decode_mime_string((string)$input, $this->default_charset);
+    $str = cmail_imap::decode_mime_string((string)$input, $this->default_charset);
     if ($str{0}=='"' && $remove_quotes)
       $str = str_replace('"', '', $str);
     
@@ -2728,19 +2728,19 @@ class rcube_imap
         $input = substr($input, $end_pos+2);
 
         // Decode the string fragement
-        $out .= rcube_imap::_decode_mime_string_part($encstr);
+        $out .= cmail_imap::_decode_mime_string_part($encstr);
       }
 
       // Deocde the rest (if any)
       if (strlen($input) != 0)
-         $out .= rcube_imap::decode_mime_string($input, $fallback);
+         $out .= cmail_imap::decode_mime_string($input, $fallback);
 
        // return the results
       return $out;
     }
 
     // no encoding information, use fallback
-    return rcube_charset_convert($input, 
+    return cmail_charset_convert($input, 
       !empty($fallback) ? $fallback : cmail::get_instance()->config->get('default_charset', 'ISO-8859-1'));
     }
 
@@ -2769,7 +2769,7 @@ class rcube_imap
         $rest = quoted_printable_decode($rest);
         }
 
-      return rcube_charset_convert($rest, $a[0]);
+      return cmail_charset_convert($rest, $a[0]);
       }
     else
       return $str;    // we dont' know what to do with this  
@@ -2819,10 +2819,10 @@ class rcube_imap
   function charset_decode($body, $ctype_param)
     {
     if (is_array($ctype_param) && !empty($ctype_param['charset']))
-      return rcube_charset_convert($body, $ctype_param['charset']);
+      return cmail_charset_convert($body, $ctype_param['charset']);
 
     // defaults to what is specified in the class header
-    return rcube_charset_convert($body,  $this->default_charset);
+    return cmail_charset_convert($body,  $this->default_charset);
     }
 
 
@@ -2910,7 +2910,7 @@ class rcube_imap
       if (($p = array_search(strtolower($folder), $this->default_folders_lc)) !== false && !$a_defaults[$p])
         $a_defaults[$p] = $folder;
       else
-        $folders[$folder] = mb_strtolower(rcube_charset_convert($folder, 'UTF7-IMAP'));
+        $folders[$folder] = mb_strtolower(cmail_charset_convert($folder, 'UTF7-IMAP'));
       }
 
     // sort folders and place defaults on the top
@@ -3104,13 +3104,13 @@ class rcube_imap
   private function _parse_address_list($str, $decode=true)
     {
     // remove any newlines and carriage returns before
-    $a = rcube_explode_quoted_string('[,;]', preg_replace( "/[\r\n]/", " ", $str));
+    $a = cmail_explode_quoted_string('[,;]', preg_replace( "/[\r\n]/", " ", $str));
     $result = array();
 
     foreach ($a as $key => $val)
       {
       $val = preg_replace("/([\"\w])</", "$1 <", $val);
-      $sub_a = rcube_explode_quoted_string(' ', $decode ? $this->decode_header($val) : $val);
+      $sub_a = cmail_explode_quoted_string(' ', $decode ? $this->decode_header($val) : $val);
       $result[$key]['name'] = '';
 
       foreach ($sub_a as $k => $v)
@@ -3131,7 +3131,7 @@ class rcube_imap
     return $result;
     }
 
-}  // end class rcube_imap
+}  // end class cmail_imap
 
 
 /**
@@ -3139,7 +3139,7 @@ class rcube_imap
  *
  * @package Mail
  */
-class rcube_message_part
+class cmail_message_part
 {
   var $mime_id = '';
   var $ctype_primary = 'text';
@@ -3170,7 +3170,7 @@ class rcube_message_part
  * @package Mail
  * @author Eric Stadtherr
  */
-class rcube_header_sorter
+class cmail_header_sorter
 {
    var $sequence_numbers = array();
    

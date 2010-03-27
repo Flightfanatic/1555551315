@@ -5,15 +5,15 @@
  +-----------------------------------------------------------------------+
  | language/en_US/labels.inc                                             |
  |                                                                       |
- | Language file of the RoundCube Webmail client                         |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | Language file of the Crystal Webmail client                         |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- @version $Id: labels.inc 2983 2009-09-23 12:32:09Z alec $
+ @version $Id: labels.inc 2983 2010-09-23 12:32:09Z alec $
 
 */
 

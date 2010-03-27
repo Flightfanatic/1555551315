@@ -4,22 +4,22 @@
  +-----------------------------------------------------------------------+
  | program/steps/addressbook/mailto.inc                                  |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2007, RoundCube Dev. - Switzerland                      |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2007, Crystal Dev. - United States                      |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Compose a recipient list with all selected contacts                 |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: copy.inc 471 2007-02-09 21:25:50Z thomasb $
 
 */
 
-$cid = get_input_value('_cid', RCUBE_INPUT_GET);
+$cid = get_input_value('_cid', cmail_INPUT_GET);
 $recipients = null;
 $mailto = array();
 

@@ -5,15 +5,15 @@
 +-----------------------------------------------------------------------+
 | language/de_DE/messages.inc                                           |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
 | Author: Marcel Schlesinger <info@marcel-schlesinger.de>               |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 3065 2009-10-27 16:08:00Z thomasb $
+@version $Id: messages.inc 3065 2010-10-27 16:08:00Z thomasb $
 
 */
 

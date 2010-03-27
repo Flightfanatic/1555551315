@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/list.inc                                           |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2007, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2007, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Send message list to client (as remote response)                    |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: list.inc 2983 2009-09-23 12:32:09Z alec $
+ $Id: list.inc 2983 2010-09-23 12:32:09Z alec $
 
 */
 
@@ -24,7 +24,7 @@ if (!$OUTPUT->ajax_call) {
 }
 
 // is there a sort type for this request?
-if ($sort = get_input_value('_sort', RCUBE_INPUT_GET))
+if ($sort = get_input_value('_sort', cmail_INPUT_GET))
 {
   // yes, so set the sort vars
   list($sort_col, $sort_order) = explode('_', $sort);

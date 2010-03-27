@@ -67,7 +67,7 @@ include("../config/admin.inc.php");
 			<img src="img/avatar.jpg" id="avatar" alt="avatar" />
 			<p>Welcome <strong>Admin</strong>. <a href="?logout=1">Log out?</a></p>
 			<p>System Version:<a href="http://crystalwebmail.com/?versionfeatures=<?php echo systemversion; ?>"><?php echo systemversion; ?></a></p>
-			<p class="last_login">Last login: 21:03 12.05.2009</p>
+			<p class="last_login">Last login: 21:03 12.05.2010</p>
 		</div>
 		<div id="logo"><h1><a href="index.php">AdmintTheme</a></h1></div>
 		
@@ -84,7 +84,7 @@ include("../config/admin.inc.php");
 				<div class="content_sub_page">
 <!--
 Syntax Highlighting By CodeMirror and
-Copyright (c) 2008-2009 Yahoo! Inc. All rights reserved.
+Copyright (c) 2008-2010 Yahoo! Inc. All rights reserved.
 The copyrights embodied in the content of this file are licensed by
 Yahoo! Inc. under the BSD (revised) open source license
 

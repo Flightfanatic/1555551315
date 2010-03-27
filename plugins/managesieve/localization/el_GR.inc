@@ -1,6 +1,6 @@
 <?php
 
-// Antonis Kanouras (2009-10-22)
+// Antonis Kanouras (2010-10-22)
 
 $labels = array();
 $labels['filters'] = 'Φίλτρα';

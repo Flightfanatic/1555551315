@@ -7,9 +7,9 @@
  *
  * @version 1.2
  * @author Philip Weir
- * @url http://roundcube.net/plugins/contextmenu
+ * @url http://Crystal.net/plugins/contextmenu
  */
-class contextmenu extends rcube_plugin
+class contextmenu extends cmail_plugin
 {
 	public $task = 'mail';
 
@@ -24,14 +24,14 @@ class contextmenu extends rcube_plugin
 	}
 
 	public function messagecount() {
-		$mbox = get_input_value('_mbox', RCUBE_INPUT_GET);
+		$mbox = get_input_value('_mbox', cmail_INPUT_GET);
 		$this->api->output->set_env('messagecount', cmail::get_instance()->imap->messagecount($mbox));
 		$this->api->output->send();
 	}
 
 	public function readfolder() {
 		$imap = cmail::get_instance()->imap;
-		$mbox = get_input_value('_mbox', RCUBE_INPUT_GET);
+		$mbox = get_input_value('_mbox', cmail_INPUT_GET);
 
 		$uids = iil_C_Search($imap->conn, $imap->mod_mailbox($mbox), 'ALL UNSEEN');
 
@@ -128,7 +128,7 @@ class contextmenu extends rcube_plugin
 			$title = null;
 
 			if (($folder_class = cmail_folder_classname($folder['id'])) && !$realnames) {
-				$foldername = rcube_label($folder_class);
+				$foldername = cmail_label($folder_class);
 			}
 			else {
 				$foldername = $folder['name'];
@@ -159,6 +159,8 @@ class contextmenu extends rcube_plugin
 				$classes[] = 'junk';
 			else if ($folder['id'] == 'INBOX')
 				$classes[] = 'inbox';
+			else if ($folder['id'] == $cmail->config->get('archive_mbox'))
+				$classes[] = 'archive';
 			else
 				$classes[] = '_'.asciiwords($folder_class ? $folder_class : strtolower($folder['id']), true);
 

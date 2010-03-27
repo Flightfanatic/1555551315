@@ -7,7 +7,7 @@
    Code licensed under the BSD License:
    http://schillmania.com/projects/soundmanager2/license.txt
 
-   V2.95a.20090717
+   V2.95a.20100717
 */
 
 var soundManager = null;
@@ -76,7 +76,7 @@ function SoundManager(smURL,smID) {
 
   var _s = this;
   this.version = null;
-  this.versionNumber = 'V2.95a.20090717';
+  this.versionNumber = 'V2.95a.20100717';
   this.movieURL = null;
   this.url = null;
   this.altURL = null;

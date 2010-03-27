@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/sv_SE/messages.inc                                           |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -15,7 +15,7 @@
 |         Andreas Henriksson <andreas@fatal.se>                         |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 3043 2009-10-14 11:45:28Z yllar $
+@version $Id: messages.inc 3043 2010-10-14 11:45:28Z yllar $
 
 */
 

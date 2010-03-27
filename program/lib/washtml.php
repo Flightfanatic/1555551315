@@ -70,7 +70,7 @@
  *  - Dont alter data on a GET: '<img src="http://yourhost/mail?action=delete&uid=3267" />'
  *  - ...
  *
- * Roundcube Changes:
+ * Crystal Changes:
  * - added $block_elements
  * - changed $ignore_elements behaviour
  */

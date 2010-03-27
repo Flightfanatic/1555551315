@@ -67,7 +67,7 @@ include("../config/admin.inc.php");
 			<img src="img/avatar.jpg" id="avatar" alt="avatar" />
 			<p>Welcome <strong>Admin</strong>. <a href="?logout=1">Log out?</a></p>
 			<p>System Version:<a href="http://crystalwebmail.com/?versionfeatures=<?php echo systemversion; ?>"><?php echo systemversion; ?></a></p>
-			<p class="last_login">Last login: 21:03 12.05.2009</p>
+			<p class="last_login">Last login: 21:03 12.05.2010</p>
 		</div>
 		<div id="logo"><h1><a href="index.php">AdmintTheme</a></h1></div>
 		
@@ -220,7 +220,7 @@ include ('nav.php')
 			<tbody>
 			<tr>
 				<td class="table_check"><input type="checkbox" class="noborder" /></td>
-				<td class="table_date">April 23, 2009</td>
+				<td class="table_date">April 23, 2010</td>
 				<td class="table_title"><a href="#">Something like post </a></td>
 				<td><a href="#">Webdesign, Life, Custom</a></td>
 				<td><a href="#"><img src="img/accept.jpg" alt="accepted"/></a><a href="#"><img src="img/cancel.jpg" alt="cancel"/></a><a href="#"><img src="img/folder.jpg" alt="folder"/></a><a href="#"><img src="img/edit.jpg" alt="edit"/></a></td>
@@ -228,7 +228,7 @@ include ('nav.php')
 			</tr>
 			<tr>
 				<td class="table_check"><input type="checkbox" class="noborder" /></td>
-				<td class="table_date">April 22, 2009</td>
+				<td class="table_date">April 22, 2010</td>
 				<td class="table_title"><a href="#">Another thing </a></td>
 				<td><a href="#">Webdesign, Life, Custom</a></td>
 				<td><a href="#"><img src="img/accept.jpg" alt="accepted"/></a><a href="#"><img src="img/cancel.jpg" alt="cancel"/></a><a href="#"><img src="img/folder.jpg" alt="folder"/></a><a href="#"><img src="img/edit.jpg" alt="edit"/></a></td>
@@ -236,7 +236,7 @@ include ('nav.php')
 			</tr>
 			<tr>
 				<td class="table_check"><input type="checkbox" class="noborder" /></td>
-				<td class="table_date">April 21, 2009</td>
+				<td class="table_date">April 21, 2010</td>
 				<td class="table_title"><a href="#">And this is also a post </a></td>
 				<td><a href="#">Webdesign, Life, Custom</a></td>
 				<td><a href="#"><img src="img/accept.jpg" alt="accepted"/></a><a href="#"><img src="img/cancel.jpg" alt="cancel"/></a><a href="#"><img src="img/folder.jpg" alt="folder"/></a><a href="#"><img src="img/edit.jpg" alt="edit"/></a></td>
@@ -244,7 +244,7 @@ include ('nav.php')
 			</tr>
 			<tr>
 				<td class="table_check"><input type="checkbox" class="noborder" /></td>
-				<td class="table_date">April 21, 2009</td>
+				<td class="table_date">April 21, 2010</td>
 				<td class="table_title"><a href="#">And this is also a post </a></td>
 				<td><a href="#">Webdesign, Life, Custom</a></td>
 				<td><a href="#"><img src="img/accept.jpg" alt="accepted"/></a><a href="#"><img src="img/cancel.jpg" alt="cancel"/></a><a href="#"><img src="img/folder.jpg" alt="folder"/></a><a href="#"><img src="img/edit.jpg" alt="edit"/></a></td>
@@ -252,7 +252,7 @@ include ('nav.php')
 			</tr>
 			<tr>
 				<td class="table_check"><input type="checkbox" class="noborder"  /></td>
-				<td class="table_date">April 21, 2009</td>
+				<td class="table_date">April 21, 2010</td>
 				<td class="table_title"><a href="#">And this is also a post </a></td>
 				<td><a href="#">Webdesign, Life, Custom</a></td>
 				<td><a href="#"><img src="img/accept.jpg" alt="accepted"/></a><a href="#"><img src="img/cancel.jpg" alt="cancel"/></a><a href="#"><img src="img/folder.jpg" alt="folder"/></a><a href="#"><img src="img/edit.jpg" alt="edit"/></a></td>
@@ -260,7 +260,7 @@ include ('nav.php')
 			</tr>
 			<tr>
 				<td class="table_check"><input type="checkbox" class="noborder"  /></td>
-				<td class="table_date">April 21, 2009</td>
+				<td class="table_date">April 21, 2010</td>
 				<td class="table_title"><a href="#">And this is also a post </a></td>
 				<td><a href="#">Webdesign, Life, Custom</a></td>
 				<td><a href="#"><img src="img/accept.jpg" alt="accepted"/></a><a href="#"><img src="img/cancel.jpg" alt="cancel"/></a><a href="#"><img src="img/folder.jpg" alt="folder"/></a><a href="#"><img src="img/edit.jpg" alt="edit"/></a></td>
@@ -365,19 +365,19 @@ include ('nav.php')
 			<ul>
 				<li class="even"><input type="checkbox" class="noborder"  value="" name="check"/>
 					Create more theme fot themeforest
-					<span class="date">July 24, 2009</span>
+					<span class="date">July 24, 2010</span>
 				</li>
 				<li class="odd"><input type="checkbox" class="noborder"  value="" name="check"/>
 					Sell a looot fo themes
-					<span class="date">July 24, 2009</span>
+					<span class="date">July 24, 2010</span>
 				</li>
 				<li class="even"><input type="checkbox" class="noborder" value="" name="check"/>
 					Learn ruby on rails
-					<span class="date">July 24, 2009</span>
+					<span class="date">July 24, 2010</span>
 				</li>
 				<li class="odd"><input type="checkbox" class="noborder" value="" name="check"/>
 					Be a better man
-					<span class="date">July 24, 2009</span>
+					<span class="date">July 24, 2010</span>
 				</li>
 			</ul>
 			<button>Add to do</button>

@@ -2,16 +2,16 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_vcard.php                                       |
+ | program/include/cmail_vcard.php                                       |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Logical representation of a vcard address record                    |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: $
@@ -24,9 +24,9 @@
  * Provides functions to parse and export vCard data format
  *
  * @package    Addressbook
- * @author     Thomas Bruederli <roundcube@gmail.com>
+ * @author     Thomas Bruederli <Crystal@gmail.com>
  */
-class rcube_vcard
+class cmail_vcard
 {
   private $raw = array(
     'FN' => array(),
@@ -162,7 +162,7 @@ class rcube_vcard
    * Factory method to import a vcard file
    *
    * @param string vCard file content
-   * @return array List of rcube_vcard objects
+   * @return array List of cmail_vcard objects
    */
   public static function import($data)
   {
@@ -171,7 +171,7 @@ class rcube_vcard
     // detect charset and convert to utf-8
     $encoding = self::detect_encoding($data);
     if ($encoding && $encoding != cmail_CHARSET) {
-      $data = rcube_charset_convert($data, $encoding);
+      $data = cmail_charset_convert($data, $encoding);
       $data = preg_replace(array('/^[\xFE\xFF]{2}/', '/^\xEF\xBB\xBF/', '/^\x00+/'), '', $data); // also remove BOM
     }
 
@@ -184,7 +184,7 @@ class rcube_vcard
 
       if (trim($line) == 'END:VCARD') {
         // parse vcard
-        $obj = new rcube_vcard(self::cleanup($vcard_block));
+        $obj = new cmail_vcard(self::cleanup($vcard_block));
         if (!empty($obj->displayname))
           $out[] = $obj;
 

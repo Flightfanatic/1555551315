@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/settings/manage_folders.inc                             |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Provide functionality to create/delete/rename folders               |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: manage_folders.inc 2505 2009-05-20 09:55:15Z alec $
+ $Id: manage_folders.inc 2505 2010-05-20 09:55:15Z alec $
 
 */
 
@@ -27,14 +27,14 @@ $cmail->imap_init(true);
 // subscribe to one or more mailboxes
 if ($cmail->action=='subscribe')
   {
-  if ($mbox = get_input_value('_mbox', RCUBE_INPUT_POST, false, 'UTF7-IMAP'))
+  if ($mbox = get_input_value('_mbox', cmail_INPUT_POST, false, 'UTF7-IMAP'))
     $IMAP->subscribe(array($mbox));
   }
 
 // unsubscribe one or more mailboxes
 else if ($cmail->action=='unsubscribe')
   {
-  if ($mbox = get_input_value('_mbox', RCUBE_INPUT_POST, false, 'UTF7-IMAP'))
+  if ($mbox = get_input_value('_mbox', cmail_INPUT_POST, false, 'UTF7-IMAP'))
     $IMAP->unsubscribe(array($mbox));
   }
 
@@ -43,7 +43,7 @@ else if ($cmail->action=='create-folder')
   {
   if (!empty($_POST['_name']))
     {
-    $name = trim(get_input_value('_name', RCUBE_INPUT_POST, FALSE, 'UTF7-IMAP'));
+    $name = trim(get_input_value('_name', cmail_INPUT_POST, FALSE, 'UTF7-IMAP'));
     $create = $IMAP->create_mailbox($name, TRUE);
     }
   
@@ -52,9 +52,9 @@ else if ($cmail->action=='create-folder')
     $delimiter = $IMAP->get_hierarchy_delimiter();
     $folderlist = $IMAP->list_unsubscribed();
     $index = array_search($create, $folderlist);
-    $before = $index !== false && isset($folderlist[$index+1]) ? rcube_charset_convert($folderlist[$index+1], 'UTF7-IMAP') : false;
+    $before = $index !== false && isset($folderlist[$index+1]) ? cmail_charset_convert($folderlist[$index+1], 'UTF7-IMAP') : false;
     
-    $create = rcube_charset_convert($create, 'UTF7-IMAP');
+    $create = cmail_charset_convert($create, 'UTF7-IMAP');
     $foldersplit = explode($delimiter, $create);
     $display_create = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', substr_count($create, $delimiter)) . $foldersplit[count($foldersplit)-1];
 
@@ -71,10 +71,10 @@ else if ($cmail->action=='rename-folder')
   {
   if (!empty($_POST['_folder_oldname']) && !empty($_POST['_folder_newname']))
     {
-    $name_utf8 = trim(get_input_value('_folder_newname', RCUBE_INPUT_POST));
-    $oldname_utf8 = get_input_value('_folder_oldname', RCUBE_INPUT_POST);
-    $name = rcube_charset_convert($name_utf8, cmail_CHARSET, 'UTF7-IMAP');
-    $oldname = rcube_charset_convert($oldname_utf8, cmail_CHARSET, 'UTF7-IMAP');
+    $name_utf8 = trim(get_input_value('_folder_newname', cmail_INPUT_POST));
+    $oldname_utf8 = get_input_value('_folder_oldname', cmail_INPUT_POST);
+    $name = cmail_charset_convert($name_utf8, cmail_CHARSET, 'UTF7-IMAP');
+    $oldname = cmail_charset_convert($oldname_utf8, cmail_CHARSET, 'UTF7-IMAP');
 
     $rename = $IMAP->rename_mailbox($oldname, $name);
     }
@@ -95,22 +95,22 @@ else if ($cmail->action=='rename-folder')
         $foldersplit = explode($delimiter, $folderlist[$x]);
         $level = count($foldersplit) - 1;
         $display_rename = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $level) 
-          . rcube_charset_convert($foldersplit[$level], 'UTF7-IMAP');
+          . cmail_charset_convert($foldersplit[$level], 'UTF7-IMAP');
 
-        $before = isset($folderlist[$x+1]) ? rcube_charset_convert($folderlist[$x+1], 'UTF7-IMAP') : false;
+        $before = isset($folderlist[$x+1]) ? cmail_charset_convert($folderlist[$x+1], 'UTF7-IMAP') : false;
         
-        $OUTPUT->command('replace_folder_row', rcube_charset_convert($oldfolder, 'UTF7-IMAP'),
-          rcube_charset_convert($folderlist[$x], 'UTF7-IMAP'), $display_rename, $before);
+        $OUTPUT->command('replace_folder_row', cmail_charset_convert($oldfolder, 'UTF7-IMAP'),
+          cmail_charset_convert($folderlist[$x], 'UTF7-IMAP'), $display_rename, $before);
         }
       }
 
     $foldersplit = explode($delimiter, $rename);
     $level = count($foldersplit) - 1;
-    $display_rename = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $level) . rcube_charset_convert($foldersplit[$level], 'UTF7-IMAP');
+    $display_rename = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $level) . cmail_charset_convert($foldersplit[$level], 'UTF7-IMAP');
     $index = array_search($rename, $folderlist);
-    $before = $index !== false && isset($folderlist[$index+1]) ? rcube_charset_convert($folderlist[$index+1], 'UTF7-IMAP') : false;
+    $before = $index !== false && isset($folderlist[$index+1]) ? cmail_charset_convert($folderlist[$index+1], 'UTF7-IMAP') : false;
 
-    $OUTPUT->command('replace_folder_row', $oldname_utf8, rcube_charset_convert($rename, 'UTF7-IMAP'), $display_rename, $before);
+    $OUTPUT->command('replace_folder_row', $oldname_utf8, cmail_charset_convert($rename, 'UTF7-IMAP'), $display_rename, $before);
     $OUTPUT->command('reset_folder_rename');
     }
   else if (!$rename && $OUTPUT->ajax_call)
@@ -128,8 +128,8 @@ else if ($cmail->action=='delete-folder')
   $a_mboxes = $IMAP->list_unsubscribed();
   $delimiter = $IMAP->get_hierarchy_delimiter();
   
-  $mboxes_utf8 = get_input_value('_mboxes', RCUBE_INPUT_POST);
-  $mboxes = rcube_charset_convert($mboxes_utf8, cmail_CHARSET, 'UTF7-IMAP');
+  $mboxes_utf8 = get_input_value('_mboxes', cmail_INPUT_POST);
+  $mboxes = cmail_charset_convert($mboxes_utf8, cmail_CHARSET, 'UTF7-IMAP');
 
   if ($mboxes)
     $deleted = $IMAP->delete_mailbox(array($mboxes));
@@ -141,7 +141,7 @@ else if ($cmail->action=='delete-folder')
       {
       if (preg_match('/^'. preg_quote($mboxes.$delimiter, '/') .'/', $mbox))
         {
-        $OUTPUT->command('remove_folder_row', rcube_charset_convert($mbox, 'UTF7-IMAP'));
+        $OUTPUT->command('remove_folder_row', cmail_charset_convert($mbox, 'UTF7-IMAP'));
         }
       }
     $OUTPUT->show_message('folderdeleted', 'confirmation');
@@ -157,7 +157,7 @@ if ($OUTPUT->ajax_call)
 
 
 // build table with all folders listed by server
-function rcube_subscription_form($attrib)
+function cmail_subscription_form($attrib)
   {
   global $IMAP, $CONFIG, $OUTPUT;
 
@@ -170,9 +170,9 @@ function rcube_subscription_form($attrib)
   $table = new html_table();
 
   // add table header
-  $table->add_header('name', rcube_label('foldername'));
-  $table->add_header('msgcount', rcube_label('messagecount'));
-  $table->add_header('subscribed', rcube_label('subscribed'));
+  $table->add_header('name', cmail_label('foldername'));
+  $table->add_header('msgcount', cmail_label('messagecount'));
+  $table->add_header('subscribed', cmail_label('subscribed'));
   $table->add_header('rename', '&nbsp;');
   $table->add_header('delete', '&nbsp;');
 
@@ -188,7 +188,7 @@ function rcube_subscription_form($attrib)
   // pre-process folders list
   foreach ($a_unsubscribed as $i => $folder) {
     $foldersplit = explode($delimiter, $folder);
-    $name = rcube_charset_convert(array_pop($foldersplit), 'UTF7-IMAP');
+    $name = cmail_charset_convert(array_pop($foldersplit), 'UTF7-IMAP');
     $parent_folder = join($delimiter, $foldersplit);
     $level = count($foldersplit);
 
@@ -197,7 +197,7 @@ function rcube_subscription_form($attrib)
       for ($i=1; $i<=$level; $i++) {
 	$ancestor_folder = join($delimiter, array_slice($foldersplit, 0, $i));
 	if ($ancestor_folder && !$seen[$ancestor_folder]++) {
-	  $ancestor_name = rcube_charset_convert($foldersplit[$i-1], 'UTF7-IMAP');
+	  $ancestor_name = cmail_charset_convert($foldersplit[$i-1], 'UTF7-IMAP');
 	  $list_folders[] = array('id' => $ancestor_folder, 'name' => $ancestor_name, 'level' => $i-1, 'virtual' => true);
 	}
       }
@@ -213,14 +213,14 @@ function rcube_subscription_form($attrib)
   ));
   
   if (!empty($attrib['deleteicon']))
-    $del_button = html::img(array('src' => $CONFIG['skin_path'] . $attrib['deleteicon'], 'alt' => rcube_label('delete')));
+    $del_button = html::img(array('src' => $CONFIG['skin_path'] . $attrib['deleteicon'], 'alt' => cmail_label('delete')));
   else
-    $del_button = rcube_label('delete');
+    $del_button = cmail_label('delete');
 
   if (!empty($attrib['renameicon']))
-    $edit_button = html::img(array('src' => $CONFIG['skin_path'] . $attrib['renameicon'], 'alt' => rcube_label('rename')));
+    $edit_button = html::img(array('src' => $CONFIG['skin_path'] . $attrib['renameicon'], 'alt' => cmail_label('rename')));
   else
-    $edit_button = rcube_label('rename');
+    $edit_button = cmail_label('rename');
     
   // create list of available folders
   foreach ($list_folders as $i => $folder) {
@@ -230,7 +230,7 @@ function rcube_subscription_form($attrib)
     $classes = array($i%2 ? 'even' : 'odd');
     $folder_js = JQ($folder['id']);
     $display_folder = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $folder['level']) . ($protected ? cmail_localize_foldername($folder['id']) : $folder['name']);
-    $folder_utf8 = rcube_charset_convert($folder['id'], 'UTF7-IMAP');
+    $folder_utf8 = cmail_charset_convert($folder['id'], 'UTF7-IMAP');
     
     if ($folder['virtual'])
       $classes[] = 'virtual';
@@ -244,8 +244,8 @@ function rcube_subscription_form($attrib)
     
     // add rename and delete buttons
     if (!$protected && !$folder['virtual']) {
-      $table->add('rename', html::a(array('href' => "#rename", 'title' => rcube_label('renamefolder')), $edit_button));
-      $table->add('delete', html::a(array('href' => "#delete", 'title' => rcube_label('deletefolder')), $del_button));
+      $table->add('rename', html::a(array('href' => "#rename", 'title' => cmail_label('renamefolder')), $edit_button));
+      $table->add('delete', html::a(array('href' => "#delete", 'title' => cmail_label('deletefolder')), $del_button));
     }
     else {
       $table->add('rename', '&nbsp;');
@@ -266,7 +266,7 @@ function rcube_subscription_form($attrib)
   }
 
 
-function rcube_create_folder_form($attrib)
+function cmail_create_folder_form($attrib)
   {
   global $OUTPUT;
   
@@ -285,7 +285,7 @@ function rcube_create_folder_form($attrib)
   if (get_boolean($attrib['button']))
     {
     $button = new html_inputfield(array('type' => 'button',
-                                    'value' => rcube_label('create'),
+                                    'value' => cmail_label('create'),
                                     'onclick' => JS_OBJECT_NAME.".command('create-folder',this.form)"));
     $out .= $button->show();
     }
@@ -295,7 +295,7 @@ function rcube_create_folder_form($attrib)
   return $out;
   }
 
-function rcube_rename_folder_form($attrib)
+function cmail_rename_folder_form($attrib)
   {
   global $CONFIG, $IMAP;
 
@@ -325,7 +325,7 @@ function rcube_rename_folder_form($attrib)
   if (get_boolean($attrib['button']))
     {
     $button = new html_inputfield(array('type' => 'button',
-                                    'value' => rcube_label('rename'),
+                                    'value' => cmail_label('rename'),
                                     'onclick' => JS_OBJECT_NAME.".command('rename-folder',this.form)"));
     $out .= $button->show();
     }
@@ -335,14 +335,14 @@ function rcube_rename_folder_form($attrib)
   return $out;
   }
 
-$OUTPUT->set_pagetitle(rcube_label('folders'));
+$OUTPUT->set_pagetitle(cmail_label('folders'));
 $OUTPUT->include_script('list.js');
 
 // register UI objects
 $OUTPUT->add_handlers(array(
-  'foldersubscription' => 'rcube_subscription_form',
-  'createfolder' => 'rcube_create_folder_form',
-  'renamefolder' => 'rcube_rename_folder_form'
+  'foldersubscription' => 'cmail_subscription_form',
+  'createfolder' => 'cmail_create_folder_form',
+  'renamefolder' => 'cmail_rename_folder_form'
 ));
 
 // add some labels to client

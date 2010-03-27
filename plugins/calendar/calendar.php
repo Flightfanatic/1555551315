@@ -1,8 +1,8 @@
 <?php
 /**
- * RoundCube Calendar
+ * Crystal Calendar
  *
- * Plugin to add a calendar to RoundCube.
+ * Plugin to add a calendar to Crystal.
  *
  * @version 0.2 BETA 2
  * @author Lazlo Westerhof
@@ -10,7 +10,7 @@
  * @licence GNU GPL
  * @copyright (c) 2010 Lazlo Westerhof - Netherlands
  */
-class calendar extends rcube_plugin
+class calendar extends cmail_plugin
 {
   public $task = '?(?!login|logout).*';
 
@@ -39,12 +39,12 @@ class calendar extends rcube_plugin
       $myusername = $cmail->config->get('caldav_username');
       $mypassword = $cmail->config->get('caldav_password');
       
-      if ($cmail->config->get('caldav_use_roundcube_login') === true) {
+      if ($cmail->config->get('caldav_use_Crystal_login') === true) {
         $myusername = $_SESSION['username'];
         $mypassword = $cmail->decrypt($_SESSION['password']);
         
         // Strip top-level domain from login (username@domain.com -> username)
-        if ($cmail->config->get('username_domain') !== '' /* global RoundCube setting */
+        if ($cmail->config->get('username_domain') !== '' /* global Crystal setting */
           && $cmail->config->get('caldav_loginwithout_tld') === true) {
           $a_myusername = explode('@', $_SESSION['username'], 2);
           
@@ -207,12 +207,12 @@ class calendar extends rcube_plugin
   }
   
   function newEvent() {
-    $start = $this->toGMT(get_input_value('_start', RCUBE_INPUT_POST));
-    $summary = trim(get_input_value('_summary', RCUBE_INPUT_POST));
-    $description = trim(get_input_value('_description', RCUBE_INPUT_POST));
-    $location = trim(get_input_value('_location', RCUBE_INPUT_POST));
-    $categories = trim(get_input_value('_categories', RCUBE_INPUT_POST));
-    $allDay = get_input_value('_allDay', RCUBE_INPUT_POST);
+    $start = $this->toGMT(get_input_value('_start', cmail_INPUT_POST));
+    $summary = trim(get_input_value('_summary', cmail_INPUT_POST));
+    $description = trim(get_input_value('_description', cmail_INPUT_POST));
+    $location = trim(get_input_value('_location', cmail_INPUT_POST));
+    $categories = trim(get_input_value('_categories', cmail_INPUT_POST));
+    $allDay = get_input_value('_allDay', cmail_INPUT_POST);
     $allDay = ($allDay === "true")?1:0;
     
     $this->backend->newEvent($start, $summary, $description, $location, $categories, $allDay);
@@ -222,20 +222,20 @@ class calendar extends rcube_plugin
   }
 
   function editEvent() {
-    $id = get_input_value('_event_id', RCUBE_INPUT_POST);
-    $summary = trim(get_input_value('_summary', RCUBE_INPUT_POST));
-    $description = trim(get_input_value('_description', RCUBE_INPUT_POST));
-    $location = trim(get_input_value('_location', RCUBE_INPUT_POST));
-    $categories = trim(get_input_value('_categories', RCUBE_INPUT_POST));
+    $id = get_input_value('_event_id', cmail_INPUT_POST);
+    $summary = trim(get_input_value('_summary', cmail_INPUT_POST));
+    $description = trim(get_input_value('_description', cmail_INPUT_POST));
+    $location = trim(get_input_value('_location', cmail_INPUT_POST));
+    $categories = trim(get_input_value('_categories', cmail_INPUT_POST));
     
     $this->backend->editEvent($id, $summary, $description, $location, $categories);
   }
   
   function moveEvent() {
-    $id = get_input_value('_event_id', RCUBE_INPUT_POST);
-    $start = $this->toGMT(get_input_value('_start', RCUBE_INPUT_POST));
-    $end = $this->toGMT(get_input_value('_end', RCUBE_INPUT_POST));
-    $allDay = get_input_value('_allDay', RCUBE_INPUT_POST);
+    $id = get_input_value('_event_id', cmail_INPUT_POST);
+    $start = $this->toGMT(get_input_value('_start', cmail_INPUT_POST));
+    $end = $this->toGMT(get_input_value('_end', cmail_INPUT_POST));
+    $allDay = get_input_value('_allDay', cmail_INPUT_POST);
     $allDay = ($allDay === "true")?1:0;
     
     $this->backend->moveEvent($id, $start, $end, $allDay);
@@ -244,31 +244,31 @@ class calendar extends rcube_plugin
   }
   
   function resizeEvent() {
-    $id = get_input_value('_event_id', RCUBE_INPUT_POST);
-    $start = $this->toGMT(get_input_value('_start', RCUBE_INPUT_POST));
-    $end = $this->toGMT(get_input_value('_end', RCUBE_INPUT_POST));
+    $id = get_input_value('_event_id', cmail_INPUT_POST);
+    $start = $this->toGMT(get_input_value('_start', cmail_INPUT_POST));
+    $end = $this->toGMT(get_input_value('_end', cmail_INPUT_POST));
     
     $this->backend->resizeEvent($id, $start, $end);
   }
   
   function removeEvent() {
-    $id = get_input_value('_event_id', RCUBE_INPUT_POST);
+    $id = get_input_value('_event_id', cmail_INPUT_POST);
       
     $this->backend->removeEvent($id);
   }
   
   function getEvents() {
-    // "start" and "end" are from fullcalendar, not RoundCube.
-    $start = $this->toGMT(get_input_value('start', RCUBE_INPUT_GET));
-    $end = $this->toGMT(get_input_value('end', RCUBE_INPUT_GET));
+    // "start" and "end" are from fullcalendar, not Crystal.
+    $start = $this->toGMT(get_input_value('start', cmail_INPUT_GET));
+    $end = $this->toGMT(get_input_value('end', cmail_INPUT_GET));
     
     echo $this->utils->jsonEvents($start, $end);
     exit;
   }
   
   function exportEvents() {
-    $start = $this->toGMT(get_input_value('_start', RCUBE_INPUT_POST));
-    $end = $this->toGMT(get_input_value('_end', RCUBE_INPUT_POST));
+    $start = $this->toGMT(get_input_value('_start', cmail_INPUT_POST));
+    $end = $this->toGMT(get_input_value('_end', cmail_INPUT_POST));
     
     header("Content-Type: text/calendar");
     header("Content-Disposition: inline; filename=calendar.ics");
@@ -291,16 +291,16 @@ class calendar extends rcube_plugin
 
     // localisation
     $settings['days'] = array(
-      rcube_label('sunday'),   rcube_label('monday'),
-      rcube_label('tuesday'),  rcube_label('wednesday'),
-      rcube_label('thursday'), rcube_label('friday'),
-      rcube_label('saturday')
+      cmail_label('sunday'),   cmail_label('monday'),
+      cmail_label('tuesday'),  cmail_label('wednesday'),
+      cmail_label('thursday'), cmail_label('friday'),
+      cmail_label('saturday')
     );
     $settings['days_short'] = array(
-      rcube_label('sun'), rcube_label('mon'),
-      rcube_label('tue'), rcube_label('wed'),
-      rcube_label('thu'), rcube_label('fri'),
-      rcube_label('sat')
+      cmail_label('sun'), cmail_label('mon'),
+      cmail_label('tue'), cmail_label('wed'),
+      cmail_label('thu'), cmail_label('fri'),
+      cmail_label('sat')
     );
     $settings['months'] = array(
       $cmail->gettext('longjan'), $cmail->gettext('longfeb'),
@@ -318,7 +318,7 @@ class calendar extends rcube_plugin
       $cmail->gettext('sep'), $cmail->gettext('oct'),
       $cmail->gettext('nov'), $cmail->gettext('dec')
     );
-    $settings['today'] = rcube_label('today');
+    $settings['today'] = cmail_label('today');
 
     $cmail->output->command('plugin.getSettings', array('settings' => $settings));
   }
@@ -363,13 +363,13 @@ class calendar extends rcube_plugin
       $first_day = $cmail->config->get('first_day', 1);    
       $field_id = 'rcmfd_timeslot';   
       $select = new html_select(array('name' => '_first_day', 'id' => $field_id));
-      $select->add(rcube_label('sunday'), '0');
-      $select->add(rcube_label('monday'), '1');
-      $select->add(rcube_label('tuesday'), '2');
-      $select->add(rcube_label('wednesday'), '3');
-      $select->add(rcube_label('thursday'), '4');
-      $select->add(rcube_label('friday'), '5');
-      $select->add(rcube_label('saturday'), '6');
+      $select->add(cmail_label('sunday'), '0');
+      $select->add(cmail_label('monday'), '1');
+      $select->add(cmail_label('tuesday'), '2');
+      $select->add(cmail_label('wednesday'), '3');
+      $select->add(cmail_label('thursday'), '4');
+      $select->add(cmail_label('friday'), '5');
+      $select->add(cmail_label('saturday'), '6');
       $args['blocks']['calendar']['options']['first_day'] = array(
         'title' => html::label($field_id, Q($this->gettext('first_day'))),
         'content' => $select->show($cmail->config->get('first_day')),
@@ -381,10 +381,10 @@ class calendar extends rcube_plugin
   function saveSettings($args) {
     if ($args['section'] == 'calendarlink') {
       $cmail = cmail::get_instance();
-      $args['prefs']['default_view'] = get_input_value('_default_view', RCUBE_INPUT_POST);
-      $args['prefs']['time_format'] = get_input_value('_time_format', RCUBE_INPUT_POST);
-      $args['prefs']['timeslots'] = get_input_value('_timeslots', RCUBE_INPUT_POST);
-      $args['prefs']['first_day'] = get_input_value('_first_day', RCUBE_INPUT_POST);
+      $args['prefs']['default_view'] = get_input_value('_default_view', cmail_INPUT_POST);
+      $args['prefs']['time_format'] = get_input_value('_time_format', cmail_INPUT_POST);
+      $args['prefs']['timeslots'] = get_input_value('_timeslots', cmail_INPUT_POST);
+      $args['prefs']['first_day'] = get_input_value('_first_day', cmail_INPUT_POST);
     }
     
     return $args;

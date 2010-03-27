@@ -20,7 +20,7 @@
  *  // new identity, match the user's login name against this field.
  *  $cmail_config['new_user_identity_match'] = 'uid';
  */
-class new_user_identity extends rcube_plugin
+class new_user_identity extends cmail_plugin
 {
     function init()
     {

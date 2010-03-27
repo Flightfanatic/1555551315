@@ -2,20 +2,20 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_contacts.php                                    |
+ | program/include/cmail_contacts.php                                    |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2006-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2006-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Interface to the local address book database                        |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_contacts.inc 328 2006-08-30 17:41:21Z thomasb $
+ $Id: cmail_contacts.inc 328 2006-08-30 17:41:21Z thomasb $
 
 */
 
@@ -25,7 +25,7 @@
  *
  * @package Addressbook
  */
-class rcube_contacts extends rcube_addressbook
+class cmail_contacts extends cmail_addressbook
 {
   var $db = null;
   var $db_name = '';
@@ -47,7 +47,7 @@ class rcube_contacts extends rcube_addressbook
   /**
    * Object constructor
    *
-   * @param object  Instance of the rcube_db class
+   * @param object  Instance of the cmail_db class
    * @param integer User-ID
    */
   function __construct($dbconn, $user)
@@ -193,7 +193,7 @@ class rcube_contacts extends rcube_addressbook
       $this->user_id);
 
     $sql_arr = $this->db->fetch_assoc($sql_result);
-    return new rcube_result_set($sql_arr['rows'], ($this->list_page-1) * $this->page_size);;
+    return new cmail_result_set($sql_arr['rows'], ($this->list_page-1) * $this->page_size);;
   }
 
 
@@ -231,7 +231,7 @@ class rcube_contacts extends rcube_addressbook
     if ($sql_arr = $this->db->fetch_assoc())
     {
       $sql_arr['ID'] = $sql_arr[$this->primary_key];
-      $this->result = new rcube_result_set(1);
+      $this->result = new cmail_result_set(1);
       $this->result->add($sql_arr);
     }
 
@@ -247,7 +247,7 @@ class rcube_contacts extends rcube_addressbook
    */
   function insert($save_data, $check=false)
   {
-    if (is_object($save_data) && is_a($save_data, rcube_result_set))
+    if (is_object($save_data) && is_a($save_data, cmail_result_set))
       return $this->insert_recset($save_data, $check);
 
     $insert_id = $existing = false;

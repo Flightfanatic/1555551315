@@ -5,15 +5,15 @@
 +-----------------------------------------------------------------------+
 | language/hr/messages.inc                                              |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
 | Author: Edi Budimilic <edi@gemstudio.hr>                              |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 2237 2009-01-17 01:55:39Z till $
+@version $Id: messages.inc 2237 2010-01-17 01:55:39Z till $
 
 */
 

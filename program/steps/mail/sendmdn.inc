@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/sendmdn.inc                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Send a message disposition notification for a specific mail         |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: sendmail.inc 930 2007-11-25 17:34:19Z thomasb $
@@ -24,7 +24,7 @@ if (!$OUTPUT->ajax_call)
   return;
 
 if (!empty($_POST['_uid'])) {
-  $sent = cmail_send_mdn(get_input_value('_uid', RCUBE_INPUT_POST), $smtp_error);
+  $sent = cmail_send_mdn(get_input_value('_uid', cmail_INPUT_POST), $smtp_error);
 }
 
 // show either confirm or error message

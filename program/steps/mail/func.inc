@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/func.inc                                           |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Provide webmail functionality and GUI objects                       |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: func.inc 3058 2009-10-24 19:09:23Z alec $
+ $Id: func.inc 3058 2010-10-24 19:09:23Z alec $
 
 */
 
@@ -38,7 +38,7 @@ if (!in_array($cmail->action, $NOIMAP_ACTIONS) && !$cmail->imap_connect()) {
 
 
 // set imap properties and session vars
-if ($mbox = get_input_value('_mbox', RCUBE_INPUT_GPC))
+if ($mbox = get_input_value('_mbox', cmail_INPUT_GPC))
   $IMAP->set_mailbox(($_SESSION['mbox'] = $mbox));
 else
   $_SESSION['mbox'] = $IMAP->get_mailbox_name();
@@ -132,7 +132,7 @@ function cmail_message_list($attrib)
 
   // add id to message list table if not specified
   if (!strlen($attrib['id']))
-    $attrib['id'] = 'rcubemessagelist';
+    $attrib['id'] = 'cmailmessagelist';
 
   // allow the following attributes to be added to the <table> tag
   $attrib_str = create_attrib_string($attrib, array('style', 'class', 'id', 'cellpadding', 'cellspacing', 'border', 'summary'));
@@ -184,7 +184,7 @@ function cmail_message_list($attrib)
         $col_name = sprintf($image_tag, $skin_path, $attrib['attachmenticon'], '');
         break;
       default:
-        $col_name = Q(rcube_label($col));
+        $col_name = Q(cmail_label($col));
     }
 
     // make sort links
@@ -225,7 +225,7 @@ function cmail_message_list($attrib)
           '<a href="./#sort" onclick="return %s.command(\'sort\',\'%s\',this)" title="%s">%s</a>',
           JS_OBJECT_NAME,
           $col,
-          rcube_label('sortby'),
+          cmail_label('sortby'),
           $col_name);
         }
       }
@@ -313,8 +313,8 @@ function cmail_message_list($attrib)
         $action = $mbox==$CONFIG['drafts_mbox'] ? 'compose' : 'show';
         $uid_param = $mbox==$CONFIG['drafts_mbox'] ? '_draft_uid' : '_uid';
         $cont = abbreviate_string(trim($IMAP->decode_header($header->$col)), 160);
-        if (empty($cont)) $cont = rcube_label('nosubject');
-        $cont = $OUTPUT->browser->ie ? Q($cont) : sprintf('<a href="%s" onclick="return rcube_event.cancel(event)">%s</a>', Q(cmail_url($action, array($uid_param=>$header->uid, '_mbox'=>$mbox))), Q($cont));
+        if (empty($cont)) $cont = cmail_label('nosubject');
+        $cont = $OUTPUT->browser->ie ? Q($cont) : sprintf('<a href="%s" onclick="return cmail_event.cancel(event)">%s</a>', Q(cmail_url($action, array($uid_param=>$header->uid, '_mbox'=>$mbox))), Q($cont));
         }
       else if ($col=='flag')
         $cont = $flagged_icon ? sprintf($image_tag, $skin_path, $flagged_icon, '') : '';
@@ -400,7 +400,7 @@ function cmail_js_message_list($a_headers, $insert_top=FALSE, $replace=TRUE)
       && (($f = array_search('from', $a_show_cols)) !== false) && array_search('to', $a_show_cols) === false)
     $a_show_cols[$f] = 'to';
 
-  $browser = new rcube_browser;
+  $browser = new cmail_browser;
 
   $OUTPUT->command('set_message_coltypes', $a_show_cols);
 
@@ -434,8 +434,8 @@ function cmail_js_message_list($a_headers, $insert_top=FALSE, $replace=TRUE)
         $action = $mbox==$CONFIG['drafts_mbox'] ? 'compose' : 'show';
         $uid_param = $mbox==$CONFIG['drafts_mbox'] ? '_draft_uid' : '_uid';
 	$cont = abbreviate_string(trim($IMAP->decode_header($header->$col)), 160);
-        if (!$cont) $cont = rcube_label('nosubject');
-        $cont = $browser->ie ? Q($cont) : sprintf('<a href="%s" onclick="return rcube_event.cancel(event)">%s</a>', Q(cmail_url($action, array($uid_param=>$header->uid, '_mbox'=>$mbox))), Q($cont));
+        if (!$cont) $cont = cmail_label('nosubject');
+        $cont = $browser->ie ? Q($cont) : sprintf('<a href="%s" onclick="return cmail_event.cancel(event)">%s</a>', Q(cmail_url($action, array($uid_param=>$header->uid, '_mbox'=>$mbox))), Q($cont));
         }
       else if ($col=='size')
         $cont = show_bytes($header->$col);
@@ -538,7 +538,7 @@ function cmail_quota_content($quota=NULL, $attrib=NULL)
 
   if (empty($quota)) {
     if (!$IMAP->get_capability('QUOTA'))
-      return rcube_label('unknown');
+      return cmail_label('unknown');
     else 
       $quota = $IMAP->get_quota();
     }
@@ -561,7 +561,7 @@ function cmail_quota_content($quota=NULL, $attrib=NULL)
       }
     }
   else
-    return rcube_label('unlimited');
+    return cmail_label('unlimited');
 
   return $quota_result;
   }
@@ -573,7 +573,7 @@ function cmail_get_messagecount_text($count=NULL, $page=NULL)
   
   if (isset($MESSAGE->index))
     {
-    return rcube_label(array('name' => 'messagenrof',
+    return cmail_label(array('name' => 'messagenrof',
                              'vars' => array('nr'  => $MESSAGE->index+1,
                                              'count' => $count!==NULL ? $count : $IMAP->messagecount())));
     }
@@ -585,9 +585,9 @@ function cmail_get_messagecount_text($count=NULL, $page=NULL)
   $max = $count!==NULL ? $count : $IMAP->messagecount();
 
   if ($max==0)
-    $out = rcube_label('mailboxempty');
+    $out = cmail_label('mailboxempty');
   else
-    $out = rcube_label(array('name' => 'messagesfromto',
+    $out = cmail_label(array('name' => 'messagesfromto',
                               'vars' => array('from'  => $start_msg,
                                               'to'    => min($max, $start_msg + $IMAP->page_size - 1),
                                               'count' => $max)));
@@ -635,7 +635,7 @@ function cmail_send_unread_count($mbox_name, $force=false)
 /**
  * Sets message is_safe flag according to 'show_images' option value
  *
- * @param object rcube_message Message
+ * @param object cmail_message Message
  */
 function cmail_check_safe(&$message)
 {
@@ -648,7 +648,7 @@ function cmail_check_safe(&$message)
   {
     switch($show_images) {
       case '1': // known senders only
-        $CONTACTS = new rcube_contacts($cmail->db, $_SESSION['user_id']);
+        $CONTACTS = new cmail_contacts($cmail->db, $_SESSION['user_id']);
         if ($CONTACTS->search('email', $message->sender['mailto'], true, false)->count) {
           $message->set_safe(true);
         }
@@ -692,7 +692,7 @@ function cmail_wash_html($html, $p = array(), $cid_replaces)
   // fix (unknown/malformed) HTML tags before "wash"
   $html = preg_replace_callback('/(<[\/]*)([^\s>]+)/', 'cmail_html_tag_callback', $html);
 
-  // charset was converted to UTF-8 in rcube_imap::get_message_part(),
+  // charset was converted to UTF-8 in cmail_imap::get_message_part(),
   // -> change charset specification in HTML accordingly
   $charset_pattern = '(<meta\s+[^>]*)(content=[\'"]?\w+\/\w+;\s*charset)=([a-z0-9-_]+)';
   if (preg_match("/$charset_pattern/Ui", $html)) {
@@ -743,7 +743,7 @@ function cmail_wash_html($html, $p = array(), $cid_replaces)
  * Convert the given message part to proper HTML
  * which can be displayed the message view
  *
- * @param object rcube_message_part Message part
+ * @param object cmail_message_part Message part
  * @param array  Display parameters array 
  * @return string Formatted HTML string
  */
@@ -800,7 +800,7 @@ function cmail_print_body($part, $p = array())
 function cmail_plain_body($body)
 {
   // make links and email-addresses clickable
-  $replacements = new rcube_string_replacer;
+  $replacements = new cmail_string_replacer;
     
   // search for patterns like links and e-mail addresses
   $body = preg_replace_callback($replacements->link_pattern, array($replacements, 'link_callback'), $body);
@@ -954,11 +954,11 @@ function cmail_message_headers($attrib, $headers=NULL)
     else if (in_array($hkey, array('from', 'to', 'cc', 'bcc')))
       $header_value = cmail_address_string($headers[$hkey], null, true, $attrib['addicon']);
     else if ($hkey == 'subject' && empty($headers[$hkey]))
-      $header_value = rcube_label('nosubject');
+      $header_value = cmail_label('nosubject');
     else
       $header_value = trim($IMAP->decode_header($headers[$hkey]));
       
-    $output_headers[$hkey] = array('title' => rcube_label($hkey), 'value' => $header_value, 'raw' => $headers[$hkey]);
+    $output_headers[$hkey] = array('title' => cmail_label($hkey), 'value' => $header_value, 'raw' => $headers[$hkey]);
   }
     
   $plugin = $cmail->plugins->exec_hook('message_headers_output', array('output' => $output_headers, 'headers' => $MESSAGE->headers));
@@ -1071,7 +1071,7 @@ function cmail_resolve_base($body)
 {
   // check for <base href=...>
   if (preg_match('!(<base.*href=["\']?)([hftps]{3,5}://[a-z0-9/.%-]+)!i', $body, $regs)) {
-    $replacer = new rcube_base_replacer($regs[2]);
+    $replacer = new cmail_base_replacer($regs[2]);
 
     // replace all relative paths
     $body = preg_replace_callback('/(src|background|href)=(["\']?)([\.\/]+[^"\'\s]+)(\2|\s|>)/Ui', array($replacer, 'callback'), $body);
@@ -1199,7 +1199,7 @@ function cmail_address_string($input, $max=null, $linked=false, $addicon=null)
         $out .= '&nbsp;' . html::a(array(
             'href' => "#add",
             'onclick' => sprintf("return %s.command('add-contact','%s',this)", JS_OBJECT_NAME, urlencode($part['string'])),
-            'title' => rcube_label('addtoaddressbook'),
+            'title' => cmail_label('addtoaddressbook'),
           ),
           html::img(array(
             'src' => $CONFIG['skin_path'] . $addicon,
@@ -1276,7 +1276,7 @@ function cmail_message_part_controls()
   {
   global $MESSAGE;
   
-  $part = asciiwords(get_input_value('_part', RCUBE_INPUT_GPC));
+  $part = asciiwords(get_input_value('_part', cmail_INPUT_GPC));
   if (!is_object($MESSAGE) || !is_array($MESSAGE->parts) || !($_GET['_uid'] && $_GET['_part']) || !$MESSAGE->mime_parts[$part])
     return '';
     
@@ -1284,13 +1284,13 @@ function cmail_message_part_controls()
   $table = new html_table(array('cols' => 3));
   
   if (!empty($part->filename)) {
-    $table->add('title', Q(rcube_label('filename')));
+    $table->add('title', Q(cmail_label('filename')));
     $table->add(null, Q($part->filename));
-    $table->add(null, '[' . html::a('?'.str_replace('_frame=', '_download=', $_SERVER['QUERY_STRING']), Q(rcube_label('download'))) . ']');
+    $table->add(null, '[' . html::a('?'.str_replace('_frame=', '_download=', $_SERVER['QUERY_STRING']), Q(cmail_label('download'))) . ']');
   }
   
   if (!empty($part->size)) {
-    $table->add('title', Q(rcube_label('filesize')));
+    $table->add('title', Q(cmail_label('filesize')));
     $table->add(null, Q(show_bytes($part->size)));
   }
   
@@ -1303,7 +1303,7 @@ function cmail_message_part_frame($attrib)
   {
   global $MESSAGE;
   
-  $part = $MESSAGE->mime_parts[asciiwords(get_input_value('_part', RCUBE_INPUT_GPC))];
+  $part = $MESSAGE->mime_parts[asciiwords(get_input_value('_part', cmail_INPUT_GPC))];
   $ctype_primary = strtolower($part->ctype_primary);
 
   $attrib['src'] = './?' . str_replace('_frame=', ($ctype_primary=='text' ? '_show=' : '_preload='), $_SERVER['QUERY_STRING']);
@@ -1322,7 +1322,7 @@ function cmail_compose_cleanup()
 
   cmail::get_instance()->plugins->exec_hook('cleanup_attachments',array());
   
-  rcube_sess_unset('compose');
+  cmail_sess_unset('compose');
   }
   
 
@@ -1415,7 +1415,7 @@ function cmail_send_mdn($uid, &$smtp_error)
 {
   global $cmail, $IMAP;
 
-  $message = new rcube_message($uid);
+  $message = new cmail_message($uid);
   
   if ($message->headers->mdn_to && !$message->headers->mdn_sent &&
     ($IMAP->check_permflag('MDNSENT') || $IMAP->check_permflag('*')))
@@ -1425,7 +1425,7 @@ function cmail_send_mdn($uid, &$smtp_error)
     $recipient = array_shift($IMAP->decode_address_list($message->headers->mdn_to));
     $mailto = $recipient['mailto'];
 
-    $compose = new rcube_mail_mime($cmail->config->header_delimiter());
+    $compose = new cmail_mail_mime($cmail->config->header_delimiter());
     $compose->setParam(array(
       'text_encoding' => 'quoted-printable',
       'html_encoding' => 'quoted-printable',
@@ -1440,7 +1440,7 @@ function cmail_send_mdn($uid, &$smtp_error)
       'Date' => date('r'),
       'From' => $sender,
       'To'   => $message->headers->mdn_to,
-      'Subject' => rcube_label('receiptread') . ': ' . $message->subject,
+      'Subject' => cmail_label('receiptread') . ': ' . $message->subject,
       'Message-ID' => sprintf('<%s@%s>', md5(uniqid('cmail'.mt_rand(),true)), $cmail->config->mail_domain($_SESSION['imap_host'])),
       'X-Sender' => $identity['email'],
       'Content-Type' => 'multipart/report; report-type=disposition-notification',
@@ -1449,13 +1449,13 @@ function cmail_send_mdn($uid, &$smtp_error)
     if ($agent = $cmail->config->get('useragent'))
       $headers['User-Agent'] = $agent;
 
-    $body = rcube_label("yourmessage") . "\r\n\r\n" .
-      "\t" . rcube_label("to") . ': ' . rcube_imap::decode_mime_string($message->headers->to, $message->headers->charset) . "\r\n" .
-      "\t" . rcube_label("subject") . ': ' . $message->subject . "\r\n" .
-      "\t" . rcube_label("sent") . ': ' . format_date($message->headers->date, $cmail->config->get('date_long')) . "\r\n" .
-      "\r\n" . rcube_label("receiptnote") . "\r\n";
+    $body = cmail_label("yourmessage") . "\r\n\r\n" .
+      "\t" . cmail_label("to") . ': ' . cmail_imap::decode_mime_string($message->headers->to, $message->headers->charset) . "\r\n" .
+      "\t" . cmail_label("subject") . ': ' . $message->subject . "\r\n" .
+      "\t" . cmail_label("sent") . ': ' . format_date($message->headers->date, $cmail->config->get('date_long')) . "\r\n" .
+      "\r\n" . cmail_label("receiptnote") . "\r\n";
     
-    $ua = $cmail->config->get('useragent', "RoundCube Webmail (Version ".cmail_VERSION.")");
+    $ua = $cmail->config->get('useragent', "Crystal Webmail (Version ".cmail_VERSION.")");
     $report = "Reporting-UA: $ua\r\n";
     
     if ($message->headers->to)
@@ -1500,12 +1500,12 @@ function cmail_search_filter($attrib)
   */
 
   $select_filter = new html_select($attrib);
-  $select_filter->add(rcube_label('all'), 'ALL');
-  $select_filter->add(rcube_label('unread'), 'UNSEEN');
-  $select_filter->add(rcube_label('flagged'), 'FLAGGED');
-  $select_filter->add(rcube_label('unanswered'), 'UNANSWERED');
+  $select_filter->add(cmail_label('all'), 'ALL');
+  $select_filter->add(cmail_label('unread'), 'UNSEEN');
+  $select_filter->add(cmail_label('flagged'), 'FLAGGED');
+  $select_filter->add(cmail_label('unanswered'), 'UNANSWERED');
   if (!$CONFIG['skip_deleted'])
-    $select_filter->add(rcube_label('deleted'), 'DELETED');
+    $select_filter->add(cmail_label('deleted'), 'DELETED');
 
   $out = $select_filter->show($_SESSION['search_filter']);
 

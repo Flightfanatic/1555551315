@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Czech translation for Roundcube password plugin
+ * Czech translation for Crystal password plugin
  *
- * @version 1.0 (2009-08-29)
+ * @version 1.0 (2010-08-29)
  * @author Milan Kozak <hodza@hodza.net>
  *
  */

@@ -4,18 +4,18 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/folders.inc                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Implement folder operations line EXPUNGE and Clear                  |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: folders.inc 2959 2009-09-17 12:07:58Z alec $
+ $Id: folders.inc 2959 2010-09-17 12:07:58Z alec $
 */
 
 // only process ajax requests
@@ -25,7 +25,7 @@ if (!$OUTPUT->ajax_call)
 $mbox_name = $IMAP->get_mailbox_name();
 
 // send EXPUNGE command
-if ($cmail->action=='expunge' && ($mbox = get_input_value('_mbox', RCUBE_INPUT_POST)))
+if ($cmail->action=='expunge' && ($mbox = get_input_value('_mbox', cmail_INPUT_POST)))
 {
   $success = $IMAP->expunge($mbox);
 
@@ -41,7 +41,7 @@ if ($cmail->action=='expunge' && ($mbox = get_input_value('_mbox', RCUBE_INPUT_P
 }
 
 // clear mailbox
-else if ($cmail->action=='purge' && ($mbox = get_input_value('_mbox', RCUBE_INPUT_POST)))
+else if ($cmail->action=='purge' && ($mbox = get_input_value('_mbox', cmail_INPUT_POST)))
 {
   $delimiter = $IMAP->get_hierarchy_delimiter();
   $trash_regexp = '/^' . preg_quote($CONFIG['trash_mbox'] . $delimiter, '/') . '/';

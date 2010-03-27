@@ -5,7 +5,7 @@
  *
  * @version 1.0 - 15.01.2010
  * @author Roland 'rosali' Liebl
- * @website http://myroundcube.googlecode.com
+ * @website http://myCrystal.googlecode.com
  * @licence GNU GPL
  *
  **/
@@ -18,7 +18,7 @@
  *
  **/ 
  
-class rss extends rcube_plugin
+class rss extends cmail_plugin
 {
   public $task = "mail";
   
@@ -100,7 +100,7 @@ class rss extends rcube_plugin
  
         // create new session ID
         unset($_SESSION['temp']);
-        rcube_sess_regenerate_id();
+        cmail_sess_regenerate_id();
 
         // send auth cookie if necessary
         $cmail->authenticate_session();

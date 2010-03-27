@@ -1,12 +1,12 @@
 /**
- * RoundCube functions for default skin interface
+ * Crystal functions for default skin interface
  */
 
 /**
  * Settings
  */
 
-function rcube_init_settings_tabs()
+function cmail_init_settings_tabs()
 {
   var tab = '#settingstabdefault';
   if (window.cmail && cmail.env.action)
@@ -16,7 +16,7 @@ function rcube_init_settings_tabs()
   $(tab + '> a').removeAttr('onclick').unbind('click').bind('click', function(){return false});
 }
 
-function rcube_show_advanced(visible)
+function cmail_show_advanced(visible)
 {
   $('tr.advanced').css('display', (visible ? (bw.ie ? 'block' : 'table-row') : 'none'));
 }
@@ -110,8 +110,8 @@ function cmail_init_compose_form()
 
   // prevent from form data loss when pressing ESC key in IE
   if (bw.ie) {
-    var form = rcube_find_object('form');
-    form.onkeydown = function (e) { if (rcube_event.get_keycode(e) == 27) rcube_event.cancel(e); };
+    var form = cmail_find_object('form');
+    form.onkeydown = function (e) { if (cmail_event.get_keycode(e) == 27) cmail_event.cancel(e); };
   }
 }
 
@@ -119,21 +119,21 @@ function cmail_init_compose_form()
  * Mailbox view
  */
 
-function rcube_mail_ui()
+function cmail_mail_ui()
 {
   this.markmenu = $('#markmessagemenu');
   this.searchmenu = $('#searchmenu');
   this.messagemenu = $('#messagemenu');
 }
 
-rcube_mail_ui.prototype = {
+cmail_mail_ui.prototype = {
 
 show_markmenu: function(show)
 {
   if (typeof show == 'undefined')
     show = this.markmenu.is(':visible') ? false : true;
   
-  var ref = rcube_find_object('markreadbutton');
+  var ref = cmail_find_object('markreadbutton');
   if (show && ref)
     this.markmenu.css({ left:ref.offsetLeft, top:(ref.offsetTop + ref.offsetHeight) });
   
@@ -145,7 +145,7 @@ show_messagemenu: function(show)
   if (typeof show == 'undefined')
     show = this.messagemenu.is(':visible') ? false : true;
 
-  var ref = rcube_find_object('messagemenulink');
+  var ref = cmail_find_object('messagemenulink');
   if (show && ref)
     this.messagemenu.css({ left:ref.offsetLeft, top:(ref.offsetTop + ref.offsetHeight) });
 
@@ -157,14 +157,14 @@ show_searchmenu: function(show)
   if (typeof show == 'undefined')
     show = this.searchmenu.is(':visible') ? false : true;
 
-  var ref = rcube_find_object('searchmod');
+  var ref = cmail_find_object('searchmod');
   if (show && ref) {
     var pos = $(ref).offset();
     this.searchmenu.css({ left:pos.left, top:(pos.top + ref.offsetHeight + 2)});
 
     if (cmail.env.search_mods) {
       for (var n in cmail.env.search_mods) {
-        box = rcube_find_object('s_mod_' + n);
+        box = cmail_find_object('s_mod_' + n);
         box.checked = 'checked';
       }
     }
@@ -185,13 +185,13 @@ set_searchmod: function(elem)
 
 body_mouseup: function(evt, p)
 {
-  if (this.markmenu && this.markmenu.is(':visible') && rcube_event.get_target(evt) != rcube_find_object('markreadbutton'))
+  if (this.markmenu && this.markmenu.is(':visible') && cmail_event.get_target(evt) != cmail_find_object('markreadbutton'))
     this.show_markmenu(false);
-  else if (this.messagemenu && this.messagemenu.is(':visible') && rcube_event.get_target(evt) != rcube_find_object('messagemenulink'))
+  else if (this.messagemenu && this.messagemenu.is(':visible') && cmail_event.get_target(evt) != cmail_find_object('messagemenulink'))
     this.show_messagemenu(false);
-  else if (this.searchmenu && this.searchmenu.is(':visible') && rcube_event.get_target(evt) != rcube_find_object('searchmod')) {
-    var menu = rcube_find_object('searchmenu');
-    var target = rcube_event.get_target(evt);
+  else if (this.searchmenu && this.searchmenu.is(':visible') && cmail_event.get_target(evt) != cmail_find_object('searchmod')) {
+    var menu = cmail_find_object('searchmenu');
+    var target = cmail_event.get_target(evt);
     while (target.parentNode) {
       if (target.parentNode == menu)
         return;
@@ -203,7 +203,7 @@ body_mouseup: function(evt, p)
 
 body_keypress: function(evt, p)
 {
-  if (rcube_event.get_keycode(evt) == 27) {
+  if (cmail_event.get_keycode(evt) == 27) {
     if (this.markmenu && this.markmenu.is(':visible'))
       this.show_markmenu(false);
     if (this.searchmenu && this.searchmenu.is(':visible'))
@@ -217,9 +217,9 @@ body_keypress: function(evt, p)
 
 var cmail_ui;
 
-function rcube_init_mail_ui()
+function cmail_init_mail_ui()
 {
-  cmail_ui = new rcube_mail_ui();
-  rcube_event.add_listener({ object:cmail_ui, method:'body_mouseup', event:'mouseup' });
-  rcube_event.add_listener({ object:cmail_ui, method:'body_keypress', event:'keypress' });
+  cmail_ui = new cmail_mail_ui();
+  cmail_event.add_listener({ object:cmail_ui, method:'body_mouseup', event:'mouseup' });
+  cmail_event.add_listener({ object:cmail_ui, method:'body_keypress', event:'keypress' });
 }

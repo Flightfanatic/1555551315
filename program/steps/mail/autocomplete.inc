@@ -4,15 +4,15 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/autocomplete.inc                                   |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev Team                           |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev Team                           |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Perform a search on configured address books for the address        |
  |   autocompletion of the message compose screen                        |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id: $
@@ -23,7 +23,7 @@ $MAXNUM = 15;
 $contacts = array();
 $book_types = (array) $cmail->config->get('autocomplete_addressbooks', 'sql');
 
-if ($book_types && $search = get_input_value('_search', RCUBE_INPUT_POST, true)) {
+if ($book_types && $search = get_input_value('_search', cmail_INPUT_POST, true)) {
 
   foreach ($book_types as $id) {
     $abook = $cmail->get_address_book($id);

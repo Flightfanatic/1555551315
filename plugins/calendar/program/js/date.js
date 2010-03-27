@@ -270,7 +270,7 @@ Date.fullYearStart = '20';
 	 * @example var dtm = new Date("01/12/2008");
 	 * dtm.addYears(1);
 	 * dtm.toString();
-	 * @result 'Mon Jan 12 2009 00:00:00'
+	 * @result 'Mon Jan 12 2010 00:00:00'
 	 * 
 	 * @name addYears
 	 * @type Date

@@ -2,31 +2,31 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_result_set.php                                  |
+ | program/include/cmail_result_set.php                                  |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2006-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2006-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Class representing an address directory result set                  |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_result_set.php 328 2006-08-30 17:41:21Z thomasb $
+ $Id: cmail_result_set.php 328 2006-08-30 17:41:21Z thomasb $
 
 */
 
 
 /**
- * RoundCube result set class.
+ * Crystal result set class.
  * Representing an address directory result set.
  *
  * @package Addressbook
  */
-class rcube_result_set
+class cmail_result_set
 {
   var $count = 0;
   var $first = 0;

@@ -73,7 +73,7 @@ require_once 'utils.php';
 require_once 'main.inc';
 
 
-$RCI = rcube_install::get_instance();
+$RCI = cmail_install::get_instance();
 $RCI->load_config();
 
 if (isset($_GET['_getfile']) && in_array($_GET['_getfile'], array('main', 'db'))) {
@@ -146,7 +146,7 @@ else {
 </div>
 
 <div id="footer">
-  Installer by the Hunter Dolan! Copyright &copy; 2009 - All Rights Reserved Baby;&nbsp;
+  Installer by the Hunter Dolan! Copyright &copy; 2010 - All Rights Reserved Baby;&nbsp;
   Icons by <a href="http://famfamfam.com">famfamfam</a>
 </div>
 </body>

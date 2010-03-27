@@ -1,6 +1,6 @@
 <?php
 /**
- * RoundCube Calendar
+ * Crystal Calendar
  *
  * CalDAV backend based on exemplary DAViCal / AWL client.
  *
@@ -20,7 +20,7 @@ final class CalDAV extends Backend
   private $calendar = null;
   
   /**
-   * @param object cmail   The RoundCube instance.
+   * @param object cmail   The Crystal instance.
    * @param string server   The CalDAV server.
    * @param string user     The user name.
    * @param string pass     The user's password.
@@ -31,7 +31,7 @@ final class CalDAV extends Backend
     $this->calendar = '/' . $calendar;
 
     $this->cal = new CalDAVClient($server. "/" . $user, $user, $pass, $calendar /* is ignored currently */);
-    $this->cal->setUserAgent('RoundCube');
+    $this->cal->setUserAgent('Crystal');
   }
   
   public function newEvent($start, $summary, $description, $location, $categories, $allDay) {

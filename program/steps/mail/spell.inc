@@ -4,7 +4,7 @@
  +-----------------------------------------------------------------------+
  | program/steps/mail/spell.inc                                          |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
+ | This file is part of the Crystal Webmail client                       |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |

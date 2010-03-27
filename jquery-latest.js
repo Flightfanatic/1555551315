@@ -2,11 +2,11 @@
  * jQuery JavaScript Library v1.3.2
  * http://jquery.com/
  *
- * Copyright (c) 2009 John Resig
+ * Copyright (c) 2010 John Resig
  * Dual licensed under the MIT and GPL licenses.
  * http://docs.jquery.com/License
  *
- * Date: 2009-02-19 17:34:21 -0500 (Thu, 19 Feb 2009)
+ * Date: 2010-02-19 17:34:21 -0500 (Thu, 19 Feb 2010)
  * Revision: 6246
  */
 (function(){
@@ -1412,7 +1412,7 @@ jQuery.fn.extend({
 	}
 });/*!
  * Sizzle CSS Selector Engine - v0.9.3
- *  Copyright 2009, The Dojo Foundation
+ *  Copyright 2010, The Dojo Foundation
  *  Released under the MIT, BSD, and GPL Licenses.
  *  More information: http://sizzlejs.com/
  */

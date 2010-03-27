@@ -5,8 +5,8 @@
 +-----------------------------------------------------------------------+
 | language/pt_PT/messages.inc                                           |
 |                                                                       |
-| Language file of the RoundCube Webmail client                         |
-| Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+| Language file of the Crystal Webmail client                         |
+| Copyright (C) 2005-2010, Crystal Dev. - United States                 |
 | Licensed under the GNU GPL                                            |
 |                                                                       |
 +-----------------------------------------------------------------------+
@@ -15,7 +15,7 @@
 |         Nuno Costa <nuno@criacaoweb.net>                              |
 +-----------------------------------------------------------------------+
 
-@version $Id: messages.inc 2953 2009-09-13 16:42:56Z yllar $
+@version $Id: messages.inc 2953 2010-09-13 16:42:56Z yllar $
 
 */
 

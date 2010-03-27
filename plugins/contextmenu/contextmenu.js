@@ -53,12 +53,12 @@ function rcm_contextmenu_init(row) {
 					cmail.command(command, '', $(el));
 					break;
 				case 'open':
-					cmail.command(command, '', rcube_find_object('rcm_open'));
-					cmail.sourcewin = window.open(rcube_find_object('rcm_open').href);
+					cmail.command(command, '', cmail_find_object('rcm_open'));
+					cmail.sourcewin = window.open(cmail_find_object('rcm_open').href);
 					if (cmail.sourcewin)
 						window.setTimeout(function(){ cmail.sourcewin.focus(); }, 20);
 
-					rcube_find_object('rcm_open').href = '#open';
+					cmail_find_object('rcm_open').href = '#open';
 					break;
 				case 'delete':
 					if (cmail.message_list.selection.length > 1 || cmail.env.uid == cmail.message_list.get_selection()) {
@@ -243,12 +243,12 @@ function rcm_foldermenu_init() {
 						});
 						break;
 					case 'openfolder':
-						rcube_find_object('rcm_openfolder').href = '?_task=mail&_mbox='+urlencode(mailbox);
-						cmail.sourcewin = window.open(rcube_find_object('rcm_openfolder').href);
+						cmail_find_object('rcm_openfolder').href = '?_task=mail&_mbox='+urlencode(mailbox);
+						cmail.sourcewin = window.open(cmail_find_object('rcm_openfolder').href);
 						if (cmail.sourcewin)
 							window.setTimeout(function(){ cmail.sourcewin.focus(); }, 20);
 
-						rcube_find_object('rcm_openfolder').href = '#openfolder';
+						cmail_find_object('rcm_openfolder').href = '#openfolder';
 						break;
 				}
 			}

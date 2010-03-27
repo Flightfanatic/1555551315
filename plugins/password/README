@@ -1,5 +1,5 @@
  -----------------------------------------------------------------------
- Password Plugin for Roundcube
+ Password Plugin for Crystal
  -----------------------------------------------------------------------
 
  Plugin that adds a possibility to change user password using many
@@ -107,7 +107,7 @@
  2.2. Cyrus/SASL (sasl)
  ----------------------
 
- Cyrus SASL database authentication allows your Cyrus+RoundCube
+ Cyrus SASL database authentication allows your Cyrus+Crystal
  installation to host mail users without requiring a Unix Shell account!
 
  This driver only covers the "sasldb" case when using Cyrus SASL. Kerberos

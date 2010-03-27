@@ -140,7 +140,7 @@ $db_working = false;
 if ($RCI->configured) {
     if (!empty($RCI->config['db_dsnw'])) {
 
-        $DB = new rcube_mdb2($RCI->config['db_dsnw'], '', false);
+        $DB = new cmail_mdb2($RCI->config['db_dsnw'], '', false);
         $DB->db_connect('w');
         if (!($db_error_msg = $DB->is_error())) {
             $RCI->pass('DSN (write)');
@@ -287,10 +287,10 @@ if (isset($_POST['sendmail']) && !empty($_POST['_from']) && !empty($_POST['_to']
         $CONFIG['smtp_pass'] = $_POST['_smtp_pass'];
       }
 
-      $mail_object  = new rcube_mail_mime();
+      $mail_object  = new cmail_mail_mime();
       $send_headers = $mail_object->headers($headers);
 
-      $SMTP = new rcube_smtp();
+      $SMTP = new cmail_smtp();
       $SMTP->connect();
 
       $status = $SMTP->send_mail($headers['From'], $headers['To'],
@@ -398,7 +398,7 @@ if (isset($_POST['imaptest']) && !empty($_POST['_host']) && !empty($_POST['_user
     $imap_port = $RCI->getprop('default_port');
   }
   
-  $imap = new rcube_imap(null);
+  $imap = new cmail_imap(null);
   if ($imap->connect($imap_host, $_POST['_user'], $_POST['_pass'], $imap_port, $imap_ssl)) {
     $RCI->pass('IMAP connect', 'SORT capability: ' . ($imap->get_capability('SORT') ? 'yes' : 'no'));
     $imap->close();

@@ -16,7 +16,7 @@
  *     3.4       Nov 2007     AJAX, and improved script   *
  *                       include using CURL and fsockopen *
  *     3.5     Dec 2008    Improvements, including        *
- *     3.61     Dec 2009    Patched for PHP v5.3           *
+ *     3.61     Dec 2010    Patched for PHP v5.3           *
  *  NOTES:                                                *
  *        Requires:  PHP and MySQL                        *
  **********************************************************/

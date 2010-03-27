@@ -1,6 +1,6 @@
 <?php
 /**
- * RoundCube Calendar
+ * Crystal Calendar
  *
  * Some utility functions.
  * - Import from and export to iCalendar (.ics) format.
@@ -49,7 +49,7 @@ class Utils
 
       $ical = "BEGIN:VCALENDAR\n";
       $ical .= "VERSION:2.0\n";
-      $ical .= "PRODID:-//RoundCube Webmail//NONSGML Calendar//EN\n";
+      $ical .= "PRODID:-//Crystal Webmail//NONSGML Calendar//EN\n";
       foreach ($events as $event) {
         $ical .= "BEGIN:VEVENT\n";
         $ical .= "DTSTART:" . date('Ymd\THis\Z',$event['start'] - date('Z')) . "\n";

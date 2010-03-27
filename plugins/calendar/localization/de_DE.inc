@@ -1,8 +1,8 @@
 <?php
 /**
- * RoundCube Calendar
+ * Crystal Calendar
  *
- * Plugin to add a calendar to RoundCube.
+ * Plugin to add a calendar to Crystal.
  *
  * @version 0.2 BETA 2
  * @author Lazlo Westerhof

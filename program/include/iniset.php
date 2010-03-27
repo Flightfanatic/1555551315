@@ -4,8 +4,8 @@
  +-----------------------------------------------------------------------+
  | program/include/iniset.php                                            |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2008-2009, RoundCube Dev, - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2008-2010, Crystal Dev, - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -13,10 +13,10 @@
  |   any request.                                                        |
  +-----------------------------------------------------------------------+
  | Author: Till Klampaeckel <till@php.net>                               |
- |         Thomas Bruederli <roundcube@gmail.com>                        |
+ |         Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: iniset.php 3081 2009-10-31 13:20:02Z thomasb $
+ $Id: iniset.php 3081 2010-10-31 13:20:02Z thomasb $
 
 */
 
@@ -56,7 +56,7 @@ if  (isset($_SERVER['HTTPS'])) {
 } else {
    ini_set('session.cookie_secure', 0);
 }
-ini_set('session.name', 'roundcube_sessid');
+ini_set('session.name', 'Crystal_sessid');
 ini_set('session.use_cookies', 1);
 ini_set('session.use_only_cookies', 1);
 
@@ -75,7 +75,7 @@ if(extension_loaded('mbstring'))
  * @todo Make Zend, PEAR etc play with this
  * @todo Make our classes conform to a more straight forward CS.
  */
-function rcube_autoload($classname)
+function cmail_autoload($classname)
 {
   $filename = preg_replace(
       array(
@@ -99,12 +99,12 @@ function rcube_autoload($classname)
   include $filename. '.php';
 }
 
-spl_autoload_register('rcube_autoload');
+spl_autoload_register('cmail_autoload');
 
 /**
  * Local callback function for PEAR errors
  */
-function rcube_pear_error($err)
+function cmail_pear_error($err)
 {
   error_log(sprintf("%s (%s): %s",
     $err->getMessage(),
@@ -115,8 +115,8 @@ function rcube_pear_error($err)
 // include global functions
 require_once 'include/bugs.inc';
 require_once 'include/main.inc';
-require_once 'include/rcube_shared.inc';
+require_once 'include/cmail_shared.inc';
 
 
 // set PEAR error handling (will also load the PEAR main class)
-PEAR::setErrorHandling(PEAR_ERROR_CALLBACK, 'rcube_pear_error');
+PEAR::setErrorHandling(PEAR_ERROR_CALLBACK, 'cmail_pear_error');

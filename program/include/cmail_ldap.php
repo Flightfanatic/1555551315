@@ -1,20 +1,20 @@
 <?php
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_ldap.php                                        |
+ | program/include/cmail_ldap.php                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2006-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2006-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Interface to an LDAP address directory                              |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_ldap.php 2976 2009-09-21 11:50:53Z alec $
+ $Id: cmail_ldap.php 2976 2010-09-21 11:50:53Z alec $
 
 */
 
@@ -24,7 +24,7 @@
  *
  * @package Addressbook
  */
-class rcube_ldap extends rcube_addressbook
+class cmail_ldap extends cmail_addressbook
 {
   var $conn;
   var $prop = array();
@@ -309,7 +309,7 @@ class rcube_ldap extends rcube_addressbook
     if ($fields == 'ID' || $fields == $this->primary_key)
     {
       $ids = explode(',', $value);
-      $result = new rcube_result_set();
+      $result = new cmail_result_set();
       foreach ($ids as $id)
         if ($rec = $this->get_record($id, true))
         {
@@ -325,13 +325,13 @@ class rcube_ldap extends rcube_addressbook
     if (is_array($this->prop['search_fields']))
     {
       foreach ($this->prop['search_fields'] as $k => $field)
-        $filter .= "($field=$wc" . rcube_ldap::quote_string($value) . "$wc)";
+        $filter .= "($field=$wc" . cmail_ldap::quote_string($value) . "$wc)";
     }
     else
     {
       foreach ((array)$fields as $field)
         if ($f = $this->_map_field($field))
-          $filter .= "($f=$wc" . rcube_ldap::quote_string($value) . "$wc)";
+          $filter .= "($f=$wc" . cmail_ldap::quote_string($value) . "$wc)";
     }
     $filter .= ')';
     
@@ -358,7 +358,7 @@ class rcube_ldap extends rcube_addressbook
   /**
    * Count number of available contacts in database
    *
-   * @return object rcube_result_set Resultset with values for 'count' and 'first'
+   * @return object cmail_result_set Resultset with values for 'count' and 'first'
    */
   function count()
   {
@@ -378,14 +378,14 @@ class rcube_ldap extends rcube_addressbook
       } // end if
     } // end else
 
-    return new rcube_result_set($count, ($this->list_page-1) * $this->page_size);
+    return new cmail_result_set($count, ($this->list_page-1) * $this->page_size);
   }
 
 
   /**
    * Return the last result set
    *
-   * @return object rcube_result_set Current resultset or NULL if nothing selected yet
+   * @return object cmail_result_set Current resultset or NULL if nothing selected yet
    */
   function get_result()
   {
@@ -398,7 +398,7 @@ class rcube_ldap extends rcube_addressbook
    *
    * @param mixed   Record identifier
    * @param boolean Return as associative array
-   * @return mixed  Hash array or rcube_result_set with all record fields
+   * @return mixed  Hash array or cmail_result_set with all record fields
    */
   function get_record($dn, $assoc=false)
   {
@@ -421,7 +421,7 @@ class rcube_ldap extends rcube_addressbook
         // Add in the dn for the entry.
         $rec['dn'] = base64_decode($dn);
         $res = $this->_ldap2result($rec);
-        $this->result = new rcube_result_set(1);
+        $this->result = new cmail_result_set(1);
         $this->result->add($res);
       }
     }
@@ -450,7 +450,7 @@ class rcube_ldap extends rcube_addressbook
     } // end foreach
 
     // Verify that the required fields are set.
-    // We know that the email address is required as a default of rcube, so
+    // We know that the email address is required as a default of cmail, so
     // we will default its value into any unfilled required fields.
     foreach ($this->prop['required_fields'] as $fld) {
       if (!isset($newentry[$fld])) {

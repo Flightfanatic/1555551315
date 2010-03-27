@@ -21,7 +21,7 @@
 function api_rss_encode($string, $enc='xml'){
   //$string = rep_specialchars_output($string, $enc);
   if($string == ""){
-    $string = rcube_label("rss.novalue");
+    $string = cmail_label("rss.novalue");
   }
   $string = makeAllEntities($string) ;//htmlspecialchars($string, ENT_QUOTES);
 	
@@ -212,7 +212,7 @@ if(in_array(ucwords($mbox), $CONFIG['default_imap_folders'])    ||
    in_array(strtoupper($mbox), $CONFIG['default_imap_folders']) ||
    in_array($mbox, $CONFIG['default_imap_folders'])
 ){
-  $disp_mbox = rcube_label(strtolower($mbox));
+  $disp_mbox = cmail_label(strtolower($mbox));
 }
 else{
   $disp_mbox = $mbox;
@@ -313,18 +313,18 @@ echo '
 		<pubDate>'.date('r').'</pubDate>
 		<lastBuildDate>'.date('r').'</lastBuildDate>
 		<link>'.api_rss_encode($webmail_url . "&_action=plugin.rssauth") .'</link>
-		<title>' . api_rss_encode($cmail->config->get('product_name') . ' ::: ' . $_SESSION['username'] . " ::: " . ucwords($disp_mbox) . " (" . rcube_label('rss.rss_' . $flag) . ")") . '</title>
+		<title>' . api_rss_encode($cmail->config->get('product_name') . ' ::: ' . $_SESSION['username'] . " ::: " . ucwords($disp_mbox) . " (" . cmail_label('rss.rss_' . $flag) . ")") . '</title>
 		<description>' . api_rss_encode(ucwords($disp_mbox)) . '</description>
 		<generator>'.api_rss_encode($CONFIG['useragent'], 'xml').'</generator>
 		<image>
 			<link>' . api_rss_encode($webmail_url) . '</link>
 			<title>'.api_rss_encode($cmail->config->get('product_name')).' logo</title>
-			<url>'.api_rss_encode($root_url . $cmail->config->get('skin_path') .'/images/roundcube_logo.png').'</url>
+			<url>'.api_rss_encode($root_url . $cmail->config->get('skin_path') .'/images/Crystal_logo.png').'</url>
 		</image>';
 
 // Check if the user wants to override the default sortingmethode
 if (isset($_GET['_sort']))
-  list($sort_col, $sort_order) = explode('_', get_input_value('_sort', RCUBE_INPUT_GET));
+  list($sort_col, $sort_order) = explode('_', get_input_value('_sort', cmail_INPUT_GET));
 
 // Add message to output
 if ($messagecount > 0){
@@ -349,12 +349,12 @@ if ($messagecount > 0){
 
         $item->body = $IMAP->get_body($item->uid);
          
-        $MESSAGE = new rcube_message($item->uid);
+        $MESSAGE = new cmail_message($item->uid);
 
         $item->body = $MESSAGE->first_text_part();
             
         if(strlen($item->body) > $rss_truncate_body){
-          $trailing = " ... [" . rcube_label('rss.truncated') . "]";
+          $trailing = " ... [" . cmail_label('rss.truncated') . "]";
         }
         else{
           $trailing = "";
@@ -372,7 +372,7 @@ if ($messagecount > 0){
       $res = imap_mime_header_decode($subject);
       $subject = $res[0]->text;
       if($subject == ""){
-        $subject = rcube_label("nosubject");
+        $subject = cmail_label("nosubject");
       }
 
       // Print the actual messages
@@ -391,7 +391,7 @@ if ($messagecount > 0){
 else{
       echo '
 			<item>
-				<title>'.api_rss_encode($mbox . ': ' . rcube_label('rss.mboxempty')).'</title>
+				<title>'.api_rss_encode($mbox . ': ' . cmail_label('rss.mboxempty')).'</title>
 				<description></description>
 				<link></link>
 				<author></author>

@@ -2,18 +2,18 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_template.php                                    |
+ | program/include/cmail_template.php                                    |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2006-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2006-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Class to handle HTML page output using a skin template.             |
- |   Extends rcube_html_page class from rcube_shared.inc                 |
+ |   Extends cmail_html_page class from cmail_shared.inc                 |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id$
@@ -26,9 +26,9 @@
  *
  * @package View
  * @todo Documentation
- * @uses rcube_html_page
+ * @uses cmail_html_page
  */
-class rcube_template extends rcube_html_page
+class cmail_template extends cmail_html_page
 {
     var $app;
     var $config;
@@ -47,7 +47,7 @@ class rcube_template extends rcube_html_page
      * Constructor
      *
      * @todo   Use jQuery's $(document).ready() here.
-     * @todo   Replace $this->config with the real rcube_config object
+     * @todo   Replace $this->config with the real cmail_config object
      */
     public function __construct($task, $framed = false)
     {
@@ -55,7 +55,7 @@ class rcube_template extends rcube_html_page
 
         $this->app = cmail::get_instance();
         $this->config = $this->app->config->all();
-        $this->browser = new rcube_browser();
+        $this->browser = new cmail_browser();
         
         //$this->framed = $framed;
         $this->set_env('task', $task);
@@ -65,7 +65,7 @@ class rcube_template extends rcube_html_page
         $this->set_skin($this->config['skin']);
 
         // add common javascripts
-        $javascript = 'var '.JS_OBJECT_NAME.' = new rcube_webmail();';
+        $javascript = 'var '.JS_OBJECT_NAME.' = new cmail_webmail();';
 
         // don't wait for page onload. Call init at the bottom of the page (delayed)
         $javascript_foot = '$(document).ready(function(){ '.JS_OBJECT_NAME.'.init(); });';
@@ -122,7 +122,7 @@ class rcube_template extends rcube_html_page
             $title = $this->pagetitle;
         }
         else if ($this->env['task'] == 'login') {
-            $title = rcube_label(array('name' => 'welcome', 'vars' => array('product' => $this->config['product_name'])));
+            $title = cmail_label(array('name' => 'welcome', 'vars' => array('product' => $this->config['product_name'])));
         }
         else {
             $title = ucfirst($this->env['task']);
@@ -218,7 +218,7 @@ class rcube_template extends rcube_html_page
           $args = $args[0];
         
         foreach ($args as $name) {
-            $this->command('add_label', $name, rcube_label($name));
+            $this->command('add_label', $name, cmail_label($name));
         }
     }
 
@@ -238,7 +238,7 @@ class rcube_template extends rcube_html_page
             $this->message = $message;
             $this->command(
                 'display_message',
-                rcube_label(array('name' => $message, 'vars' => $vars)),
+                cmail_label(array('name' => $message, 'vars' => $vars)),
                 $type);
         }
     }
@@ -248,7 +248,7 @@ class rcube_template extends rcube_html_page
      * Delete all stored env variables and commands
      *
      * @return void
-     * @uses   rcube_html::reset()
+     * @uses   cmail_html::reset()
      * @uses   self::$env
      * @uses   self::$js_env
      * @uses   self::$js_commands
@@ -313,7 +313,7 @@ class rcube_template extends rcube_html_page
      * Process template and write to stdOut
      *
      * @param string HTML template
-     * @see rcube_html_page::write()
+     * @see cmail_html_page::write()
      * @override
      */
     public function write($template = '')
@@ -463,7 +463,7 @@ class rcube_template extends rcube_html_page
      *
      * @param  string $input
      * @return string
-     * @uses   rcube_template::parse_xml()
+     * @uses   cmail_template::parse_xml()
      * @since  0.1-rc1
      */
     public function just_parse($input)
@@ -479,7 +479,7 @@ class rcube_template extends rcube_html_page
      */
     private function parse_conditions($input)
     {
-        $matches = preg_split('/<roundcube:(if|elseif|else|endif)\s+([^>]+)>/is', $input, 2, PREG_SPLIT_DELIM_CAPTURE);
+        $matches = preg_split('/<crystal:(if|elseif|else|endif)\s+([^>]+)>/is', $input, 2, PREG_SPLIT_DELIM_CAPTURE);
         if ($matches && count($matches) == 4) {
             if (preg_match('/^(else|endif)$/i', $matches[1])) {
                 return $matches[0] . $this->parse_conditions($matches[3]);
@@ -487,13 +487,13 @@ class rcube_template extends rcube_html_page
             $attrib = parse_attrib_string($matches[2]);
             if (isset($attrib['condition'])) {
                 $condmet = $this->check_condition($attrib['condition']);
-                $submatches = preg_split('/<roundcube:(elseif|else|endif)\s+([^>]+)>/is', $matches[3], 2, PREG_SPLIT_DELIM_CAPTURE);
+                $submatches = preg_split('/<crystal:(elseif|else|endif)\s+([^>]+)>/is', $matches[3], 2, PREG_SPLIT_DELIM_CAPTURE);
                 if ($condmet) {
                     $result = $submatches[0];
-                    $result.= ($submatches[1] != 'endif' ? preg_replace('/.*<roundcube:endif\s+[^>]+>/Uis', '', $submatches[3], 1) : $submatches[3]);
+                    $result.= ($submatches[1] != 'endif' ? preg_replace('/.*<crystal:endif\s+[^>]+>/Uis', '', $submatches[3], 1) : $submatches[3]);
                 }
                 else {
-                    $result = "<roundcube:$submatches[1] $submatches[2]>" . $submatches[3];
+                    $result = "<crystal:$submatches[1] $submatches[2]>" . $submatches[3];
                 }
                 return $matches[0] . $this->parse_conditions($result);
             }
@@ -561,7 +561,7 @@ class rcube_template extends rcube_html_page
                 "\$_SESSION['\\1']",
                 "\$this->app->config->get('\\1',get_boolean('\\3'))",
                 "\$this->env['\\1']",
-                "get_input_value('\\1', RCUBE_INPUT_GPC)",
+                "get_input_value('\\1', cmail_INPUT_GPC)",
                 "\$_COOKIE['\\1']",
                 "\$this->browser->{'\\1'}"
             ),
@@ -580,7 +580,7 @@ class rcube_template extends rcube_html_page
      */
     private function parse_xml($input)
     {
-        return preg_replace_callback('/<roundcube:([-_a-z]+)\s+([^>]+)>/Ui', array($this, 'xml_command'), $input);
+        return preg_replace_callback('/<crystal:([-_a-z]+)\s+([^>]+)>/Ui', array($this, 'xml_command'), $input);
     }
 
 
@@ -613,7 +613,7 @@ class rcube_template extends rcube_html_page
             // show a label
             case 'label':
                 if ($attrib['name'] || $attrib['command']) {
-                    return Q(rcube_label($attrib + array('vars' => array('product' => $this->config['product_name']))));
+                    return Q(cmail_label($attrib + array('vars' => array('product' => $this->config['product_name']))));
                 }
                 break;
 
@@ -663,7 +663,7 @@ class rcube_template extends rcube_html_page
                     $content = call_user_func($handler, $attrib);
                 }
                 else if ($object == 'productname') {
-                    $name = !empty($this->config['product_name']) ? $this->config['product_name'] : 'RoundCube Webmail';
+                    $name = !empty($this->config['product_name']) ? $this->config['product_name'] : 'Crystal Webmail';
                     $content = Q($name);
                 }
                 else if ($object == 'version') {
@@ -709,7 +709,7 @@ class rcube_template extends rcube_html_page
                         }
                         break;
                     case 'request':
-                        $value = get_input_value($name, RCUBE_INPUT_GPC);
+                        $value = get_input_value($name, cmail_INPUT_GPC);
                         break;
                     case 'session':
                         $value = $_SESSION[$name];
@@ -801,13 +801,13 @@ class rcube_template extends rcube_html_page
         }
         // get localized text for labels and titles
         if ($attrib['title']) {
-            $attrib['title'] = Q(rcube_label($attrib['title'], $attrib['domain']));
+            $attrib['title'] = Q(cmail_label($attrib['title'], $attrib['domain']));
         }
         if ($attrib['label']) {
-            $attrib['label'] = Q(rcube_label($attrib['label'], $attrib['domain']));
+            $attrib['label'] = Q(cmail_label($attrib['label'], $attrib['domain']));
         }
         if ($attrib['alt']) {
-            $attrib['alt'] = Q(rcube_label($attrib['alt'], $attrib['domain']));
+            $attrib['alt'] = Q(cmail_label($attrib['alt'], $attrib['domain']));
         }
 
         // set title to alt attribute for IE browsers
@@ -1001,7 +1001,7 @@ class rcube_template extends rcube_html_page
         $_SESSION['temp'] = true;
         
         // save original url
-        $url = get_input_value('_url', RCUBE_INPUT_POST);
+        $url = get_input_value('_url', cmail_INPUT_POST);
         if (empty($url) && !preg_match('/_(task|action)=logout/', $_SERVER['QUERY_STRING']))
             $url = $_SERVER['QUERY_STRING'];
 
@@ -1035,16 +1035,16 @@ class rcube_template extends rcube_html_page
         // create HTML table with two cols
         $table = new html_table(array('cols' => 2));
 
-        $table->add('title', html::label('rcmloginuser', Q(rcube_label('username'))));
-        $table->add(null, $input_user->show(get_input_value('_user', RCUBE_INPUT_POST)));
+        $table->add('title', html::label('rcmloginuser', Q(cmail_label('username'))));
+        $table->add(null, $input_user->show(get_input_value('_user', cmail_INPUT_POST)));
 
-        $table->add('title', html::label('rcmloginpwd', Q(rcube_label('password'))));
+        $table->add('title', html::label('rcmloginpwd', Q(cmail_label('password'))));
         $table->add(null, $input_pass->show());
 
         // add host selection row
         if (is_object($input_host)) {
-            $table->add('title', html::label('rcmloginhost', Q(rcube_label('server'))));
-            $table->add(null, $input_host->show(get_input_value('_host', RCUBE_INPUT_POST)));
+            $table->add('title', html::label('rcmloginhost', Q(cmail_label('server'))));
+            $table->add(null, $input_host->show(get_input_value('_host', cmail_INPUT_POST)));
         }
 
         $out = $input_action->show();
@@ -1158,6 +1158,6 @@ class rcube_template extends rcube_html_page
             return $select->show($set);
     }
 
-}  // end class rcube_template
+}  // end class cmail_template
 
 

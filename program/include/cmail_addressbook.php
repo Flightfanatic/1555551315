@@ -2,17 +2,17 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_addressbook.php                                 |
+ | program/include/cmail_addressbook.php                                 |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2006-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2006-2010, Crystal Dev. - United States                 |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
  |   Interface to the local address book database                        |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
  $Id:  $
@@ -25,7 +25,7 @@
  *
  * @package Addressbook
  */
-abstract class rcube_addressbook
+abstract class cmail_addressbook
 {
     /** public properties */
     var $primary_key;
@@ -75,14 +75,14 @@ abstract class rcube_addressbook
     /**
      * Count number of available contacts in database
      *
-     * @return object rcube_result_set Result set with values for 'count' and 'first'
+     * @return object cmail_result_set Result set with values for 'count' and 'first'
      */
     abstract function count();
 
     /**
      * Return the last result set
      *
-     * @return object rcube_result_set Current result set or NULL if nothing selected yet
+     * @return object cmail_result_set Current result set or NULL if nothing selected yet
      */
     abstract function get_result();
 

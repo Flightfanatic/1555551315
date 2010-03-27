@@ -26,8 +26,8 @@
 	VERSION:
 		IlohaMail-0.9-20050415
 	CHANGES:
-		File altered by Thomas Bruederli <roundcube@gmail.com>
-		to fit enhanced equirements by the RoundCube Webmail:
+		File altered by Thomas Bruederli <Crystal@gmail.com>
+		to fit enhanced equirements by the Crystal Webmail:
 		- Added list of server capabilites and check these before invoking commands
 		- Added junk flag to iilBasicHeader
 		- Enhanced error reporting on fsockopen()

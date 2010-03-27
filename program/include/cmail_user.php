@@ -2,10 +2,10 @@
 
 /*
  +-----------------------------------------------------------------------+
- | program/include/rcube_user.inc                                        |
+ | program/include/cmail_user.inc                                        |
  |                                                                       |
- | This file is part of the RoundCube Webmail client                     |
- | Copyright (C) 2005-2009, RoundCube Dev. - Switzerland                 |
+ | This file is part of the Crystal Webmail client                       |
+ | Copyright (C) 2005-2010, Crystal Dev Team - United States             |
  | Licensed under the GNU GPL                                            |
  |                                                                       |
  | PURPOSE:                                                              |
@@ -13,10 +13,10 @@
  |   to the related database records.                                    |
  |                                                                       |
  +-----------------------------------------------------------------------+
- | Author: Thomas Bruederli <roundcube@gmail.com>                        |
+ | Author: Thomas Bruederli <Crystal@gmail.com>                        |
  +-----------------------------------------------------------------------+
 
- $Id: rcube_user.inc 933 2007-11-29 14:17:32Z thomasb $
+ $Id: cmail_user.inc 933 2007-11-29 14:17:32Z thomasb $
 
 */
 
@@ -25,9 +25,9 @@
  * Class representing a system user
  *
  * @package    Core
- * @author     Thomas Bruederli <roundcube@gmail.com>
+ * @author     Thomas Bruederli <Crystal@gmail.com>
  */
-class rcube_user
+class cmail_user
 {
   public $ID = null;
   public $data = null;
@@ -322,7 +322,7 @@ class rcube_user
    *
    * @param string IMAP user name
    * @param string IMAP host name
-   * @return object rcube_user New user instance
+   * @return object cmail_user New user instance
    */
   static function query($user, $host)
   {
@@ -340,18 +340,18 @@ class rcube_user
     
     // user already registered -> overwrite username
     if ($sql_arr)
-      return new rcube_user($sql_arr['user_id'], $sql_arr);
+      return new cmail_user($sql_arr['user_id'], $sql_arr);
     else
       return false;
   }
   
   
   /**
-   * Create a new user record and return a rcube_user instance
+   * Create a new user record and return a cmail_user instance
    *
    * @param string IMAP user name
    * @param string IMAP host
-   * @return object rcube_user New user instance
+   * @return object cmail_user New user instance
    */
   static function create($user, $host)
   {
@@ -387,8 +387,8 @@ class rcube_user
 
     if ($user_id = $dbh->insert_id('users'))
     {
-      // create rcube_user instance to make plugin hooks work
-      $user_instance = new rcube_user($user_id);
+      // create cmail_user instance to make plugin hooks work
+      $user_instance = new cmail_user($user_id);
       $cmail->user = $user_instance;
 
       $mail_domain = $cmail->config->mail_domain($host);
